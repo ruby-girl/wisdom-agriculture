@@ -4,10 +4,7 @@
 		<view class="uni-tab__seat" />
 		<view class="uni-tab__cart-box flex">
 			<view class="flex uni-tab__cart-sub-left">
-				<view class="flex  uni-tab__shop-cart uni-tab__text" v-for="(item,index) in kwt" :key="index" style="justify-content:center;align-items: center;">
-					<text :style="{'Color': item.numberColor,'FontSize':'22px'}">{{item.number}}</text>{{item.text}}
-				</view>
-				<view v-for="(item,index) in options" :key="index" class="flex uni-tab__cart-button-left uni-tab__shop-cart" @click="onClick(index,item)" >
+				<view v-for="(item,index) in options" :key="index" class="flex uni-tab__cart-button-left uni-tab__shop-cart" @click="onClick(index,item)">
 					<view class="uni-tab__icon">
 						<uni-icons :type="item.icon" size="20" color="#646566"></uni-icons>
 						<!-- <image class="image" :src="item.icon" mode="widthFix" /> -->
@@ -78,18 +75,6 @@
 			fill: {
 				type: Boolean,
 				default: false
-			},
-			kwt:{
-				type: Array,
-				default () {
-					return [
-						{
-							text: '加入购物车',
-							numberColor: '#ffa200',
-							number: 10
-						}
-					]
-				}
 			}
 		},
 		methods: {
@@ -160,15 +145,13 @@
 		justify-content: center;
 		align-items: center;
 		flex-direction: column;
-		// margin: 0 10px;
-		padding: 0 10px;
-		border-left: 1px solid #DCDCDC;
+		margin: 0 10px;
 	}
 
 	.uni-tab__icon {
 		width: 18px;
 		height: 18px;
-		line-height: normal;
+		line-height: 1.5;
 	}
 
 	.image {

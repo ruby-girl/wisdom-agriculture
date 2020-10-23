@@ -1,7 +1,7 @@
 <template>
 	<view class="padding-login">
 		<view class="title-y">
-			欢迎登录/注册科维特！
+			欢迎登录/注册星鸦智农！
 		</view>
 		<view class="border-bottom">
 			<view class="cu-form-group">
@@ -18,7 +18,7 @@
 		 lang="zh_CN" @getuserinfo="onGotUserInfo" withCredentials="true">
 			登录/注册</button>
 		<view class="auto-bottom">
-			注册即为同意<text class="agreement" @click="toTermsOfService">《科维特用户使用协议》</text>
+			注册即为同意<text class="agreement" @click="toTermsOfService">《星鸦智农用户使用协议》</text>
 		</view>
 
 	</view>
@@ -29,8 +29,8 @@
 			return {
 				title: 'Hello',
 				obj: {
-					username: '',
-					password: ''
+					phone: '',
+					yzm: ''
 				},
 				headPortrait: '',
 				name: '',
@@ -45,7 +45,7 @@
 		},
 		onShareAppMessage: function() {
 			return {
-				title: '科维特',
+				title: '星鸦智农',
 				desc: '',
 				path: '/pages/login/login'
 			}
@@ -64,21 +64,21 @@
 				})	
 			},
 			onInput(e) {
-				this.obj.username = e.detail.value
+				this.obj.phone = e.detail.value
 			},
 			captchaInput(e){
-				this.obj.password = e.detail.value
+				this.obj.yzm = e.detail.value
 			},
 			// 手动授权方法
 			onGotUserInfo(e) {
-				if (!this.obj.username) {
+				if (!this.obj.phone) {
 					uni.showToast({
 						title: '请输入手机号',
 						icon: 'none'
 					})
 					return
 				}
-				if (!this.obj.password) {
+				if (!this.obj.yzm) {
 					uni.showToast({
 						title: '请输入验证码',
 						icon: 'none'
@@ -115,56 +115,127 @@
 			codeClick() {
 				//点击发送验证码		     
 				let _this = this
-				if (!this.obj.username) {
+				if (!this.obj.phone) {
 					uni.showToast({
 						title: '请输入手机号',
 						icon: 'none'
 					})
 					return
 				}
-				this.disabled = true
-				this.$api.captcha({
-					phone: this.obj.username
-				}).then(res => {
-					console.log('1',res)
-					if (res.data.stateCode == 200) {
-						this.btnTitle = 60
-						this.txt = '秒后获取'
-						let timer = setInterval(function() {
-							if (_this.btnTitle == 1) {
-								clearInterval(timer)
-								_this.btnTitle = '获取验证码'
-								_this.txt = ''
-								_this.disabled = false
-							} else {
-								_this.btnTitle = _this.btnTitle - 1
-							}
-						}, 1000)
-					} else {
-						this.btnTitle = 180
-						this.txt = '秒后获取'
-						let timer = setInterval(function() {
-							if (_this.btnTitle == 1) {
-								clearInterval(timer)
-								_this.btnTitle = '获取验证码'
-								_this.txt = ''
-								_this.disabled = false
-							} else {
-								_this.btnTitle = _this.btnTitle - 1
-							}
-						}, 1000)
-					}
+				this.disabled = true;
+				uni.request({
+					url:'http://150.158.174.77:1021/api/sms/send',
+					method:'POST',
+					header:{
+						'Content-Type': 'application/x-www-form-urlencoded',
+					},
+					data:{
+						'phone': this.obj.phone,
+					},
+					success: (res) => {
+					        if (res.data.stateCode == 200) {
+					        	this.btnTitle = 60
+					        	this.txt = '秒后获取'
+					        	let timer = setInterval(function() {
+					        		if (_this.btnTitle == 1) {
+					        			clearInterval(timer)
+					        			_this.btnTitle = '获取验证码'
+					        			_this.txt = ''
+					        			_this.disabled = false
+					        		} else {
+					        			_this.btnTitle = _this.btnTitle - 1
+					        		}
+					        	}, 1000)
+					        } else {
+					        	this.btnTitle = 180
+					        	this.txt = '秒后获取'
+					        	let timer = setInterval(function() {
+					        		if (_this.btnTitle == 1) {
+					        			clearInterval(timer)
+					        			_this.btnTitle = '获取验证码'
+					        			_this.txt = ''
+					        			_this.disabled = false
+					        		} else {
+					        			_this.btnTitle = _this.btnTitle - 1
+					        		}
+					        	}, 1000)
+					        }
+					    }
 				})
+				// this.$api.captcha({
+				// 	phone: this.obj.phone
+				// }).then(res => {
+				// 	if (res.data.stateCode == 200) {
+				// 		this.btnTitle = 60
+				// 		this.txt = '秒后获取'
+				// 		let timer = setInterval(function() {
+				// 			if (_this.btnTitle == 1) {
+				// 				clearInterval(timer)
+				// 				_this.btnTitle = '获取验证码'
+				// 				_this.txt = ''
+				// 				_this.disabled = false
+				// 			} else {
+				// 				_this.btnTitle = _this.btnTitle - 1
+				// 			}
+				// 		}, 1000)
+				// 	} else {
+				// 		this.btnTitle = 180
+				// 		this.txt = '秒后获取'
+				// 		let timer = setInterval(function() {
+				// 			if (_this.btnTitle == 1) {
+				// 				clearInterval(timer)
+				// 				_this.btnTitle = '获取验证码'
+				// 				_this.txt = ''
+				// 				_this.disabled = false
+				// 			} else {
+				// 				_this.btnTitle = _this.btnTitle - 1
+				// 			}
+				// 		}, 1000)
+				// 	}
+				// })
 			},
 			userLogin() {
 				let that = this;
+				// uni.request({
+				// 	url:'http://150.158.174.77:1022/api/user/login',
+				// 	method:'POST',
+				// 	header:{
+				// 		'Content-Type': 'application/json',
+				// 	},
+				// 	data:this.obj,
+				// 	success: (res) => {
+				// 		console.log(res)
+				// 		// let obj = {
+				// 		// 		token: res.data.data.token,					
+				// 		// 		nickName: this.user.nickName,
+				// 		// 		avatarUrl: this.user.avatarUrl,
+				// 		// 		phone: this.obj.phone,
+				// 		// 		// cookie: res.cookies[0],
+				// 		// 	}
+				// 		// 	uni.setStorage({
+				// 		// 		key: 'XYZNUserInfo',
+				// 		// 		data: obj,
+				// 		// 		success() {
+				// 		// 			uni.showToast({
+				// 		// 				title: '登录成功',
+				// 		// 				icon: 'success',
+				// 		// 				success() {
+				// 		// 					uni.switchTab({
+				// 		// 						url: '../personal/personal'
+				// 		// 					});
+				// 		// 				}
+				// 		// 			})
+				// 		// 		}
+				// 		// 	})
+				// 	}
+				// })
 				this.$api.login(this.obj).then(res => {		
 					let obj = {
-						token: res.data.token,					
+						token: res.data.data.token,					
 						nickName: this.user.nickName,
 						avatarUrl: this.user.avatarUrl,
-						phone: this.obj.username,
-						cookie: res.cookies[0],
+						phone: this.obj.phone,
+						// cookie: res.data.token,
 					}
 					uni.setStorage({
 						key: 'XYZNUserInfo',

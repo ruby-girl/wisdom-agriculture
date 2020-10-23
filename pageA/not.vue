@@ -5,9 +5,7 @@
 </template>
 
 <script>
-	import tabBar from '@/components/tabbar.vue';
 export default {
-	components:{tabBar},
 	data() {
 		return {
 			windowHeight:'',

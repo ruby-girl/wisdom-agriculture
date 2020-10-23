@@ -1,35 +1,101 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+	
 	{
-		"path": "pages/personal/personal",
+		"path": "pages/index/index",
 		"style": {
-			"navigationBarTitleText": "用户中心",
+			"navigationBarTitleText": "驿都果业",
+			"navigationBarBackgroundColor": "#FFFFFF",
+			"navigationBarTextStyle": "black",
+			"disableScroll": true
+			// "navigationStyle": "custom"
+		}
+	},
+	{
+		"path": "pages/farm/traceabilityDetails",
+		"style": {
+			"navigationBarTitleText": "溯源详情",
 			"navigationBarBackgroundColor": "#17BB89",
 			"navigationBarTextStyle": "white",
 			"disableScroll": true
-	
+		}
+	},
+	{
+		"path": "pages/bazaar/bazaar",
+		"style": {
+			"navigationBarTitleText": "集市",
+			"navigationBarBackgroundColor": "#FFFFFF",
+			"navigationBarTextStyle": "black",
+			"disableScroll": true
 		}
 	},
 		{
-			"path": "pages/index/index",
+			"path": "pages/circle/circle",
 			"style": {
-				"navigationBarTitleText": "首页",
-				"navigationBarBackgroundColor": "#17BB89",
-				"navigationBarTextStyle": "white",
+				"navigationBarTitleText": "圈子",
+				"navigationBarBackgroundColor": "#FFFFFF",
+				"navigationBarTextStyle": "black",
 				"disableScroll": true
-				// "navigationStyle": "custom"
 			}
 		},
 		{
-			"path": "pages/farm/traceabilityDetails",
+			"path": "pages/circle/activityList",
 			"style": {
-				"navigationBarTitleText": "溯源详情",
-				"navigationBarBackgroundColor": "#17BB89",
-				"navigationBarTextStyle": "white",
+				"navigationBarTitleText": "活动",
+				"navigationBarBackgroundColor": "#FFFFFF",
+				"navigationBarTextStyle": "black",
+				"disableScroll": true
+			}
+		},
+		{
+			"path": "pages/circle/activityDetail",
+			"style": {
+				"navigationBarTitleText": "活动详情",
+				"navigationBarBackgroundColor": "#FFFFFF",
+				"navigationBarTextStyle": "black",
+				"disableScroll": true
+			}
+		},
+		{
+			"path": "pages/circle/addNetworkVideo",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarBackgroundColor": "#FFFFFF",
+				"navigationBarTextStyle": "black",
 				"disableScroll": true
 			}
 		},
 		
+		
+		{
+			"path": "pages/bazaar/commodityDetails",
+			"style": {
+				"navigationBarTitleText": "商品详情",
+				"navigationBarBackgroundColor": "#FFFFFF",
+				"navigationBarTextStyle": "black",
+				"disableScroll": true
+				// "navigationStyle": "custom"
+			}
+		},
+
+
+
+		{
+			"path": "pages/personal/personal",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"navigationBarBackgroundColor": "#17BB89",
+				"navigationBarTextStyle": "white",
+				"disableScroll": true
+
+			}
+		},
+
+
+
+
+		
+
 		{
 			"path": "pages/login/login",
 			"style": {
@@ -44,33 +110,33 @@
 				"disableScroll": true
 			}
 		},
-		{
-			"path": "pages/aiRecognition/aiRecognition",
-			"style": {
-				"navigationBarTitleText": "AI识别",
-				"navigationBarBackgroundColor": "#17BB89",
-				"navigationBarTextStyle": "white",
-				"disableScroll": true
-				// "navigationStyle": "custom"
-		
-			}
-		},
-		{
-			"path": "pages/aiRecognition/identifyResults",
-			"style": {
-				"navigationBarTitleText": "识别结果",
-				"navigationBarBackgroundColor": "#17BB89",
-				"navigationBarTextStyle": "white",
-				"disableScroll": true
-			}
-		},
+		// {
+		// 	"path": "pages/aiRecognition/aiRecognition",
+		// 	"style": {
+		// 		"navigationBarTitleText": "AI识别",
+		// 		"navigationBarBackgroundColor": "#17BB89",
+		// 		"navigationBarTextStyle": "white",
+		// 		"disableScroll": true
+		// 		// "navigationStyle": "custom"
+
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/aiRecognition/identifyResults",
+		// 	"style": {
+		// 		"navigationBarTitleText": "识别结果",
+		// 		"navigationBarBackgroundColor": "#17BB89",
+		// 		"navigationBarTextStyle": "white",
+		// 		"disableScroll": true
+		// 	}
+		// },
 
 		{
 			"path": "pages/farm/farmList",
 			"style": {
 				"navigationBarTitleText": "农场",
-				"navigationBarBackgroundColor": "#17BB89",
-				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#FFFFFF",
+				"navigationBarTextStyle": "black",
 				"disableScroll": true
 			}
 		},
@@ -105,7 +171,7 @@
 	"subPackages": [{
 		"root": "pageA",
 		"pages": [
-			
+
 			{
 				"path": "termsOfService",
 				"style": {
@@ -113,14 +179,16 @@
 					"navigationBarBackgroundColor": "#17BB89",
 					"navigationBarTextStyle": "white"
 				}
-			}, {
-				"path": "mandate",
-				"style": {
-					"navigationBarTitleText": "添加员工",
-					"navigationBarBackgroundColor": "#17BB89",
-					"navigationBarTextStyle": "white"
-				}
-			}, {
+			},
+			// {
+			// 	"path": "mandate",
+			// 	"style": {
+			// 		"navigationBarTitleText": "添加员工",
+			// 		"navigationBarBackgroundColor": "#17BB89",
+			// 		"navigationBarTextStyle": "white"
+			// 	}
+			// }, 
+			{
 				"path": "photoAlbum",
 				"style": {
 					"navigationBarTitleText": "生长历程",
@@ -167,46 +235,45 @@
 		"backgroundColor": "#F8F8F8"
 		// 下拉刷新
 		// "enablePullDownRefresh": true
+	},
+	"tabBar": {
+		"color": "#999999",
+		"selectedColor": "#17BB89",
+		"backgroundColor": "#fff",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"text": "首页",
+				"iconPath": "static/imgs/首页.png",
+				"selectedIconPath": "static/imgs/首页1.png"
+			},
+			{
+				"pagePath": "pages/farm/farmList",
+				"text": "农场",
+				"iconPath": "static/imgs/农场.png",
+				"selectedIconPath": "static/imgs/农场1.png"
+			},
+			{
+				"pagePath": "pages/circle/circle",
+				"text": "圈子",
+				"iconPath": "static/imgs/圈子.png",
+				"selectedIconPath": "static/imgs/圈子1.png"
+			},
+			{
+				"pagePath": "pages/bazaar/bazaar",
+				"text": "集市",
+				"iconPath": "static/imgs/集市.png",
+				"selectedIconPath": "static/imgs/集市1.png"
+			},
+
+			{
+				"pagePath": "pages/personal/personal",
+				"text": "我的",
+				"iconPath": "static/imgs/我的.png",
+				"selectedIconPath": "static/imgs/我的1.png"
+			}
+		]
+
 	}
-	// "tabBar": {
-	// 	"color": "#999999",
-	// 	"selectedColor": "#17BB89",
-	// 	"backgroundColor": "#fff",
-	// 	"list": [
-	// 		{
-	// 			"pagePath": "pages/index/index",
-	// 			"text": "首页",
-	// 			"iconPath": "static/imgs/首页.png",
-	// 			"selectedIconPath": "static/imgs/首页1.png"
-	// 		},
-	// 		{
-	// 			"pagePath": "pages/farm/farmList",
-	// 			"text": "农场",
-	// 			"iconPath": "static/imgs/农场.png",
-	// 			"selectedIconPath": "static/imgs/农场1.png"
-	// 		},
-	// 		{
-	// 			"pagePath": "pages/aiRecognition/aiRecognition",
-	// 			"text": "圈子",
-	// 			"iconPath": "static/imgs/圈子.png",
-	// 			"selectedIconPath": "static/imgs/圈子1.png"
-	// 		},
-	// 		{
-	// 			"pagePath": "pages/aiRecognition/aiRecognition",
-	// 			"text": "集市",
-	// 			"iconPath": "static/imgs/集市.png",
-	// 			"selectedIconPath": "static/imgs/集市1.png"
-	// 		},
-
-	// 		{
-	// 			"pagePath": "pages/personal/personal",
-	// 			"text": "我的",
-	// 			"iconPath": "static/imgs/我的.png",
-	// 			"selectedIconPath": "static/imgs/我的1.png"
-	// 		}
-	// 	]
-
-	// }
 	// "condition": { //模式配置，仅开发期间生效
 	// 	"current": 0, //当前激活的模式(list 的索引项)
 

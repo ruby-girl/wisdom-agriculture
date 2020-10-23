@@ -102,7 +102,7 @@
 	
 	<view class="tabbarMain" :class="[flagTypeInfo? 'tabbarMainIphone':'']">
 		<!-- <image src="/static/nav_btn.png" :fade-show='false' class="btnfixMin"  :class="[flagTypeInfo? 'btnfixMinIphone':'']" mode=""></image> -->
-		<view class="tabBtnMina"  :class="[flagTypeInfo? 'tabBtnMinaIphone':'']" mode="" style="background-color: #FFFFFF;">
+		<view class="tabBtnMina"  :class="[flagTypeInfo? 'tabBtnMinaIphone':'']" mode="" style="background-color: #F8FAFB;">
 			<view class="itmMain" @click.stop="switchTabFunc(0, '/pages/index/index')">
 				<image class="imgse" :fade-show='false' v-if="active!=0" src="/static/imgs/首页.png"></image>
 				<image class="imgse" :fade-show='false' v-if="active===0" src="/static/imgs/首页1.png"></image>
@@ -114,7 +114,7 @@
 				<text class="txtBtn" :class="{'txtBtnSel' :active==1}">农场</text>
 			</view>
 			<view class="itmMain" @click.stop="switchTabFunc(2, '/pages/aiRecognition/aiRecognition')" style="position: relative;"> 
-				<view style="position: absolute;padding: 30rpx;background-color: #FFFFFF;border-radius: 45%;">
+				<view style="position: absolute;padding: 30rpx;background-color: #F8FAFB;border-radius: 45%;">
 					<image class="imgsAi" :fade-show='false' v-if="active!=2" src="/static/imgs/ai.png" style=""></image>
 					<image class="imgsAi" :fade-show='false' v-if="active===2" src="/static/imgs/ai1.png"></image>
 					<!-- <text class="txtBtn" :class="{'txtBtnSel' :active==2}">AI识别</text> -->

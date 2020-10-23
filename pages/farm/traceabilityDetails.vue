@@ -45,7 +45,7 @@
 				<view class="Grid">
 					<view class="Grid-Item" >
 						<view class="GSimg">
-							<image class="Image" src="../../static/images/TPG01028537.jpg" mode="aspectFill"></image>
+							<image class="Image" src="../../static/images/TPG07956984.jpg" mode="aspectFill"></image>
 							<view class="GSbottomtitle">1/2</view>
 						</view>
 						<view class="GStitle">育种</view>
@@ -58,22 +58,7 @@
 						<view class="GStitle">灌溉</view>
 					</view>
 				</view>
-				<view class="Grid">
-					<view class="Grid-Item" >
-						<view class="GSimg">
-							<image class="Image" src="../../static/images/TPG01028537.jpg" mode="aspectFill"></image>
-							<view class="GSbottomtitle">1/2</view>
-						</view>
-						<view class="GStitle">育种</view>
-					</view>
-					<view class="Grid-Item" >
-						<view class="GSimg">
-							<image class="Image" src="../../static/images/TPG07956984.jpg" mode="aspectFill"></image>
-							<view class="GSbottomtitle">1/2</view>
-						</view>
-						<view class="GStitle">灌溉</view>
-					</view>
-				</view>
+				
 			</view>
 		</scroll-view>
 	</view>
@@ -107,7 +92,7 @@ export default {
 					name: '农场劳作'
 				}
 			],
-			TabCur: 3,
+			TabCur: 1,
 			tabList: [
 				{
 					id: 1,

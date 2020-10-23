@@ -6,107 +6,115 @@
 					<view class="page-section swiper">
 						<view class="page-section-spacing">
 							<swiper class="swiper" :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration">
-								<swiper-item><image mode="scaleToFill" src="../../static/imgs/index.png" style="width: 100%;height: 100%;"></image></swiper-item>
-								<swiper-item><image mode="scaleToFill" src="../../static/imgs/index.png" style="width: 100%;height: 100%;"></image></swiper-item>
-								<swiper-item><image mode="scaleToFill" src="../../static/imgs/index.png" style="width: 100%;height: 100%;"></image></swiper-item>
+								<swiper-item><image mode="aspectFill" src="../../static/images/index.jpg" style="width: 100%;height: 100%;"></image></swiper-item>
 							</swiper>
 						</view>
 					</view>
 				</view>
 			</view>
-			<view class="flex padding-box justify-center" @tap="toFarm()">
-				<view class="flex index-h3">推荐农场</view>
-				<view class="flex index-span" >
-					查看全部
-					<image src="../../static/imgs/arrows.png" mode="" class="img-right"></image>
-				</view>
-			</view>
-			<view class="page-section-spacing  " style="padding-bottom: 30rpx;border-bottom: 1px solid #E4E4E4;">
-				<scroll-view class="scroll-view_H " scroll-x="true" bindscroll="scroll" style="width: 100%">
-					<view id="demo1" class="scroll-view-item_H demo-text-1 " style="margin-left: 30rpx;" @tap="showFarm()">
-						<image src="../../static/imgs/The-probe.jpg" class="scroll-view-item-img" mode=""></image>
-						<view>绵阳九汇生态农场</view>
-						<view class="flex index-span">以种植苹果、梨为主的水果农场</view>
-						<view class="flex index-span">
-							<image class="img-size" src="../../static/imgs/nearby.png"></image>
-							绵阳
-						</view>
+			<view class="card" >
+				<view class="flex padding-box justify-center">
+					<view class="flex index-h3">农场信息</view>
+					<view class="flex index-span">
+						查看更多
+						<image src="../../static/imgs/arrows.png" mode="" class="img-right"></image>
 					</view>
-				</scroll-view>
-			</view>
-			<view class="flex padding-box justify-center">
-				<view class="flex index-h3">
-					限时秒杀地块
-					<view class="index-time">{{remaining}}</view>
 				</view>
-				<view class="flex index-span">
-					查看全部
-					<image src="../../static/imgs/arrows.png" mode="" class="img-right"></image>
-				</view>
-			</view>
-			<view class="padding-box" style="padding-bottom: 25rpx;border-bottom: 1px solid #E4E4E4;">
-				<view style="padding-bottom: 40rpx">
-					<image src="../../static/imgs/The-probe.jpg" style="width: 100%;height: 300rpx;border-radius: 8rpx;"></image>
-					<view class="font-size-16 card-height">圣女果新鲜水果10斤保底</view>
-					<view class="flex">
-						<view class="font-size-14">剩余：220份</view>
-						<progress style="flex: 1;"  percent="40" border-radius="10"  stroke-width="8" activeColor="#4ABA8A" backgroundColor="#C9EEDE"/>
+				<view class="flex padding-box" style="height: 320rpx;" @tap="showFarm(farm.farmId,farm.farmName)">
+					<image
+						:src="farm.farmphotoPath"
+						style="width: 60%;height: 100%;border-top-left-radius: 10rpx;border-bottom-left-radius: 10rpx;"
+						mode="aspectFill"
+					></image>
+					<view
+						class="flex bg-personal  flex-direction-column"
+						style="width: 40%;padding: 10rpx;background-color: #F5F5F5;height: 100%;font-size: 12px;border-top-right-radius: 10rpx;border-bottom-right-radius: 10rpx;"
+					>
+						<span style="overflow: hidden;text-overflow: ellipsis;height: 100%;">{{ farm.introduce }}</span>
+						<button type="primary" style="line-height: 2;" size="mini" @click="showFarm(farm.farmId,farm.farmName)">查看详情</button>
 					</view>
-					<view class="flex index-span font-size-14 card-height">
-						<view class="flex-1">
-							<image class="img-size" src="../../static/imgs/nearby.png"></image>
-							成都 庆丰收农场
+				</view>
+			</view>
+			<view class="card">
+				<view class="flex padding-box justify-center" >
+					<view class="flex index-h3">
+						限时秒杀地块
+						<view class="index-time">{{ remaining }}</view>
+					</view>
+					<view class="flex index-span">
+						查看全部
+						<image src="../../static/imgs/arrows.png" mode="" class="img-right"></image>
+					</view>
+				</view>
+				<view class="page-section-spacing  " style="padding-bottom: 30rpx;">
+					<scroll-view class="scroll-view_H " scroll-x="true" bindscroll="scroll" style="width: 100%">
+						<view v-for="(item, index) in PREFERENCE" id="demo1" class="scroll-view-item_H demo-text-1 " style="margin-left: 30rpx;" >
+							<image src="../../static/images/farmIndex.jpg" class="scroll-view-item-img" mode=""></image>
+							<view class="flex align-center">
+								<view class="flex-1">{{item.title}}</view>
+								<view class="text-gray">
+									<text class="text-red">￥</text>
+									<text class="text-red" style="font-size: 20px;">{{item.price}}</text>
+									/{{item.unitName}}
+								</view>
+							</view>
+							<view class="flex index-span">
+								<view class="index-span flex-1">{{item.description}}</view>
+								<text class="index-span flex-1 text-right">剩余{{item.stock - item.sales}}{{item.unitName}}</text>
+							</view>
+							<view class="flex index-span">
+								<image class="img-size" src="../../static/imgs/dingwei@3x.png"></image>
+								绵阳
+							</view>
 						</view>
-						<view class="flex">
-							<button class="" type="primary" plain="true" style="padding: 2rpx 12rpx;height: min-content;border-radius: 20px;font-size: 24rpx;line-height: 1.5;">认领中</button>
+					</scroll-view>
+				</view>
+			</view>
+			<view class="card">
+				<view class="flex padding-box justify-center">
+					<view class="flex index-h3">精选项目</view>
+					<view class="flex index-span">
+						查看全部
+						<image src="../../static/imgs/arrows.png" mode="" class="img-right"></image>
+					</view>
+				</view>
+				<view class="padding-box ">
+					<view style="padding-bottom: 40rpx" v-for="(item, index) in Featured" :key="index" @tap="farmManor">
+						<image src="../../static/images/farmIndex.jpg" style="width: 100%;height: 300rpx;border-radius: 8rpx;"></image>
+						<view class="font-size-16 card-height">{{item.title}}</view>
+						<view class="flex ">
+							<view class="font-size-14">剩余：{{item.stock - item.sales}}{{item.unitName}}</view>
+							<progress style="flex: 1;" percent="1" border-radius="10" stroke-width="8" activeColor="#4ABA8A" backgroundColor="#C9EEDE" />
+						</view>
+						<view class="flex index-span font-size-14 card-height">
+							<view class="flex-1">
+								<image class="img-size" src="../../static/imgs/nearby.png"></image>
+								成都 庆丰收农场
+							</view>
 							<view class="flex">
-								<view class="index-money" style="position: relative;top:-14rpx;">￥<span style="font-size: 40rpx;">120</span></view>/份
+								<button class="" type="primary" plain="true" style="padding: 2rpx 12rpx;height: min-content;border-radius: 20px;font-size: 24rpx;line-height: 1.5;">
+									认领中
+								</button>
+								<view class="flex">
+									<view class="index-money" style="position: relative;top:-14rpx;">
+										￥
+										<span style="font-size: 40rpx;">{{item.price}}</span>
+									</view>
+									/{{item.unitName}}
+								</view>
 							</view>
 						</view>
 					</view>
 				</view>
 			</view>
-			<view class="flex padding-box justify-center">
-				<view class="flex index-h3">
-					精选项目
-				</view>
-				<view class="flex index-span">
-					查看全部
-					<image src="../../static/imgs/arrows.png" mode="" class="img-right"></image>
-				</view>
-			</view>
-			<view class="padding-box" style="padding-bottom: 30rpx;border-bottom: 1px solid #E4E4E4;">
-				<view style="padding-bottom: 40rpx" @tap="farmManor()">
-					<image src="../../static/imgs/The-probe.jpg" style="width: 100%;height: 300rpx;border-radius: 8rpx;"></image>
-					<view class="font-size-16 card-height">圣女果新鲜水果10斤保底</view>
-					<view class="flex ">
-						<view class="font-size-14">剩余：220份</view>
-						<progress style="flex: 1;"  percent="40" border-radius="10"  stroke-width="8" activeColor="#4ABA8A" backgroundColor="#C9EEDE"/>
-					</view>
-					<view class="flex index-span font-size-14 card-height">
-						<view class="flex-1">
-							<image class="img-size" src="../../static/imgs/nearby.png"></image>
-							成都 庆丰收农场
-						</view>
-						<view class="flex">
-							<button class="" type="primary" plain="true" style="padding: 2rpx 12rpx;height: min-content;border-radius: 20px;font-size: 24rpx;line-height: 1.5;">认领中</button>
-							<view class="flex">
-								<view class="index-money" style="position: relative;top:-14rpx;">￥<span style="font-size: 40rpx;">120</span></view>/份
-							</view>
-						</view>
-					</view>
-				</view>
-				
-			</view>
-			<tabBar :actives="0"></tabBar>
 		</scroll-view>
 	</view>
 </template>
 
 <script>
-	import tabBar from '@/components/tabbar.vue';
+import QQMapWX from '@/static/qqmap-wx-jssdk.min.js';
+var qqmapsdk;
 export default {
-	components:{tabBar},
 	data() {
 		return {
 			windowHeight: 300,
@@ -115,7 +123,31 @@ export default {
 			autoplay: true,
 			interval: 3000,
 			duration: 1000,
-
+			text: '公司目前根据目前生产情况和市场行情，首选品种应该是蜀杂茄一号，该品种为杂交一代良种种种种种种种种种种种种种该品种为杂交一代良种种种种种种种',
+			serch:{ // 城市
+				cityName:'',
+				recommended:true,
+			},
+			farm:{ // 推荐农场
+				farmphotoPath:'',
+				farmId:'',
+				introduce:'',
+				farmName:'',
+			},
+			PREFERENCE:[],// 秒杀商品
+			Featured:[],// 精选商品
+			product1:{
+				type:'seckill',
+				pageNum:1,
+				pageSize:100,
+				parentId:1,
+			},
+			product2:{
+				type:'recommend',
+				pageNum:1,
+				pageSize:100,
+				parentId:1,
+			},
 			remaining: '', //显示剩余时间
 			remainingd: '' //数据返回时间秒
 		};
@@ -124,7 +156,11 @@ export default {
 	onLoad() {
 		this.windowHeight = uni.getSystemInfoSync().windowHeight; // 屏幕的高度
 		this.isLogin = getApp().globalData.isLogin;
-		this.getmsglist(); //第一次加载数据
+		this.getmsglist();
+		this.getCity();
+		this.coverAll()
+		this.productType(this.product1);
+		this.productType(this.product2);
 	},
 	// onShareAppMessage: function() {
 	// 	return {
@@ -144,22 +180,90 @@ export default {
 		// }
 	},
 	methods: {
-		showFarm(){
-			uni.navigateTo({
-				url:"/pageA/farmDetails?id="+ 1 +"&name=" + '九汇生态农场',
+		getCity() {
+			let _this = this;
+			// 向用户发起授权请求，弹框提示
+			uni.authorize({
+				// 获取用户定位信息
+				scope: 'scope.userLocation',
+				// 用户同意授权执行
+				success() {
+					// 引入腾讯地图api
+					// 实例化API核心类
+					qqmapsdk = new QQMapWX({
+						// 填写自己的Key值，这个值是与AppID绑定的
+						key: 'GFHBZ-JU3CD-NEJ4S-PT3J2-JGFH6-7DBOX'
+					});
+					//获取位置信息
+					uni.getLocation({
+						type: 'gcj02',
+						success: function(res) {
+							_this.longitude = res.longitude.toString();
+							_this.latitude = res.latitude.toString();
+							//解析经纬度获取城市信息
+							uni.request({
+								header: {
+									'Content-Type': 'application/text'
+								},
+								url: 'http://apis.map.qq.com/ws/geocoder/v1/?location=' + _this.latitude + ',' + _this.longitude + '&key=GFHBZ-JU3CD-NEJ4S-PT3J2-JGFH6-7DBOX',
+								success(re) {
+									// _this.serch.cityName = re.data.result.address_component.city;
+									_this.serch.cityName = '成都市';
+									_this.getOne();
+								}
+							});
+						}
+					});
+				},
+				// 若用户不同意授权，弹框提示
+				fail(res) {
+					uni.showToast({
+						icon: 'none',
+						title: '注意：需要获取您的定位授权,否则部分功能将无法使用',
+						duration: 2000
+					});
+				}
+			});
+		},
+		getOne(){ // 获取推荐农场
+			this.$api.farmGetOne(this.serch).then(res => {
+				this.farm.farmphotoPath = res.data.data[1].farmPhotos[0].path;
+				this.farm.farmId = res.data.data[1].farm.farmId;
+				this.farm.introduce = res.data.data[1].farm.introduce;
+				this.farm.farmName = res.data.data[1].farm.farmName;
 			})
 		},
-		toFarm(){
-			console.log('111')
-			uni.navigateTo({
-				url:"../farm/farmList",
+		coverAll(){ // 获取轮播
+			this.$api.coverAll().then(res => {
+				// console.log(res)
 			})
 		},
-		farmManor(){
-			
-			uni.navigateTo({
-				url:"../farm/farmManor",
+		
+		productType(data){ // 推荐/精选商品
+			this.$api.productType(data).then(res => {
+				if (data.type == 'seckill') {
+					this.PREFERENCE = this.PREFERENCE.concat(res.data.data.records);
+				}
+				if (data.type == 'recommend') {
+					this.Featured = this.Featured.concat(res.data.data.records);
+				}
+				console.log(this.PREFERENCE,this.Featured)
 			})
+		},
+		showFarm(id,name) {
+			uni.navigateTo({
+				url: '/pageA/farmDetails?id=' + id + '&name=' + name,
+			});
+		},
+		toFarm() {
+			uni.switchTab({
+				url: '../farm/farmList'
+			});
+		},
+		farmManor() {
+			uni.navigateTo({
+				url: '../farm/farmManor'
+			});
 		},
 		getmsglist: function() {
 			var _self = this;
@@ -199,7 +303,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less">
+page {
+	background: #fff;
+}
 .bg-personal {
 	position: relative;
 }
@@ -250,16 +357,17 @@ export default {
 	color: #ff0001;
 }
 .img-right {
-	width: 18rpx;
-	height: 24rpx;
+	width: 10rpx;
+	height: 20rpx;
 	position: relative;
 	margin: auto 10rpx;
 }
 .img-size {
-	width: 30rpx;
-	height: 34rpx;
+	width: 22rpx;
+	height: 28rpx;
 	position: relative;
 	margin: auto 0;
+	margin-right: 10rpx;
 }
 .scroll-view-item_H {
 	width: 45%;
@@ -269,13 +377,18 @@ export default {
 	width: 100%;
 	height: 70%;
 }
-.font-size-14{
+.font-size-14 {
 	font-size: 28rpx;
 }
-.font-size-16{
+.font-size-16 {
 	font-size: 32rpx;
 }
-.card-height{
+.card-height {
 	height: 60rpx;
+}
+.card {
+	margin-top: 30rpx;
+	padding-bottom: 30rpx;
+	border-bottom: 1px solid #e4e4e4;
 }
 </style>

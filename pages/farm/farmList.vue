@@ -25,15 +25,12 @@
 				</view>
 			</view>
 		</scroll-view>
-		<tabBar :actives="1" ></tabBar>
 	</view>
 	
 </template>
 
 <script>
-	import tabBar from '@/components/tabbar.vue';
 export default {
-	components:{tabBar},
 	data() {
 		return {
 			windowHeight: 300,

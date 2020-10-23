@@ -1,110 +1,142 @@
 <template>
 	<view>
+		<scroll-view v-bind:style="{ height: windowHeight + 'px' }" scroll-y="true" enable-back-to-top="true">
 		<view class="bg-personal">
-			<view class="user-info text-center flex" v-if="isLogin">
-				<view class="text-lg">
-					<image style="width:90rpx;height:90rpx;border-radius: 50%;" :src="user.avatarUrl" mode=""></image>
+			<view  v-if="isLogin">
+				<view class="user-info text-center flex">
+					<view class="text-lg">
+						<image style="width:90rpx;height:90rpx;border-radius: 50%;" :src="user.avatarUrl" mode=""></image>
+					</view>
+					<view style="text-align: left;padding-left:20rpx;line-height: 3;">
+						<text style="color:#fff">{{user.nickName||''}}</text>
+						<!-- <view style="color:#fff" class="text-gray">{{user.phone||''}}</view> -->
+					</view>
+					
 				</view>
-				<view style="text-align: left;padding-left:20rpx">
-					<text style="color:#fff">{{user.nickName||''}}</text>
-					<view style="color:#fff" class="text-gray">{{user.phone||''}}</view>
+				<view class="flex justify-content-flex-justify padding-box" style="padding-top: 0;">
+					<view class="flex-1" style="border-right: 1px solid #FFFFFF;">
+						<view class="position-max">
+							{{cart}}
+						</view>
+						<view class="position-min">
+							购物车
+						</view>
+					</view>
+					<view class="flex-1" >
+						<view class="position-max">
+							2
+						</view>
+						<view class="position-min">
+							我的钱包
+						</view>
+					</view>
 				</view>
 			</view>
-			<view style="padding:40rpx 30rpx" v-else>
+			<view style="padding:40rpx 30rpx 0rpx 30rpx" v-else>
 				<view class="login-box" @click="showPopup">
 					登录/注册
 				</view>
 			</view>
+			
 		</view>
-		<!-- <view class="flex justify-content-flex-justify positon-box">
-			<view class="item-box" @click="toMyFarm">
-				<view class="flex justify-content-flex-justify item-jt align-items-center">
-					<view class="title display-flex align-items-center">
-						<image src="../../static/imgs/farm-management.png" mode=""></image>我的农场
-					</view>
-					<image src="../../static/imgs/arrows.png" mode=""></image>
+		<view class="container-input" >
+			<view>我的项目</view>
+			<view class="flex justify-content-flex-justify " style="padding: 20rpx 0;">
+				<view class="flex-1 text-center text-gray" >
+					<image src="../../static/imgs/付款.png" style="width: 50rpx;height: 50rpx;"></image>
+					<view>待付款</view>
 				</view>
-				<view class="position-num">
-					{{nums.farmCount}}
+				<view class="flex-1 text-center text-gray" >
+					<image src="../../static/imgs/项目直播.png" style="width: 50rpx;height: 50rpx;"></image>
+					<view>项目直播</view>
+				</view>
+				<view class="flex-1 text-center text-gray" >
+					<image src="../../static/imgs/种植中.png" style="width: 50rpx;height: 50rpx;"></image>
+					<view>项目进行</view>
+				</view>
+				<view class="flex-1 text-center text-gray" >
+					<image src="../../static/imgs/待收获.png" style="width: 50rpx;height: 50rpx;"></image>
+					<view>待收获</view>
+				</view>
+				<view class="flex-1 text-center text-gray" >
+					<image src="../../static/imgs/物流发货.png" style="width: 50rpx;height: 50rpx;"></image>
+					<view>待发货</view>
 				</view>
 			</view>
-			<view class="item-box" @click="toLandManagement()">
-				<view class="flex justify-content-flex-justify item-jt align-items-center">
-					<view class="title display-flex align-items-center">
-						<image src="../../static/imgs/dikuai.png" mode=""></image>我的地块
-					</view>
-					<image src="../../static/imgs/arrows.png" mode=""></image>
+			<view class="flex justify-content-flex-justify " style="padding: 20rpx 0;">
+				<view class="flex-1 text-center text-gray" >
+					<image src="../../static/imgs/收货入库.png" style="width: 50rpx;height: 50rpx;"></image>
+					<view>待收货</view>
 				</view>
-				<view class="position-num">
-					{{nums.massifCount}}
+				<view class="flex-1 text-center text-gray" >
+					<image src="../../static/imgs/评价.png" style="width: 50rpx;height: 50rpx;"></image>
+					<view>待评价</view>
 				</view>
+				<view class="flex-1 text-center text-gray" >
+					<image src="../../static/imgs/售后.png" style="width: 50rpx;height: 50rpx;"></image>
+					<view>待售后</view>
+				</view>
+				<view class="flex-1 text-center text-gray" ></view>
+				<view class="flex-1 text-center text-gray" ></view>
 			</view>
-		</view> -->
-		<view class="container-input">
+		</view>
+		<view class="container-input" >
 			<form>
-				<view class="cu-form-group item-jt">
-					<view class="title display-flex align-items-center">
-						<image src="../../static/imgs/tip.png" mode=""></image>版本更新
-					</view>
-					<text class="tip-text">当前1.0.1</text>
-				</view>
-				<view class="cu-form-group item-jt" @click="toGetNearTheEquipment">
-					<view class="title display-flex align-items-center">
-						<image class="small-img" src="../../static/imgs/fujin.png" mode=""></image>查找附近设备
+				<view class="cu-form-group item-jt" >
+					<view class="title display-flex align-items-center border-left">
+						地址管理
 					</view>
 					<image src="../../static/imgs/arrows.png" mode=""></image>
 				</view>
-				<view class="cu-form-group item-jt" @click="toSetWaring">
-					<view class="title display-flex align-items-center">
-						<image src="../../static/imgs/warning.png" mode=""></image>预警设置
-					</view>
-					<image src="../../static/imgs/arrows.png" mode=""></image>
-				</view>
-				<view class="cu-form-group item-jt" @click="toMandate">
-					<view class="title display-flex align-items-center">
-						<image class="small-img" src="../../static/imgs/shouquan.png" mode=""></image>添加员工
-					</view>
-					<image src="../../static/imgs/arrows.png" mode=""></image>
 				
-				</view>
-				<view class="cu-form-group item-jt" @click="toUs">
-					<view class="title display-flex align-items-center">
-						<image src="../../static/imgs/about.png" mode=""></image>关于我们
+				<view class="cu-form-group item-jt">
+					<view class="title display-flex align-items-center border-left" >
+						关于我们
 					</view>
 					<image src="../../static/imgs/arrows.png" mode=""></image>
 
+				</view>
+				<view class="cu-form-group item-jt" >
+					<view class="title display-flex align-items-center border-left">
+						意见反馈
+					</view>
+					<image src="../../static/imgs/arrows.png" mode=""></image>
+				</view>
+				<view class="cu-form-group item-jt" >
+					<view class="title display-flex align-items-center border-left">
+						使用指南
+					</view>
+					<image src="../../static/imgs/arrows.png" mode=""></image>
 				</view>
 			</form>
 		</view>
 		<button v-if="isLogin" @click="toLogin" class="cu-btn block line-green lg" style="width:90%;margin:60rpx auto">退出</button>
+		</scroll-view>
 		<popup content='是否跳转到登录页面？' align='center' cancelText="我再看看" :show='popupShow' :showCancel='true' confirmText='确定'
 		 @confirm="confirmFunc" @close="closePopup" />
-		 <tabBar :actives="4"></tabBar>
 	</view>
 </template>
 
 <script>
-	import tabBar from '@/components/tabbar.vue';
 	import popup from "@/components/neil-modal/neil-modal.vue"
 	export default {
-		components:{tabBar},
+		components: {
+			popup
+		},
 		data() {
 			return {
 				switchB: true,
-				nums: {
-					massifCount:'-',
-					farmCount:'-'
-				},
+				windowHeight:0,
+				cart:0,
 				user: {},
 				isLogin: false,
 				popupShow: false
 			};
 		},
-		components: {
-			popup
-		},
+		
 		onLoad() {
 			let _this = this
+			this.windowHeight = uni.getSystemInfoSync().windowHeight; // 屏幕的高度
 			uni.getStorage({
 				key: 'XYZNUserInfo',
 				success: function(res) {
@@ -115,7 +147,7 @@
 						phone: res.data.phone || '',
 						avatarUrl: res.data.avatarUrl
 					}
-					 _this.getCount()
+					 // _this.getList()
 				},
 				fail: function() {
 					_this.isLogin = false
@@ -134,10 +166,10 @@
 			if (!this.isLogin) { //每次进入页面检查是否登录，如果没有登录，再拿一次最新状态
 				this.isLogin = getApp().globalData.isLogin
 				if (this.isLogin) {
-					this.getCount()
+					this.getList()
 				}
 			}else{
-				this.getCount()
+				this.getList()
 			}
 		},
 		methods: {
@@ -180,11 +212,10 @@
 					url: '/pageA/mandate'
 				});
 			},
-			getCount() {
-				this.$api.massifCount().then(res => {
-					this.nums = res.data.data;
+			getList() { // 收藏
+				this.$api.cartGetList().then(res => {
+					this.nums = res.data.data.length;
 				}).catch(res=>{
-					console.info('没登录')
 					this.isLogin = false
 					getApp().globalData.isLogin = false
 				})
@@ -226,18 +257,13 @@
 			showPopup() {
 				this.popupShow = true
 			},
-			toUs(){
-				uni.navigateTo({
-					url: 'aboutUs'
-				});			
-			}
 		}
 	}
 </script>
 
 <style lang="less">
 	page{
-		// background: #fff;
+		background: #fff;
 	}
 	.bg-personal {
 		height: 300rpx;
@@ -249,7 +275,7 @@
 
 	.user-info {
 		margin: 0 30rpx;
-		padding: 40rpx;
+		padding: 40rpx 40rpx 0 40rpx;
 		padding-left: 0;
 
 		.text-lg image {
@@ -308,6 +334,7 @@
 		z-index: 11111;
 		background: #fff;
 		position: relative;
+		border-bottom: 10px solid #F5F5F5;
 		// top: -40rpx;
 	}
 
@@ -333,5 +360,25 @@
 		color: #fff;
 		width: 160rpx;
 		text-align: center;
+	}
+	.padding-box {
+		position: relative;
+		padding: 30rpx;
+		
+		.position-min {
+			font-size: 24rpx;
+			color: #FFFFFF;
+			text-align: center;
+		}
+		
+		.position-max{
+			font-size: 34rpx;
+			color: #FFFFFF;
+			text-align: center;
+		}
+	}
+	.border-left{
+		padding-left: 30rpx;
+		border-left: 3px solid #00AE66;
 	}
 </style>

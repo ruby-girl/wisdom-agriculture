@@ -1,9 +1,9 @@
 export default {
 	config: {
-		baseUrl: "https://www.sc-kwt.com/",
-		imgUrl: "https://www.sc-kwt.com",
-		baseUrl: "http://139.155.21.14:1024/",
-		imgUrl: "http://139.155.21.14:1024",
+		// baseUrl: "https://www.sc-kwt.com/",
+		// imgUrl: "https://www.sc-kwt.com",
+		baseUrl: "http://150.158.174.77",
+		imgUrl: "http://150.158.174.77",
 		// baseUrl:"https://xyzn.tree-iot.com/",
 		// imgUrl:"https://xyzn.tree-iot.com",
 		header: {
@@ -45,17 +45,16 @@ export default {
 		//TODO 数据签名
 
 		options.header = {
-			// 'token': uni.getStorageSync('XYZNUserInfo').token || '',
-			'token':'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ4a3puIiwiaWF0IjoxNjAyNTU1NTIxLCJleHAiOjE2MDM0MTk1MjEsImlkIjoiMTkifQ.1Z0pyd2v66Pxkd5JeW9wAYrkIIvskPdBJfRg_LAhyC8',
+			'token': uni.getStorageSync('XYZNUserInfo').token || '',
 			'cookie': uni.getStorageSync('XYZNUserInfo').cookie || '',
-			'Content-Type': 'application/x-www-form-urlencoded'
+			'Content-Type': 'application/json',
+			
 		}
 		return new Promise((resolve, reject) => {
 			let _config = null
 
 			options.complete = (response) => {
 				let statusCode = response.statusCode
-
 				response.config = _config
 				if (process.env.NODE_ENV === 'development') {
 					if (statusCode === 200) {
@@ -72,7 +71,7 @@ export default {
 				_reslog(response)
 				if (statusCode === 200) { //成功
 					uni.hideLoading();
-					if (response.data.stateCode == 200) {
+					if (response.data.code == 200) {
 						resolve(response);
 					} else if(response.data.msg=='USER_NOT_LOGIN'){
 						uni.showToast({

@@ -3,14 +3,14 @@
 	<view>
 		<scroll-view v-bind:style="{ height: windowHeight + 'px' }" scroll-y="true" enable-back-to-top="true" style="background-color: #FFFFFF;">
 			<view class="bg-personal" style="margin-bottom: 150rpx;">
-				<image src="../static/images/bg.jpg" style="width: 100%;height: 500rpx;"></image>
-				<view class="bg-img">
+				<image :src="data.bgUrl" style="width: 100%;height: 500rpx;"></image>
+				<view class="bg-img" v-if="data">
 					<view style="letter-spacing: 8rpx;text-align: center;">
 						<image class="img-size" src="../static/imgs/dingwei@3x.png"></image>
-						绵阳市江油
+						{{data.provinceName}}{{data.cityName}}
 					</view>
-					<view class="font-size-12 text-center" style="margin: 20rpx 0;font-weight: 600;">主营业务：农家乐旅游、苹果和梨种植农场</view>
-					<view class="font-size-12" style="">{{ text }}</view>
+					<!-- <view class="font-size-12 text-center" style="margin: 20rpx 0;font-weight: 600;">主营业务：农家乐旅游、苹果和梨种植农场</view> -->
+					<view class="font-size-12" style="height: 230rpx;overflow: auto;margin-top: 20rpx;">{{ data.introduce }}</view>
 				</view>
 			</view>
 
@@ -31,168 +31,42 @@
 				</scroll-view>
 			</view>
 			<view v-if="TabCur == 1">
-				<view class="flex padding-box justify-center margin-box"><view class="flex index-h3">农场主</view></view>
-				<view class="" style="background-color: #F8F8F8;margin: 8px 15px;">
-					<view style="border-radius: 10rpx;">
-						<view class="flex justify-center" style="padding: 30rpx;">
-							<image src="../static/images/people.jpg" style="width: 150rpx;height: 150rpx;border-radius: 10rpx;" mode="aspectFill"></image>
-							<view class="flex bg-personal" style="flex: 1;padding:  10rpx 0 10rpx 30rpx;flex-direction: column;letter-spacing: 8rpx;overflow: hidden;">
-								<view class="font-size-12 ">
-									农&nbsp;场&nbsp;主：
-									<text class="font-size-12 " style="letter-spacing: 0;">李老板</text>
-								</view>
-								<view class="font-size-12 text-overflows ">
-									资&nbsp;&nbsp;&nbsp;&nbsp;历：
-									<text class="font-size-12 " style="letter-spacing: 0;">八年种植苹果、梨的经验</text>
-								</view>
-								<view class="font-size-12 text-overflows ">
-									农场位置：
-									<text class="font-size-12 " style="letter-spacing: 0;">绵阳市江油市xx区xx路xx号</text>
-								</view>
-							</view>
-						</view>
-					</view>
-				</view>
-				<view class="flex line-gray"></view>
 				<view class="flex padding-box justify-center margin-box"><view class="flex index-h3">发起的项目</view></view>
 				<view class="page-section-spacing  " style="padding-bottom: 30rpx;">
 					<scroll-view class="scroll-view_H " scroll-x="true" bindscroll="scroll" style="width: 100%;margin: 0 15px;">
-						<view id="demo1" class="scroll-view-item_H demo-text-1 ">
-							<image src="../static/images/fsf.jpg" class="scroll-view-item-img"  mode="aspectFill"></image>
-							<view class="font-size-12 " style="padding: 0 10rpx;">生态无公害圣女果红</view>
+						<view id="demo1" class="scroll-view-item_H demo-text-1 " v-for="(item , index) in project" :key="index">
+							<image :src="item.photoUrl" class="scroll-view-item-img"  mode="aspectFill"></image>
+							<view class="font-size-12 " style="padding: 0 10rpx;">{{item.title}}</view>
 							<view class="flex ">
 								<view class="font-size-12 text-gray flex-1">
 									剩余
-									<text class="text-red">7</text>
-									天
+									<text class="text-red">{{item.stock - item.sales}}</text>
+									{{item.unitName}}
 								</view>
-								<view class="font-size-12 text-gray">已达成90%</view>
+								<view class="font-size-12 text-gray">
+									<text class="text-red">￥{{item.price}}</text>
+									/{{item.unitName}}
+								</view>
 							</view>
 						</view>
-						<view id="demo1" class="scroll-view-item_H demo-text-1 ">
-							<image src="../static/images/dadq.jpg" class="scroll-view-item-img"  mode="aspectFill"></image>
-							<view class="font-size-12 " style="padding: 0 10rpx;">生态无公害圣女果红</view>
-							<view class="flex ">
-								<view class="font-size-12 text-gray flex-1">
-									剩余
-									<text class="text-red">7</text>
-									天
-								</view>
-								<view class="font-size-12 text-gray">已达成90%</view>
-							</view>
-						</view>
-						<view id="demo1" class="scroll-view-item_H demo-text-1 ">
-							<image src="../static/images/timgVSZGA7FB.jpg" class="scroll-view-item-img"  mode="aspectFill"></image>
-							<view class="font-size-12 " style="padding: 0 10rpx;">生态无公害圣女果红</view>
-							<view class="flex ">
-								<view class="font-size-12 text-gray flex-1">
-									剩余
-									<text class="text-red">7</text>
-									天
-								</view>
-								<view class="font-size-12 text-gray">已达成90%</view>
-							</view>
-						</view>
-						<view id="demo1" class="scroll-view-item_H demo-text-1 ">
-							<image src="../static/images/dsaf.jpg" class="scroll-view-item-img"  mode="aspectFill"></image>
-							<view class="font-size-12 " style="padding: 0 10rpx;">生态无公害圣女果红</view>
-							<view class="flex ">
-								<view class="font-size-12 text-gray flex-1">
-									剩余
-									<text class="text-red">7</text>
-									天
-								</view>
-								<view class="font-size-12 text-gray">已达成90%</view>
-							</view>
-						</view>
-						<view id="demo1" class="scroll-view-item_H demo-text-1 ">
-							<image src="../static/images/timgAZ9AN5WW.jpg" class="scroll-view-item-img"  mode="aspectFill"></image>
-							<view class="font-size-12 " style="padding: 0 10rpx;">生态无公害圣女果红</view>
-							<view class="flex ">
-								<view class="font-size-12 text-gray flex-1">
-									剩余
-									<text class="text-red">7</text>
-									天
-								</view>
-								<view class="font-size-12 text-gray">已达成90%</view>
-							</view>
-						</view>
-						<view id="demo1" class="scroll-view-item_H demo-text-1 ">
-							<image src="../static/images/timgdsad.jpg" class="scroll-view-item-img"  mode="aspectFill"></image>
-							<view class="font-size-12 " style="padding: 0 10rpx;">生态无公害圣女果红</view>
-							<view class="flex ">
-								<view class="font-size-12 text-gray flex-1">
-									剩余
-									<text class="text-red">7</text>
-									天
-								</view>
-								<view class="font-size-12 text-gray">已达成90%</view>
-							</view>
-						</view>
-						
 					</scroll-view>
 				</view>
 				<view class="flex line-gray"></view>
 				<view class="flex padding-box justify-center margin-box"><view class="flex index-h3">发起的活动</view></view>
 				<view class="page-section-spacing  " style="padding-bottom: 30rpx;">
 					<scroll-view class="scroll-view_H " scroll-x="true" bindscroll="scroll" style="width: 100%;margin: 0 15px;">
-						<view id="demo1" class="scroll-view-item_H demo-text-1 ">
-							<image src="../static/images/u=3182281012,3984649657&fm=26&gp=0.jpg" class="scroll-view-item-img"  mode="aspectFill"></image>
-							<view class="font-size-12 " style="padding: 0 10rpx;">南瓜节游园活动</view>
+						<view id="demo1" class="scroll-view-item_H demo-text-1 " v-for="(item , index) in activities" :key="index">
+							<image :src="item.photoUrl" class="scroll-view-item-img"  mode="aspectFill"></image>
+							<view class="font-size-12 " style="padding: 0 10rpx;">{{item.title}}</view>
 							<view class="flex ">
 								<view class="font-size-12 text-gray flex-1">
 									剩余
-									<text class="text-red">7</text>
-									天
+									<text class="text-red">{{item.stock - item.sales}}</text>
+									{{item.unitName}}
 								</view>
 								<view class="font-size-12 text-gray">
-									<text class="text-red">￥50</text>
-									元/位
-								</view>
-							</view>
-						</view>
-						<view id="demo1" class="scroll-view-item_H demo-text-1 ">
-							<image src="../static/images/u=12638188,2993346786&fm=26&gp=0.jpg" class="scroll-view-item-img"  mode="aspectFill"></image>
-							<view class="font-size-12 " style="padding: 0 10rpx;">夏至赏桃活动</view>
-							<view class="flex ">
-								<view class="font-size-12 text-gray flex-1">
-									剩余
-									<text class="text-red">7</text>
-									天
-								</view>
-								<view class="font-size-12 text-gray">
-									<text class="text-red">￥50</text>
-									元/位
-								</view>
-							</view>
-						</view>
-						<view id="demo1" class="scroll-view-item_H demo-text-1 ">
-							<image src="../static/images/u=1878396425,457522588&fm=26&gp=0.jpg" class="scroll-view-item-img"  mode="aspectFill"></image>
-							<view class="font-size-12 " style="padding: 0 10rpx;">春之采花活动</view>
-							<view class="flex ">
-								<view class="font-size-12 text-gray flex-1">
-									剩余
-									<text class="text-red">7</text>
-									天
-								</view>
-								<view class="font-size-12 text-gray">
-									<text class="text-red">￥50</text>
-									元/位
-								</view>
-							</view>
-						</view>
-						<view id="demo1" class="scroll-view-item_H demo-text-1 ">
-							<image src="../static/images/u=2192420015,3569094498&fm=26&gp=0.jpg" class="scroll-view-item-img"  mode="aspectFill"></image>
-							<view class="font-size-12 " style="padding: 0 10rpx;">丰收采摘活动</view>
-							<view class="flex ">
-								<view class="font-size-12 text-gray flex-1">
-									剩余
-									<text class="text-red">7</text>
-									天
-								</view>
-								<view class="font-size-12 text-gray">
-									<text class="text-red">￥50</text>
-									元/位
+									<text class="text-red">￥{{item.price}}</text>
+									/{{item.unitName}}
 								</view>
 							</view>
 						</view>
@@ -202,78 +76,18 @@
 				<view class="flex padding-box justify-center margin-box"><view class="flex index-h3">集市售卖</view></view>
 				<view class="page-section-spacing  " style="padding-bottom: 30rpx;">
 					<scroll-view class="scroll-view_H " scroll-x="true" bindscroll="scroll" style="width: 100%;margin: 0 15px;">
-						<view id="demo1" class="scroll-view-item_H demo-text-1 ">
-							<image src="../static/images/u=2248551291,340642128&fm=26&gp=0.jpg" class="scroll-view-item-img"  mode="aspectFill"></image>
-							<view class="font-size-12 " style="padding: 0 10rpx;">红富士</view>
+						<view id="demo1" class="scroll-view-item_H demo-text-1 " v-for="(item , index) in sell" :key="index">
+							<image :src="item.photoUrl" class="scroll-view-item-img"  mode="aspectFill"></image>
+							<view class="font-size-12 " style="padding: 0 10rpx;">{{item.title}}</view>
 							<view class="flex ">
 								<view class="font-size-12 text-gray flex-1">
 									剩余
-									<text class="text-red">7</text>
-									份
+									<text class="text-red">{{item.stock - item.sales}}</text>
+									{{item.unitName}}
 								</view>
 								<view class="font-size-12 text-gray">
-									<text class="text-red">￥10</text>
-									元/位
-								</view>
-							</view>
-						</view>
-						<view id="demo1" class="scroll-view-item_H demo-text-1 ">
-							<image src="../static/images/timg7OXMT344.jpg" class="scroll-view-item-img"  mode="aspectFill"></image>
-							<view class="font-size-12 " style="padding: 0 10rpx;">红将军</view>
-							<view class="flex ">
-								<view class="font-size-12 text-gray flex-1">
-									剩余
-									<text class="text-red">7</text>
-									份
-								</view>
-								<view class="font-size-12 text-gray">
-									<text class="text-red">￥10</text>
-									元/位
-								</view>
-							</view>
-						</view>
-						<view id="demo1" class="scroll-view-item_H demo-text-1 ">
-							<image src="../static/images/timg5ML2TXJY.jpg" class="scroll-view-item-img"  mode="aspectFill"></image>
-							<view class="font-size-12 " style="padding: 0 10rpx;">软籽石榴</view>
-							<view class="flex ">
-								<view class="font-size-12 text-gray flex-1">
-									剩余
-									<text class="text-red">7</text>
-									份
-								</view>
-								<view class="font-size-12 text-gray">
-									<text class="text-red">￥10</text>
-									元/位
-								</view>
-							</view>
-						</view>
-						<view id="demo1" class="scroll-view-item_H demo-text-1 ">
-							<image src="../static/images/timgG034X9XK.jpg" class="scroll-view-item-img"  mode="aspectFill"></image>
-							<view class="font-size-12 " style="padding: 0 10rpx;">红心火龙果</view>
-							<view class="flex ">
-								<view class="font-size-12 text-gray flex-1">
-									剩余
-									<text class="text-red">7</text>
-									份
-								</view>
-								<view class="font-size-12 text-gray">
-									<text class="text-red">￥10</text>
-									元/位
-								</view>
-							</view>
-						</view>
-						<view id="demo1" class="scroll-view-item_H demo-text-1 ">
-							<image src="../static/images/timgdsad.jpg" class="scroll-view-item-img"  mode="aspectFill"></image>
-							<view class="font-size-12 " style="padding: 0 10rpx;">圣女果红</view>
-							<view class="flex ">
-								<view class="font-size-12 text-gray flex-1">
-									剩余
-									<text class="text-red">7</text>
-									份
-								</view>
-								<view class="font-size-12 text-gray">
-									<text class="text-red">￥10</text>
-									元/位
+									<text class="text-red">￥{{item.price}}</text>
+									/{{item.unitName}}
 								</view>
 							</view>
 						</view>
@@ -285,57 +99,16 @@
 				<view class="flex line-gray"></view>
 				<view class="flex padding-box justify-center margin-box"><view class="flex index-h3">详情介绍</view></view>
 				<view class=" padding-box">
-					<view class="standard">
-						<image src="../static/imgs/WIFI@2x.png"></image>
-						<view class="font-size-12">WIFI</view>
-					</view>
-					<view class="standard">
-						<image src="../static/imgs/家庭@2x.png"></image>
-						<view class="font-size-12">家庭入住</view>
-					</view>
-					<view class="standard">
-						<image src="../static/imgs/露营@2x.png"></image>
-						<view class="font-size-12">露营</view>
-					</view>
-					<view class="standard">
-						<image src="../static/imgs/停车位@2x.png"></image>
-						<view class="font-size-12">停车位</view>
-					</view>
-					<view class="standard">
-						<image src="../static/imgs/智慧树@2x.png"></image>
-						<view class="font-size-12">智慧树</view>
-					</view>
-
-					<view class="standard">
-						<image src="../static/imgs/大地探针@2x.png"></image>
-						<view class="font-size-12">大地探针</view>
-					</view>
-					<view class="standard">
-						<image src="../static/imgs/水精灵@2x.png"></image>
-						<view class="font-size-12">水精灵</view>
-					</view>
-					<view class="standard">
-						<image src="../static/imgs/智能鸡脚环@2x.png"></image>
-						<view class="font-size-12">智能鸡脚环</view>
-					</view>
-					<view class="standard">
-						<image src="../static/imgs/鲜仓宝@2x.png"></image>
-						<view class="font-size-12">鲜仓宝</view>
-					</view>
-					<view class="standard">
-						<image src="../static/imgs/耳标@2x.png"></image>
-						<view class="font-size-12">耳标</view>
-					</view>
-					<view class="standard">
-						<image src="../static/imgs/牛项圈@2x.png"></image>
-						<view class="font-size-12">牛项圈</view>
+					<view class="standard" v-for="(item, index) in facility" :key="index">
+						<image :src="'../static/imgs/'+ item.name +'@2x.png'"></image>
+						<view class="font-size-12">{{item.name}}</view>
 					</view>
 				</view>
 			</view>
 			<view v-else>
 				<view class="Grid">
 					<view class="Grid-Item" @tap="showVideo(0)">
-						<view class="GSimg"><image class="Image" src="../static/images/TPG01028537.jpg" mode="aspectFill"></image></view>
+						<view class="GSimg"><image class="Image" src="../static/images/TPG07956984.jpg" mode="aspectFill"></image></view>
 						<image class="GStoptitle" src="../static/imgs/视频@2x.png"></image>
 						<view class="GSbottomtitle">
 							<image class="Image" src="../static/imgs/心@2x.png"></image>
@@ -343,6 +116,14 @@
 						</view>
 					</view>
 					<view class="Grid-Item" @tap="showVideo(1)">
+						<view class="GSimg"><image class="Image" src="../static/images/TPG07956984.jpg" mode="aspectFill"></image></view>
+						<image class="GStoptitle" src="../static/imgs/视频@2x.png"></image>
+						<view class="GSbottomtitle">
+							<image class="Image" src="../static/imgs/心1@2x.png"></image>
+							170
+						</view>
+					</view>
+					<view class="Grid-Item" @tap="showVideo(2)">
 						<view class="GSimg"><image class="Image" src="../static/images/TPG07956984.jpg" mode="aspectFill"></image></view>
 						<image class="GStoptitle" src="../static/imgs/视频@2x.png"></image>
 						<view class="GSbottomtitle">
@@ -437,7 +218,13 @@ export default {
 			windowHeight: 300,
 			isLogin: false,
 			active_video:false,
-			Title: '',
+			Title: '', // 农场名
+			id:'', // 农场id
+			data:{}, // 农场信息
+			activities:[], // 发起的活动
+			project:[], // 发起的项目
+			sell:[], // 集市售卖
+			facility:[],// 设施
 			tabs: [
 				{
 					id: 1,
@@ -454,6 +241,22 @@ export default {
 			commend:false,
 			data: [
 				{
+					id: 41,
+					title: '好纠结',
+					like_nums: 0,
+					user_id: 10002,
+					goods_id: 10073,
+					nick_name: '测试1',
+					avatar_url: 'http://live.bjgs.top/default/avatar_url.png',
+					islive: 0,
+					live_id: 0,
+					room_id: 0,
+					online_num: 0,
+					img_path: 'http://live.bjgs.top/uploads/20200605162614bad357185.jpg',
+					video_path: 'https://v-cdn.zjol.com.cn/276985.mp4',
+					distance: '1.8km'
+				},
+				{
 					id: 16,
 					title: '',
 					like_nums: 1,
@@ -469,70 +272,9 @@ export default {
 					video_path: 'https://6e6f-normal-env-ta6pc-1300924598.tcb.qcloud.la/video-swiper/1589851354869410.mp4?sign=1f636557effa496e074332e3f4b9b8aa&t=1589851461',
 					distance: '1.8km'
 				},
-				{
-					id: 38,
-					title: '清新的小女孩',
-					like_nums: 0,
-					user_id: 10003,
-					goods_id: 0,
-					nick_name: '测试2',
-					avatar_url: 'http://live.bjgs.top/default/avatar_url.png',
-					islive: 0,
-					live_id: 0,
-					room_id: 0,
-					online_num: 0,
-					img_path: 'http://live.bjgs.top/uploads/20200604153424f43641439.jpg',
-					video_path: 'https://6e6f-normal-env-ta6pc-1300924598.tcb.qcloud.la/video-swiper/1589851322674828.mp4?sign=185e46cba885c4303c7cf5f8658bea9b&t=1589851482',
-					distance: '1.8km'
-				},
-				{
-					id: 39,
-					title: '吴京',
-					like_nums: 0,
-					user_id: 10050,
-					goods_id: 10020,
-					nick_name: 'ee',
-					avatar_url: 'http://live.bjgs.top/default/avatar_url.png',
-					islive: 0,
-					live_id: 0,
-					room_id: 0,
-					online_num: 0,
-					img_path: 'http://live.bjgs.top/uploads/202006041707592f5593079.jpg',
-					video_path: 'https://6e6f-normal-env-ta6pc-1300924598.tcb.qcloud.la/video-swiper/1589851312271309.mp4?sign=978660c42305ec67d4c3d603c2ae5a3d&t=1589851496',
-					distance: '1.8km'
-				},
-				{
-					id: 40,
-					title: '音乐',
-					like_nums: 0,
-					user_id: 10002,
-					goods_id: 0,
-					nick_name: '测试1',
-					avatar_url: 'http://live.bjgs.top/default/avatar_url.png',
-					islive: 0,
-					live_id: 0,
-					room_id: 0,
-					online_num: 0,
-					img_path: 'http://live.bjgs.top/uploads/202006050905065d3a43812.jpg',
-					video_path: 'https://6e6f-normal-env-ta6pc-1300924598.tcb.qcloud.la/video-swiper/1589851307588534.mp4?sign=43cf344e83089348eeeea38d26ba51bb&t=1589851514',
-					distance: '1.8km'
-				},
-				{
-					id: 41,
-					title: '好纠结',
-					like_nums: 0,
-					user_id: 10002,
-					goods_id: 10073,
-					nick_name: '测试1',
-					avatar_url: 'http://live.bjgs.top/default/avatar_url.png',
-					islive: 0,
-					live_id: 0,
-					room_id: 0,
-					online_num: 0,
-					img_path: 'http://live.bjgs.top/uploads/20200605162614bad357185.jpg',
-					video_path: 'https://v-cdn.zjol.com.cn/276985.mp4',
-					distance: '1.8km'
-				}
+				
+				
+				
 			],
 			index_: 1,
 			index: '1',
@@ -543,14 +285,16 @@ export default {
 			_arr: [],
 			len: 0,
 			current:0,
+			
 		};
 	},
 	components: {},
 	onLoad(option) {
 		this.windowHeight = uni.getSystemInfoSync().windowHeight; // 屏幕的高度
 		this.isLogin = getApp().globalData.isLogin;
-		console.log(option);
 		this.Title = option.name;
+		this.id = option.id;
+		this.getData();
 	},
 	// onShareAppMessage: function() {
 	// 	return {
@@ -570,6 +314,73 @@ export default {
 		// }
 	},
 	methods: {
+		getData(){ // 获取农场信息
+			this.$api.farmGetOne({farmId:this.id}).then(res =>{
+				this.data = res.data.data[0].farm;
+				this.data.bgUrl =  res.data.data[0].farmPhotos[0].path;
+				this.farmFarmfacilities();
+				this.MerchantsFindfarm();
+			})
+		},
+		farmFarmfacilities(){ // 获取农场设施
+			this.$api.farmFarmfacilities({farmId:this.id}).then(res =>{
+				this.facility = res.data.data;
+			})
+		},
+		MerchantsFindfarm(){ // 获取店铺信息
+			this.$api.MerchantsFindfarm({farmId:this.id}).then(res =>{
+				this.productType(res.data.data.merchantId);
+				this.productFindMerchants(0,res.data.data.merchantId);
+				this.productFindMerchants(1,res.data.data.merchantId);
+			})
+		},
+		productType(id){ // 获取活动
+			this.$api.productType(
+			{
+				type:'seckill',
+				merchantId:id,
+				pageNum:1,
+				pageSize:100,
+				parentId:0,
+			}
+			).then(res => {
+				this.coverFindByidlist(1,0,res.data.data.records);
+			})
+		},
+		productFindMerchants(number,id){ // 获取项目/集市售卖
+			this.$api.productFindMerchants({
+				"pageNum":1,
+				"pageSize":100,
+				"merchantId":id,
+				"parentId":number
+			}).then(res => {
+				if (number) {
+					this.coverFindByidlist(2,0,res.data.data.records);
+				} else {
+					this.coverFindByidlist(3,0,res.data.data.records);
+				}
+			})
+		},
+		coverFindByidlist(num,index,array){// 根据商品id查封面图
+			if (array.length > 0) {
+				this.$api.coverFindByidlist({productId:array[index].productId}).then(res => {
+					array[index].photoUrl = res.data.data[0];
+					if(++index < array.length){
+						this.coverFindByidlist(index,array);
+					} else {
+						if (num == 1) {
+							this.activities  = array;
+						}
+						if (num == 2) {
+							this.sell = array;
+						}
+						if (num == 3) {
+							this.project = array;
+						}
+					}
+				})
+			}
+		},
 		tabSelect(e) {
 			this.TabCur = e.currentTarget.dataset.id;
 		},
@@ -621,7 +432,7 @@ export default {
 			PayVideo[current]['istrue'] = true;
 			this.PayVideo = PayVideo;
 			let videoContext = uni.createVideoContext('id' + index_);
-			console.log(this.PayVideo, 1555555555);
+			
 			videoContext.pause();
 			videoContext = uni.createVideoContext('id' + current);
 			videoContext.play();
@@ -632,11 +443,7 @@ export default {
 			this.PayVideo.push(_arr[active]);
 			this.active += 1;
 		},
-		aaaa(index) {
-			let videoContext = uni.createVideoContext('id' + index);
-			console.log('11');
-			videoContext.stop();
-		}
+		
 	},
 	mounted() {
 		uni.setStorageSync('video', this.data);
@@ -795,35 +602,36 @@ export default {
 	align-content: space-between;
 	padding: 10rpx 0;
 	.Grid-Item {
-		width: 50%;
-		padding: 10rpx;
+		width: 33%;
+		padding: 0rpx;
 		text-align: center;
 		position: relative;
 		.GSimg {
 			.Image {
-				height: 600rpx;
+				height: 400rpx;
 			}
 		}
 		.GStoptitle {
 			position: absolute;
-			top: 25rpx;
-			right: 20rpx;
-			width: 45rpx;
-			height: 45rpx;
+			top: 10rpx;
+			right: 10rpx;
+			width: 35rpx;
+			height: 35rpx;
 		}
 		.GSbottomtitle {
+			
+			position: absolute;
+			bottom: 20rpx;
+			left: 15rpx;
+			color: #ffffff;
+			font-size: 28rpx;
 			.Image {
-				width: 54rpx;
-				height: 44rpx;
+				width: 41rpx;
+				height: 33rpx;
 				margin: 0 10rpx 0 0;
 				position: relative;
 				top: 10rpx;
 			}
-			position: absolute;
-			bottom: 30rpx;
-			left: 30rpx;
-			color: #ffffff;
-			font-size: 34rpx;
 		}
 	}
 }
