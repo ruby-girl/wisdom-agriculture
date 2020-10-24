@@ -122,17 +122,17 @@ export default {
 	methods: {
 		toActivity(){ // 活动列表
 			uni.navigateTo({
-				url:"./activityList"
+				url:"/pageB/activityList"
 			})
 		},
 		add(){ // 发布
 			uni.navigateTo({
-				url:'./addNetworkVideo'
+				url:'/pageB/addNetworkVideo'
 			})
 		},
 		toDetail(){
 			uni.navigateTo({
-				url:'./activityDetail'
+				url:'/pageB/activityDetail'
 			})
 		}
 		

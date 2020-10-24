@@ -1,72 +1,25 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-	
-	{
-		"path": "pages/index/index",
-		"style": {
-			"navigationBarTitleText": "驿都果业",
-			"navigationBarBackgroundColor": "#FFFFFF",
-			"navigationBarTextStyle": "black",
-			"disableScroll": true
-			// "navigationStyle": "custom"
-		}
-	},
-	{
-		"path": "pages/farm/traceabilityDetails",
-		"style": {
-			"navigationBarTitleText": "溯源详情",
-			"navigationBarBackgroundColor": "#17BB89",
-			"navigationBarTextStyle": "white",
-			"disableScroll": true
-		}
-	},
-	{
-		"path": "pages/bazaar/bazaar",
-		"style": {
-			"navigationBarTitleText": "集市",
-			"navigationBarBackgroundColor": "#FFFFFF",
-			"navigationBarTextStyle": "black",
-			"disableScroll": true
-		}
-	},
+
 		{
-			"path": "pages/circle/circle",
+			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "圈子",
+				"navigationBarTitleText": "驿都果业",
+				"navigationBarBackgroundColor": "#FFFFFF",
+				"navigationBarTextStyle": "black",
+				"disableScroll": true
+				// "navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/bazaar/bazaar",
+			"style": {
+				"navigationBarTitleText": "集市",
 				"navigationBarBackgroundColor": "#FFFFFF",
 				"navigationBarTextStyle": "black",
 				"disableScroll": true
 			}
 		},
-		{
-			"path": "pages/circle/activityList",
-			"style": {
-				"navigationBarTitleText": "活动",
-				"navigationBarBackgroundColor": "#FFFFFF",
-				"navigationBarTextStyle": "black",
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/circle/activityDetail",
-			"style": {
-				"navigationBarTitleText": "活动详情",
-				"navigationBarBackgroundColor": "#FFFFFF",
-				"navigationBarTextStyle": "black",
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/circle/addNetworkVideo",
-			"style": {
-				"navigationBarTitleText": "",
-				"navigationBarBackgroundColor": "#FFFFFF",
-				"navigationBarTextStyle": "black",
-				"disableScroll": true
-			}
-		},
-		
-		
 		{
 			"path": "pages/bazaar/commodityDetails",
 			"style": {
@@ -77,9 +30,16 @@
 				// "navigationStyle": "custom"
 			}
 		},
-
-
-
+		{
+			"path": "pages/circle/circle",
+			"style": {
+				"navigationBarTitleText": "圈子",
+				"navigationBarBackgroundColor": "#FFFFFF",
+				"navigationBarTextStyle": "black",
+				"disableScroll": true
+			}
+		},
+		
 		{
 			"path": "pages/personal/personal",
 			"style": {
@@ -90,12 +50,6 @@
 
 			}
 		},
-
-
-
-
-		
-
 		{
 			"path": "pages/login/login",
 			"style": {
@@ -139,89 +93,116 @@
 				"navigationBarTextStyle": "black",
 				"disableScroll": true
 			}
-		},
-		{
-			"path": "pages/farm/farmManor",
-			"style": {
-				"navigationBarTitleText": "领地项目详情",
-				"navigationBarBackgroundColor": "#17BB89",
-				"navigationBarTextStyle": "white",
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/farm/farmPay",
-			"style": {
-				"navigationBarTitleText": "确认支付",
-				"navigationBarBackgroundColor": "#17BB89",
-				"navigationBarTextStyle": "white",
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/farm/farmFactionalism",
-			"style": {
-				"navigationBarTitleText": "",
-				"navigationBarBackgroundColor": "#17BB89",
-				"navigationBarTextStyle": "white",
-				"disableScroll": true
-			}
 		}
+		
 	],
 	"subPackages": [{
-		"root": "pageA",
-		"pages": [
+			"root": "pageA",
+			"pages": [
 
-			{
-				"path": "termsOfService",
-				"style": {
-					"navigationBarTitleText": "服务条款",
-					"navigationBarBackgroundColor": "#17BB89",
-					"navigationBarTextStyle": "white"
+				{
+					"path": "termsOfService",
+					"style": {
+						"navigationBarTitleText": "服务条款",
+						"navigationBarBackgroundColor": "#17BB89",
+						"navigationBarTextStyle": "white"
+					}
+				},
+				{
+					"path": "photoAlbum",
+					"style": {
+						"navigationBarTitleText": "生长历程",
+						"navigationBarBackgroundColor": "#17BB89",
+						"navigationBarTextStyle": "white"
+					}
+				},
+				
+				{
+					"path": "farmDetails",
+					"style": {
+						"navigationBarTitleText": "",
+						"navigationBarBackgroundColor": "#17BB89",
+						"navigationBarTextStyle": "white"
+					}
+				},
+				{
+					"path": "not",
+					"style": {
+						"navigationBarTitleText": "",
+						"navigationBarBackgroundColor": "#17BB89",
+						"navigationBarTextStyle": "white"
+					}
 				}
-			},
-			// {
-			// 	"path": "mandate",
-			// 	"style": {
-			// 		"navigationBarTitleText": "添加员工",
-			// 		"navigationBarBackgroundColor": "#17BB89",
-			// 		"navigationBarTextStyle": "white"
-			// 	}
-			// }, 
-			{
-				"path": "photoAlbum",
-				"style": {
-					"navigationBarTitleText": "生长历程",
-					"navigationBarBackgroundColor": "#17BB89",
-					"navigationBarTextStyle": "white"
+			]
+		},
+		{
+			"root": "pageB",
+			"pages": [
+
+				{
+					"path": "activityDetail",
+					"style": {
+						"navigationBarTitleText": "活动详情",
+						"navigationBarBackgroundColor": "#FFFFFF",
+						"navigationBarTextStyle": "black"
+					}
+				},
+				{
+					"path": "activityList",
+					"style": {
+						"navigationBarTitleText": "活动",
+						"navigationBarBackgroundColor": "#FFFFFF",
+						"navigationBarTextStyle": "black"
+					}
+				},
+				{
+					"path": "addNetworkVideo",
+					"style": {
+						"navigationBarTitleText": "",
+						"navigationBarBackgroundColor": "#FFFFFF",
+						"navigationBarTextStyle": "black"
+					}
 				}
-			},
-			{
-				"path": "getNearTheEquipment",
-				"style": {
-					"navigationBarTitleText": "附近设备",
-					"navigationBarBackgroundColor": "#17BB89",
-					"navigationBarTextStyle": "white"
+			]
+		},
+		{
+			"root": "pageC",
+			"pages": [
+				{
+					"path": "farmFactionalism",
+					"style": {
+						"navigationBarTitleText": "",
+						"navigationBarBackgroundColor": "#FFFFFF",
+						"navigationBarTextStyle": "black"
+					}
+				},
+				{
+					"path": "farmManor",
+					"style": {
+						"navigationBarTitleText": "领地项目详情",
+						"navigationBarBackgroundColor": "#FFFFFF",
+						"navigationBarTextStyle": "black"
+					}
+				},
+				{
+					"path": "farmPay",
+					"style": {
+						"navigationBarTitleText": "确认支付",
+						"navigationBarBackgroundColor": "#FFFFFF",
+						"navigationBarTextStyle": "black"
+					}
+				},
+				{
+					"path": "traceabilityDetails",
+					"style": {
+						"navigationBarTitleText": "溯源详情",
+						"navigationBarBackgroundColor": "#FFFFFF",
+						"navigationBarTextStyle": "black"
+					}
 				}
-			},
-			{
-				"path": "farmDetails",
-				"style": {
-					"navigationBarTitleText": "",
-					"navigationBarBackgroundColor": "#17BB89",
-					"navigationBarTextStyle": "white"
-				}
-			},
-			{
-				"path": "not",
-				"style": {
-					"navigationBarTitleText": "",
-					"navigationBarBackgroundColor": "#17BB89",
-					"navigationBarTextStyle": "white"
-				}
-			}
-		]
-	}],
+			]
+		}
+	],
 	"preloadRule": {
 		"pageA/termsOfService": {
 			"network": "all",

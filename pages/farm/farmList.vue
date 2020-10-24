@@ -82,7 +82,7 @@ export default {
 		},
 		showFarm(){
 			uni.navigateTo({
-				url:"farmFactionalism?id="+ 1 +"&name=" + '九汇生态农场',
+				url:"/pageC/farmFactionalism?id="+ 1 +"&name=" + '九汇生态农场',
 			})
 		},
 		changeList(){

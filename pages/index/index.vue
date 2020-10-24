@@ -262,7 +262,7 @@ export default {
 		},
 		farmManor() {
 			uni.navigateTo({
-				url: '../farm/farmManor'
+				url: '/pageC/farmManor'
 			});
 		},
 		getmsglist: function() {

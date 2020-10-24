@@ -2,14 +2,10 @@
 	<view>
 		<scroll-view v-bind:style="{ height: windowHeight  + 'px' }" 
 			scroll-y="true" enable-back-to-top="true" 
-			@scrolltolower="changeList"
-			refresher-enabled="true"
-			:refresher-triggered="triggered"
-			@refresherrefresh="getList"
 			>
-			<view class="bg-personal padding-box" style="border-bottom: 1px solid #EEEEEE;padding-bottom: 20rpx;" @tap="detail">
-				<image src="../../static/images/timg5ML2TXJY.jpg" style="width: 100%;height: 330rpx;border-radius: 10rpx;" mode="aspectFill"></image>
-				<view >
+			<view class="bg-personal " style="border-bottom: 1px solid #EEEEEE;padding-bottom: 20rpx;">
+				<image src="../static/images/timg5ML2TXJY.jpg" style="width: 100%;height: 400rpx;" mode="aspectFill"></image>
+				<view class="padding-box">
 					<view class="font-size-16">水晶甜石榴硬籽</view>
 					<view class="flex align-center">
 						<view class="flex-1 font-size-14">
@@ -23,10 +19,20 @@
 					</view>
 					
 					<view class="flex index-span">
-						<image class="img-size" src="../../static/imgs/dingwei@3x.png"></image>
+						<image class="img-size" src="../static/imgs/dingwei@3x.png"></image>
 						<text class="color-grey">绵阳&nbsp;农场</text>
-						
 					</view>
+				</view>
+			</view>
+			<view class="padding-box">
+				<view class="text-center  text-h3">详情内容</view>
+				<view>
+					<text>一、品种选择</text>
+				</view>
+				<view>
+					<text space="nbsp" >
+						适宜在弥渡栽培的墨茄品种较多，根据目前生产情况和市场 行情，首选品种应该是蜀杂茄一号，该品种为杂交一
+					</text>
 				</view>
 			</view>
 		</scroll-view>
@@ -85,10 +91,13 @@ export default {
 				})
 			}, 1000);
 		},
-		detail(){
+		showFarm(){
 			uni.navigateTo({
-				url:'./activityDetail'
+				url:"farmFactionalism?id="+ 1 +"&name=" + '九汇生态农场',
 			})
+		},
+		changeList(){
+			console.log(this.page++)
 		}
 	}
 };

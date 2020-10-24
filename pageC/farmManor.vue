@@ -2,7 +2,7 @@
 	<view>
 		<scroll-view v-bind:style="{ height: windowHeight + 'px' }" scroll-y="true" enable-back-to-top="true" style="background-color: #FFFFFF;padding-bottom: 50px;">
 			<view class="bg-personal" >
-				<image src="../../static/images/timg5ML2TXJY.jpg" style="width: 100%;height: 400rpx;" mode="aspectFill"></image>
+				<image src="../static/images/farmIndex.jpg" style="width: 100%;height: 400rpx;" mode="aspectFill"></image>
 				<view class="padding-box">
 					<view>水晶甜石榴硬籽</view>
 					<view class="index-money">
@@ -27,15 +27,15 @@
 			<view class="line-gray"></view>
 			<view class="flex padding-box justify-center text-center">
 				<view class="standard">
-					<image src="../../static/images/timg3RV2I4X0.jpg" mode="aspectFill"></image>
+					<image src="../static/images/timg3RV2I4X0.jpg" mode="aspectFill"></image>
 					<view class="font-size-12">领地直播</view>
 				</view>
 				<view class="standard" style="border-left: 1px solid #BFBFBF;border-right: 1px solid #BFBFBF;" @tap="detail">
-					<image src="../../static/images/timgQ5KMALQZ.jpg" mode="aspectFill"></image>
+					<image src="../static/images/timgQ5KMALQZ.jpg" mode="aspectFill"></image>
 					<view class="font-size-12">溯源详情</view>
 				</view>
 				<view class="standard">
-					<image src="../../static/images/saf.jpg" mode="aspectFill"></image>
+					<image src="../static/images/timgQ5KMALQZ.jpg" mode="aspectFill"></image>
 					<view class="font-size-12">参与生产</view>
 				</view>
 			</view>
@@ -43,7 +43,7 @@
 			<view class="" style="margin: 8px 15px;">
 				<view style="border-radius: 10rpx;">
 					<view class="flex justify-center" style="margin: 30rpx 0;">
-						<image src="../../static/images/people.jpg" style="width: 180rpx;height: 180rpx;border-radius: 10rpx;" mode="aspectFill"></image>
+						<image src="../static/images/people.jpg" style="width: 180rpx;height: 180rpx;border-radius: 10rpx;" mode="aspectFill"></image>
 						<view class="flex bg-personal justify-center flex-direction-column" style="flex: 1;padding:  10rpx 0 10rpx 30rpx;letter-spacing: 8rpx;overflow: hidden;">
 							<view class="font-size-12 ">
 								农&nbsp;场&nbsp;主：
@@ -143,14 +143,14 @@
 					</view>
 				</view>
 				<view class="line-gray"></view>
-				<image src="../../static/images/fsafwa.jpg" style="width: 100%;"></image>
-				<image src="../../static/images/fsafwa.jpg" style="width: 100%;"></image>
+				<image src="../static/images/fsafwa.jpg" style="width: 100%;"></image>
+				<image src="../static/images/fsafwa.jpg" style="width: 100%;"></image>
 				<view class="flex line-gray"></view>
 				<view class="flex padding-box justify-center margin-box"><view class="flex index-h3">相关推荐</view></view>
 				<view class="page-section-spacing  " style="padding-bottom: 30rpx;">
 					<scroll-view class="scroll-view_H " scroll-x="true" bindscroll="scroll" style="width: 100%;margin: 0 15px;">
 						<view id="demo1" class="scroll-view-item_H demo-text-1 ">
-							<image src="../../static/images/u=3182281012,3984649657&fm=26&gp=0.jpg" class="scroll-view-item-img" mode="aspectFill"></image>
+							<image src="../static/images/u=3182281012,3984649657&fm=26&gp=0.jpg" class="scroll-view-item-img" mode="aspectFill"></image>
 							<view class="font-size-12 " style="padding: 0 10rpx;">南瓜节游园活动</view>
 							<view class="flex ">
 								<view class="font-size-12 text-gray flex-1">
@@ -165,7 +165,7 @@
 							</view>
 						</view>
 						<view id="demo1" class="scroll-view-item_H demo-text-1 ">
-							<image src="../../static/images/u=12638188,2993346786&fm=26&gp=0.jpg" class="scroll-view-item-img" mode="aspectFill"></image>
+							<image src="../static/images/u=12638188,2993346786&fm=26&gp=0.jpg" class="scroll-view-item-img" mode="aspectFill"></image>
 							<view class="font-size-12 " style="padding: 0 10rpx;">夏至赏桃活动</view>
 							<view class="flex ">
 								<view class="font-size-12 text-gray flex-1">
@@ -180,7 +180,7 @@
 							</view>
 						</view>
 						<view id="demo1" class="scroll-view-item_H demo-text-1 ">
-							<image src="../../static/images/u=1878396425,457522588&fm=26&gp=0.jpg" class="scroll-view-item-img" mode="aspectFill"></image>
+							<image src="../static/images/u=1878396425,457522588&fm=26&gp=0.jpg" class="scroll-view-item-img" mode="aspectFill"></image>
 							<view class="font-size-12 " style="padding: 0 10rpx;">春之采花活动</view>
 							<view class="flex ">
 								<view class="font-size-12 text-gray flex-1">
@@ -195,7 +195,7 @@
 							</view>
 						</view>
 						<view id="demo1" class="scroll-view-item_H demo-text-1 ">
-							<image src="../../static/images/u=2192420015,3569094498&fm=26&gp=0.jpg" class="scroll-view-item-img" mode="aspectFill"></image>
+							<image src="../static/images/u=2192420015,3569094498&fm=26&gp=0.jpg" class="scroll-view-item-img" mode="aspectFill"></image>
 							<view class="font-size-12 " style="padding: 0 10rpx;">丰收采摘活动</view>
 							<view class="flex ">
 								<view class="font-size-12 text-gray flex-1">
@@ -214,20 +214,20 @@
 			</view>
 			<view v-else-if="TabCur == 2">
 				<view class="flex padding-box justify-center margin-box"><view class="flex index-h3">720度全景展示</view></view>
-				<view class="flex padding-box"><image src="../../static/images/fsafwa.jpg" mode="aspectFill" style="width: 100%;border-radius: 20rpx;height: 350rpx;"></image></view>
+				<view class="flex padding-box"><image src="../static/images/fsafwa.jpg" mode="aspectFill" style="width: 100%;border-radius: 20rpx;height: 350rpx;"></image></view>
 				<view class="line-gray-1"></view>
 				<view class="flex padding-box justify-center margin-box"><view class="flex index-h3">详情介绍</view></view>
 				<view class="flex padding-box">
 					苹果树是喜低温干燥的温带果树。而绵阳的气候正适合 苹果生长，所以当地产的苹果都又大又甜。
 				</view>
-				<view class="flex padding-box"><image src="../../static/images/fsafwa.jpg" mode="aspectFill" style="width: 100%;height: 350rpx;"></image></view>
+				<view class="flex padding-box"><image src="../static/images/fsafwa.jpg" mode="aspectFill" style="width: 100%;height: 350rpx;"></image></view>
 				<view class="flex padding-box"><video src="https://6e6f-normal-env-ta6pc-1300924598.tcb.qcloud.la/video-swiper/1589851354869410.mp4?sign=1f636557effa496e074332e3f4b9b8aa&t=1589851461" enable-play-gesture="true" style="width: 100%;height: 350rpx;"></video></view>
-				<view class="flex padding-box"><image src="../../static/images/fsafwa.jpg" mode="aspectFill" style="width: 100%;height: 350rpx;"></image></view>
+				<view class="flex padding-box"><image src="../static/images/fsafwa.jpg" mode="aspectFill" style="width: 100%;height: 350rpx;"></image></view>
 			</view>
 			<view v-else>
 				<view class="flex" style="padding: 16rpx 30rpx;flex-direction: column;">
 					<view class="flex" style="align-items:center;margin: 10rpx 0;">
-						<image src="../../static/images/timgQ5KMALQZ.jpg" mode="aspectFill" style="width: 90rpx;height: 90rpx;border-radius: 50%;"></image>
+						<image src="../static/images/timgQ5KMALQZ.jpg" mode="aspectFill" style="width: 90rpx;height: 90rpx;border-radius: 50%;"></image>
 						<view class="font-size-12" style="margin-left: 30rpx;">种植小能手</view>
 					</view>
 					<text class="color-grey font-size-12" >
@@ -235,15 +235,15 @@
 					</text>
 					<view class="font-size-12 color-grey">项目进行的很顺利，老板人也很好，有问题及时就处理了。收到的苹果也很好，都没有烂 果,而且味道很甜，送了一些给朋友，都说很值。</view>
 					<view class="flex" style="flex-wrap: wrap;margin-top: 20rpx;">
-						<image src="../../static/images/timg7FHKTBR0.jpg" mode="aspectFill" style="width: 30%;height: 140rpx;margin-right: 22rpx;"></image>
-						<image src="../../static/images/timg7FHKTBR0.jpg" mode="aspectFill" style="width: 30%;height: 140rpx;margin-right: 22rpx;"></image>
-						<image src="../../static/images/timg7FHKTBR0.jpg" mode="aspectFill" style="width: 30%;height: 140rpx;margin-right: 22rpx;"></image>
+						<image src="../static/images/timg7FHKTBR0.jpg" mode="aspectFill" style="width: 30%;height: 140rpx;margin-right: 22rpx;"></image>
+						<image src="../static/images/timg7FHKTBR0.jpg" mode="aspectFill" style="width: 30%;height: 140rpx;margin-right: 22rpx;"></image>
+						<image src="../static/images/timg7FHKTBR0.jpg" mode="aspectFill" style="width: 30%;height: 140rpx;margin-right: 22rpx;"></image>
 					</view>
 				</view>
 				
 				<view class="flex" style="padding: 16rpx 30rpx;flex-direction: column;">
 					<view class="flex" style="align-items:center;margin: 10rpx 0;">
-						<image src="../../static/images/timgQ5KMALQZ.jpg" mode="aspectFill" style="width: 90rpx;height: 90rpx;border-radius: 50%;"></image>
+						<image src="../static/images/timgQ5KMALQZ.jpg" mode="aspectFill" style="width: 90rpx;height: 90rpx;border-radius: 50%;"></image>
 						<view class="font-size-12" style="margin-left: 30rpx;">种植小能手</view>
 					</view>
 					<text class="color-grey font-size-12" >
@@ -251,9 +251,9 @@
 					</text>
 					<view class="font-size-12 color-grey" >项目进行的很顺利，老板人也很好，有问题及时就处理了。收到的苹果也很好，都没有烂 果,而且味道很甜，送了一些给朋友，都说很值。</view>
 					<view class="flex" style="flex-wrap: wrap;margin-top: 20rpx;">
-						<image src="../../static/images/timg7FHKTBR0.jpg" mode="aspectFill" style="width: 30%;height: 140rpx;margin-right: 20rpx;"></image>
-						<image src="../../static/images/timg7FHKTBR0.jpg" mode="aspectFill" style="width: 30%;height: 140rpx;margin-right: 20rpx;"></image>
-						<image src="../../static/images/timg7FHKTBR0.jpg" mode="aspectFill" style="width: 30%;height: 140rpx;margin-right: 20rpx;"></image>
+						<image src="../static/images/timg7FHKTBR0.jpg" mode="aspectFill" style="width: 30%;height: 140rpx;margin-right: 20rpx;"></image>
+						<image src="../static/images/timg7FHKTBR0.jpg" mode="aspectFill" style="width: 30%;height: 140rpx;margin-right: 20rpx;"></image>
+						<image src="../static/images/timg7FHKTBR0.jpg" mode="aspectFill" style="width: 30%;height: 140rpx;margin-right: 20rpx;"></image>
 					</view>
 				</view>
 			</view>

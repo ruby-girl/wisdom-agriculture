@@ -2,7 +2,7 @@
 	<view>
 		<view  style="margin: 18rpx;background-color: #FFFFFF;border-radius: 10rpx;" @tap="getSite">
 			<view class="flex" style="padding: 14rpx;align-items: center;">
-				<image src="../../static/imgs/nearby1.png" style="width: 90rpx;height: 90rpx;border-radius: 10rpx;" mode="aspectFill"></image>
+				<image src="../static/imgs/nearby1.png" style="width: 90rpx;height: 90rpx;border-radius: 10rpx;" mode="aspectFill"></image>
 				<view class="flex bg-personal" style="flex: 1;padding: 30rpx;flex-direction: column;overflow: hidden;">
 					<view >
 						<text class="font-size-14" style="font-weight: 600;margin-right: 20rpx;">名字</text><text>1995087xxxx</text>
@@ -10,12 +10,12 @@
 					<view class="font-size-12 color-grey" >四川省绵阳市江油市 四川省绵阳市江油市xx街xx号</view>
 					<view class="font-size-12 color-green">收货不便时，可选择暂存服务</view>
 				</view>
-				<image src="../../static/imgs/arrows.png" class="img-right"></image>
+				<image src="../static/imgs/arrows.png" class="img-right"></image>
 			</view>
 		</view>
 		<view  style="margin: 18rpx;background-color: #FFFFFF;border-radius: 10rpx;">
 			<view class="flex" style="padding: 14rpx;">
-				<image src="../../static/images/timg3RV2I4X0.jpg" style="width: 200rpx;height: 200rpx;border-radius: 10rpx;" mode="aspectFill"></image>
+				<image src="../static/images/timg3RV2I4X0.jpg" style="width: 200rpx;height: 200rpx;border-radius: 10rpx;" mode="aspectFill"></image>
 				<view class="flex bg-personal" style="flex: 1;padding:0 30rpx;flex-direction: column;overflow: hidden;">
 					<view class="flex">
 						<text class="flex-1 font-size-14" style="font-weight: 600;margin-right: 20rpx;">名字</text>
@@ -28,7 +28,7 @@
 						<text class=" font-size-12 color-grey">x1</text>
 					</view>
 					<view class="flex font-size-12 color-grey margin-box" >
-							<image class="img-size" src="../../static/imgs/dingwei@3x.png"></image>
+							<image class="img-size" src="../static/imgs/dingwei@3x.png"></image>
 							<text class="color-grey" style="align-items: baseline">绵阳  庆丰收农场</text>
 					</view>
 				</view>
@@ -49,7 +49,7 @@
 				<view class="flex-1">支付方式</view>
 				<view class="flex-1">
 					微信
-					<image src="../../static/imgs/arrows.png" class="img-right1"></image>
+					<image src="../static/imgs/arrows.png" class="img-right1"></image>
 				</view>
 			</view>
 		</view>

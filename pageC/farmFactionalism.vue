@@ -16,17 +16,17 @@
 
 			<view class="flex align-center margin-box bg-1 color-1">
 				你有一条待处理信息
-				<image src="../../static/imgs/arrows.png" mode="" class="img-right"></image>
+				<image src="../static/imgs/arrows.png" mode="" class="img-right"></image>
 			</view>
 			<view class="line-gray"></view>
 			<view class="bg-personal">
 				<view class="flex padding-box">
-					<image class="images" src="../../static/images/cfdffd.jpg" mode="aspectFill"></image>
-					<image class="images" src="../../static/images/cfdffd.jpg" mode="aspectFill"></image>
-					<image class="images" src="../../static/images/cfdffd.jpg" mode="aspectFill"></image>
+					<image class="images" src="../static/images/cfdffd.jpg" mode="aspectFill"></image>
+					<image class="images" src="../static/images/cfdffd.jpg" mode="aspectFill"></image>
+					<image class="images" src="../static/images/cfdffd.jpg" mode="aspectFill"></image>
 				</view>
 				<view class="flex font-size-12 right-card" style="top: 38rpx;">
-					<image src="../../static/imgs/location.png" style="width: 50rpx;height: 50rpx;"></image>
+					<image src="../static/imgs/location.png" style="width: 50rpx;height: 50rpx;"></image>
 					<text style="padding: 0 12rpx;">农场社区(63人)</text>
 				</view>
 			</view>
@@ -45,14 +45,14 @@
 			<view class="line-gray"></view>
 			<view class="bg-personal">
 				<view class="flex font-size-12 right-card" style="top: 45rpx;">
-					<image src="../../static/imgs/location.png" style="width: 50rpx;height: 50rpx;"></image>
+					<image src="../static/imgs/location.png" style="width: 50rpx;height: 50rpx;"></image>
 					<text style="padding: 0 12rpx;">历史追溯</text>
 				</view>
 				<view class="flex font-size-12 right-card" style="top: 125rpx;" @tap="video()">
-					<image src="../../static/imgs/location.png" style="width: 50rpx;height: 50rpx;"></image>
+					<image src="../static/imgs/location.png" style="width: 50rpx;height: 50rpx;"></image>
 					<text style="padding: 0 12rpx;">领地直播</text>
 				</view>
-				<image src="../../static/images/u=12638188,2993346786&fm=26&gp=0.jpg" mode="aspectFill" style="width: 100%;height:700rpx;"></image>
+				<image src="../static/images/u=12638188,2993346786&fm=26&gp=0.jpg" mode="aspectFill" style="width: 100%;height:700rpx;"></image>
 			</view>
 			<video class="videos"  v-if="active_video" :src="videoSrc" enable-play-gesture="true" autoplay="true">
 				<view class="top">
