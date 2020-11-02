@@ -108,7 +108,7 @@
 			<view v-else>
 				<view class="Grid">
 					<view class="Grid-Item" @tap="showVideo(0)">
-						<view class="GSimg"><image class="Image" src="../static/images/TPG07956984.jpg" mode="aspectFill"></image></view>
+						<view class="GSimg"><image class="Image" src="../static/images/u=3182281012,3984649657&fm=26&gp=0.jpg" mode="aspectFill"></image></view>
 						<image class="GStoptitle" src="../static/imgs/视频@2x.png"></image>
 						<view class="GSbottomtitle">
 							<image class="Image" src="../static/imgs/心@2x.png"></image>
@@ -116,7 +116,7 @@
 						</view>
 					</view>
 					<view class="Grid-Item" @tap="showVideo(1)">
-						<view class="GSimg"><image class="Image" src="../static/images/TPG07956984.jpg" mode="aspectFill"></image></view>
+						<view class="GSimg"><image class="Image" src="../static/images/u=3182281012,3984649657&fm=26&gp=0.jpg" mode="aspectFill"></image></view>
 						<image class="GStoptitle" src="../static/imgs/视频@2x.png"></image>
 						<view class="GSbottomtitle">
 							<image class="Image" src="../static/imgs/心1@2x.png"></image>
@@ -124,7 +124,7 @@
 						</view>
 					</view>
 					<view class="Grid-Item" @tap="showVideo(2)">
-						<view class="GSimg"><image class="Image" src="../static/images/TPG07956984.jpg" mode="aspectFill"></image></view>
+						<view class="GSimg"><image class="Image" src="../static/images/u=3182281012,3984649657&fm=26&gp=0.jpg" mode="aspectFill"></image></view>
 						<image class="GStoptitle" src="../static/imgs/视频@2x.png"></image>
 						<view class="GSbottomtitle">
 							<image class="Image" src="../static/imgs/心1@2x.png"></image>
