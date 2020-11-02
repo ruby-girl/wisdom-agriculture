@@ -122,9 +122,9 @@
 					})
 					return
 				}
-				this.disabled = true;
+				this.disabled = true
 				uni.request({
-					url:'http://150.158.174.77:1021/api/sms/send',
+					url: getApp().globalData.baseUrl3 + 'api/sms/send',
 					method:'POST',
 					header:{
 						'Content-Type': 'application/x-www-form-urlencoded',
@@ -165,6 +165,7 @@
 				// this.$api.captcha({
 				// 	phone: this.obj.phone
 				// }).then(res => {
+				// 	console.log('1',res)
 				// 	if (res.data.stateCode == 200) {
 				// 		this.btnTitle = 60
 				// 		this.txt = '秒后获取'
@@ -196,46 +197,14 @@
 			},
 			userLogin() {
 				let that = this;
-				// uni.request({
-				// 	url:'http://150.158.174.77:1022/api/user/login',
-				// 	method:'POST',
-				// 	header:{
-				// 		'Content-Type': 'application/json',
-				// 	},
-				// 	data:this.obj,
-				// 	success: (res) => {
-				// 		console.log(res)
-				// 		// let obj = {
-				// 		// 		token: res.data.data.token,					
-				// 		// 		nickName: this.user.nickName,
-				// 		// 		avatarUrl: this.user.avatarUrl,
-				// 		// 		phone: this.obj.phone,
-				// 		// 		// cookie: res.cookies[0],
-				// 		// 	}
-				// 		// 	uni.setStorage({
-				// 		// 		key: 'XYZNUserInfo',
-				// 		// 		data: obj,
-				// 		// 		success() {
-				// 		// 			uni.showToast({
-				// 		// 				title: '登录成功',
-				// 		// 				icon: 'success',
-				// 		// 				success() {
-				// 		// 					uni.switchTab({
-				// 		// 						url: '../personal/personal'
-				// 		// 					});
-				// 		// 				}
-				// 		// 			})
-				// 		// 		}
-				// 		// 	})
-				// 	}
-				// })
 				this.$api.login(this.obj).then(res => {		
 					let obj = {
 						token: res.data.data.token,					
 						nickName: this.user.nickName,
 						avatarUrl: this.user.avatarUrl,
 						phone: this.obj.phone,
-						// cookie: res.data.token,
+						userId: res.data.data.user.userId,
+						roleCode: res.data.data.roleCode,
 					}
 					uni.setStorage({
 						key: 'XYZNUserInfo',
@@ -245,7 +214,7 @@
 								title: '登录成功',
 								icon: 'success',
 								success() {
-									uni.switchTab({
+									uni.reLaunch({
 										url: '../personal/personal'
 									});
 								}

@@ -59,7 +59,7 @@
 		},
 		onShareAppMessage: function() {
 			return {
-				title: '科维特',
+				title: '星鸦智农',
 				desc: '',
 				path: 'pages/monitor/monitor' // 路径，传递参数到指定页面。
 			};

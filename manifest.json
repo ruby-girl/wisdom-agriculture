@@ -1,5 +1,5 @@
 {
-    "name" : "科维特",
+    "name" : "星鸦智农",
     "appid" : "__UNI__4DDDB35",
     "description" : "",
     "versionName" : "1.0.0",
@@ -115,9 +115,9 @@
     "quickapp" : {},
     /* 小程序特有相关 */
     "mp-weixin" : {
-        "appid" : "wx6b425d9ea83d245c",
+        "appid" : "wx665007fdba155acf",
         "setting" : {
-            "urlCheck" : false,
+            "urlCheck" : true,
             "es6" : true,
             "postcss" : true,
             "minified" : true

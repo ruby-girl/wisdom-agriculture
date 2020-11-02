@@ -1,11 +1,8 @@
 export default {
 	config: {
-		// baseUrl: "https://www.sc-kwt.com/",
-		// imgUrl: "https://www.sc-kwt.com",
-		baseUrl: "http://150.158.174.77",
-		imgUrl: "http://150.158.174.77",
-		// baseUrl:"https://xyzn.tree-iot.com/",
-		// imgUrl:"https://xyzn.tree-iot.com",
+		baseUrl: "https://www.sc-kwt.com/",
+		// baseUrl:"https://yd.sc-kwt.com/tracing/",
+		imgUrl:"https://www.sc-kwt.com",
 		header: {
 			'Content-Type': 'application/json',
 			'Authorization': '',
@@ -46,15 +43,15 @@ export default {
 
 		options.header = {
 			'token': uni.getStorageSync('XYZNUserInfo').token || '',
-			'cookie': uni.getStorageSync('XYZNUserInfo').cookie || '',
-			'Content-Type': 'application/json',
-			
+			// 'cookie': uni.getStorageSync('XYZNUserInfo').cookie || '',
+			'Content-Type': 'application/json'
 		}
 		return new Promise((resolve, reject) => {
 			let _config = null
 
 			options.complete = (response) => {
 				let statusCode = response.statusCode
+
 				response.config = _config
 				if (process.env.NODE_ENV === 'development') {
 					if (statusCode === 200) {

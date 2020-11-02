@@ -37,16 +37,16 @@
 	height: 80rpx;
 }
 .txtBtn{
-	font-size: 24upx;
+	font-size: 22upx;
 	color: #666666;
 }
 .txtBtnSel{
-	font-size: 24upx;
-	color: #333333;
+	font-size: 22upx;
+	color: #49BA89;
 }
 .itmMain{
-	/* width: 250upx; */
-	width: 150upx;
+	width: 250upx;
+	/* width: 150upx; */
 	justify-content: center;
 	align-items: center;
 	display: flex;
@@ -103,32 +103,40 @@
 	<view class="tabbarMain" :class="[flagTypeInfo? 'tabbarMainIphone':'']">
 		<!-- <image src="/static/nav_btn.png" :fade-show='false' class="btnfixMin"  :class="[flagTypeInfo? 'btnfixMinIphone':'']" mode=""></image> -->
 		<view class="tabBtnMina"  :class="[flagTypeInfo? 'tabBtnMinaIphone':'']" mode="" style="background-color: #F8FAFB;">
-			<view class="itmMain" @click.stop="switchTabFunc(0, '/pages/index/index')">
-				<image class="imgse" :fade-show='false' v-if="active!=0" src="/static/imgs/首页.png"></image>
-				<image class="imgse" :fade-show='false' v-if="active===0" src="/static/imgs/首页1.png"></image>
-				<text class="txtBtn" :class="{'txtBtnSel' :active==0}">首页</text>
+			<view class="itmMain" @click.stop="switchTabFunc(0, '/pages/monitor/monitor')">
+				<image class="imgse" :fade-show='false' v-if="active!=0" src="/static/imgs/detection.png"></image>
+				<image class="imgse" :fade-show='false' v-if="active===0" src="/static/imgs/detection-1.png"></image>
+				<text class="txtBtn" :class="{'txtBtnSel' :active==0}">监测预警</text>
 			</view>
-			<view class="itmMain" @click.stop="switchTabFunc(1, '/pages/farm/farmList')">
-				<image class="imgse" :fade-show='false' v-if="active!=1" src="/static/imgs/农场.png"></image>
-				<image class="imgse" :fade-show='false' v-if="active===1" src="/static/imgs/农场1.png"></image>
-				<text class="txtBtn" :class="{'txtBtnSel' :active==1}">农场</text>
-			</view>
-			<view class="itmMain" @click.stop="switchTabFunc(2, '/pages/aiRecognition/aiRecognition')" style="position: relative;"> 
-				<view style="position: absolute;padding: 30rpx;background-color: #F8FAFB;border-radius: 45%;">
-					<image class="imgsAi" :fade-show='false' v-if="active!=2" src="/static/imgs/ai.png" style=""></image>
-					<image class="imgsAi" :fade-show='false' v-if="active===2" src="/static/imgs/ai1.png"></image>
-					<!-- <text class="txtBtn" :class="{'txtBtnSel' :active==2}">AI识别</text> -->
+			<template v-if=" roleCode == 'ADMIN'">
+				<view class="itmMain" @click.stop="switchTabFunc(1, '/pages/marketManagement/marketManagement')">
+					<image class="imgse" :fade-show='false' v-if="active!=1" src="/static/imgs/equipment-management-1.png"></image>
+					<image class="imgse" :fade-show='false' v-if="active===1" src="/static/imgs/equipment-management.png"></image>
+					<text class="txtBtn" :class="{'txtBtnSel' :active==1}">集市管理</text>
 				</view>
-			</view>
-			<view class="itmMain" @click.stop="switchTabFunc(3, '/pageA/not'  )">
-				<image class="imgse" :fade-show='false' v-if="active!=3" src="/static/imgs/集市.png"></image>
-				<image class="imgse" :fade-show='false' v-if="active===3" src="/static/imgs/集市1.png"></image>
-				<text class="txtBtn" :class="{'txtBtnSel' :active==3}">集市</text>
-			</view>
-			<view class="itmMain" @click.stop="switchTabFunc(4, '/pages/personal/personal')">
-				<image class="imgse" :fade-show='false' v-if="active!=4" src="/static/imgs/我的.png"></image>
-				<image class="imgse" :fade-show='false' v-if="active===4" src="/static/imgs/我的1.png"></image>
-				<text class="txtBtn" :class="{'txtBtnSel' :active==4}">我的</text>
+				<view class="itmMain" @click.stop="switchTabFunc(2, '/pages/factionalism/factionalismList' )">
+					<image class="imgse" :fade-show='false' v-if="active!=2" src="/static/imgs/nearby.png"></image>
+					<image class="imgse" :fade-show='false' v-if="active===2" src="/static/imgs/nearby1.png"></image>
+					<text class="txtBtn" :class="{'txtBtnSel' :active==2}">圈子活动</text>
+				</view>
+			</template>
+			<template v-else>
+				<view class="itmMain" @click.stop="switchTabFunc(1, '/pages/farm/farmList')">
+					<image class="imgse" :fade-show='false' v-if="active!=1" src="/static/imgs/equipment-management-1.png"></image>
+					<image class="imgse" :fade-show='false' v-if="active===1" src="/static/imgs/equipment-management.png"></image>
+					<text class="txtBtn" :class="{'txtBtnSel' :active==1}">设备管理</text>
+				</view>
+				<view class="itmMain" @click.stop="switchTabFunc(2, '/pages/personal/allNearTheEquipment'  )">
+					<image class="imgse" :fade-show='false' v-if="active!=2" src="/static/imgs/nearby.png"></image>
+					<image class="imgse" :fade-show='false' v-if="active===2" src="/static/imgs/nearby1.png"></image>
+					<text class="txtBtn" :class="{'txtBtnSel' :active==2}">附近设备</text>
+				</view>
+			</template>
+			
+			<view class="itmMain" @click.stop="switchTabFunc(3, '/pages/personal/personal')">
+				<image class="imgse" :fade-show='false' v-if="active!=3" src="/static/imgs/my.png"></image>
+				<image class="imgse" :fade-show='false' v-if="active===3" src="/static/imgs/my-1.png"></image>
+				<text class="txtBtn" :class="{'txtBtnSel' :active==3}">用户中心</text>
 			</view>
 		</view>
 		
@@ -143,6 +151,7 @@ export default{
 			platforms: '', // 终端调整兼容
 			leftWidth: 0, // 安卓 端使用
 			flagTypeInfo: false, // 检测当前是否是IPHONE 异形屏幕
+			roleCode: uni.getStorageSync('XYZNUserInfo').roleCode,
 		}
 	},
 	mounted() {
@@ -181,28 +190,15 @@ export default{
 		 * @param {string} Urls 当前点击带进来的链接
 		 * */ 
 		switchTabFunc(index, Urls) {
-			console.log(index,Urls)
-			if (index == this.active) {
-				return
-			} else {
+			if (index != this.active) {
 				uni.setStorageSync('setStatusIndexFunc', index)
 				// this._mainFuncInit() // 回调父级函数
-				uni.navigateTo({
+				uni.reLaunch({
 					url:Urls,
-				})	
-				this.active = index
-			}
-			// if(index != 2){
-			// 	uni.setStorageSync('setStatusIndexFunc', index)
-			// 	// this._mainFuncInit() // 回调父级函数
-			// 	uni.navigateTo({
-			// 		url:Urls,
-			// 	})	
-			// 	this.active = index
-			// }
-			// if (index == 2) {
-			// 	console.log('弹出自定义')
-			// } 
+				})
+				this.active = index;
+			} 
+			
 		}
 	}
 }

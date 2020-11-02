@@ -2,48 +2,9 @@
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 
 		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "驿都果业",
-				"navigationBarBackgroundColor": "#FFFFFF",
-				"navigationBarTextStyle": "black",
-				"disableScroll": true
-				// "navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/bazaar/bazaar",
-			"style": {
-				"navigationBarTitleText": "集市",
-				"navigationBarBackgroundColor": "#FFFFFF",
-				"navigationBarTextStyle": "black",
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/bazaar/commodityDetails",
-			"style": {
-				"navigationBarTitleText": "商品详情",
-				"navigationBarBackgroundColor": "#FFFFFF",
-				"navigationBarTextStyle": "black",
-				"disableScroll": true
-				// "navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/circle/circle",
-			"style": {
-				"navigationBarTitleText": "圈子",
-				"navigationBarBackgroundColor": "#FFFFFF",
-				"navigationBarTextStyle": "black",
-				"disableScroll": true
-			}
-		},
-		
-		{
 			"path": "pages/personal/personal",
 			"style": {
-				"navigationBarTitleText": "我的",
+				"navigationBarTitleText": "用户中心",
 				"navigationBarBackgroundColor": "#17BB89",
 				"navigationBarTextStyle": "white",
 				"disableScroll": true
@@ -51,6 +12,26 @@
 			}
 		},
 		{
+			"path": "pages/personal/farmVideo",
+			"style": {
+				"navigationBarTitleText": "农场视频",
+				"navigationBarBackgroundColor": "#17BB89",
+				"navigationBarTextStyle": "white",
+				"disableScroll": true
+
+			}
+		},
+		{
+			"path": "pages/personal/aboutUs",
+			"style": {
+				"navigationBarTitleText": "关于我们",
+				"navigationBarBackgroundColor": "#17BB89",
+				"navigationBarTextStyle": "white"
+			}
+		}, {
+			"path": "pages/personal/cameraModel",
+			"style": {}
+		}, {
 			"path": "pages/login/login",
 			"style": {
 				"navigationBarTitleText": "登录",
@@ -63,86 +44,226 @@
 				"navigationBarTextStyle": "white",
 				"disableScroll": true
 			}
-		},
-		// {
-		// 	"path": "pages/aiRecognition/aiRecognition",
-		// 	"style": {
-		// 		"navigationBarTitleText": "AI识别",
-		// 		"navigationBarBackgroundColor": "#17BB89",
-		// 		"navigationBarTextStyle": "white",
-		// 		"disableScroll": true
-		// 		// "navigationStyle": "custom"
-
-		// 	}
-		// },
-		// {
-		// 	"path": "pages/aiRecognition/identifyResults",
-		// 	"style": {
-		// 		"navigationBarTitleText": "识别结果",
-		// 		"navigationBarBackgroundColor": "#17BB89",
-		// 		"navigationBarTextStyle": "white",
-		// 		"disableScroll": true
-		// 	}
-		// },
-
-		{
-			"path": "pages/farm/farmList",
+		}, {
+			"path": "pages/personal/myFarm",
 			"style": {
-				"navigationBarTitleText": "农场",
-				"navigationBarBackgroundColor": "#FFFFFF",
-				"navigationBarTextStyle": "black",
+				"navigationBarTitleText": "农场管理",
+				"navigationBarBackgroundColor": "#17BB89",
+				"navigationBarTextStyle": "white",
 				"disableScroll": true
 			}
+		}, {
+			"path": "pages/personal/addMyFarm",
+			"style": {
+				"navigationBarTitleText": "添加农场",
+				"navigationBarBackgroundColor": "#17BB89",
+				"navigationBarTextStyle": "white"
+			}
+		}, {
+			"path": "pages/personal/detailFarm",
+			"style": {
+				"navigationBarTitleText": "我的农场",
+				"navigationBarBackgroundColor": "#17BB89",
+				"navigationBarTextStyle": "white"
+			}
+		}, {
+			"path": "pages/personal/landManagement",
+			"style": {
+				"navigationBarTitleText": "地块管理",
+				"navigationBarBackgroundColor": "#17BB89",
+				"navigationBarTextStyle": "white"
+			}
+		}, {
+			"path": "pages/personal/addLand",
+			"style": {
+				"navigationBarTitleText": "添加地块",
+				"navigationBarBackgroundColor": "#17BB89",
+				"navigationBarTextStyle": "white"
+			}
+		}, {
+
+			"path": "pages/monitor/monitor",
+			"style": {
+				"navigationBarTitleText": "监测预警",
+				"navigationBarBackgroundColor": "#17BB89",
+				"navigationBarTextStyle": "white",
+				"disableScroll": true
+
+			}
+		}, {
+
+			"path": "pages/monitor/growthMonitoring",
+			"style": {
+				"navigationBarTitleText": "生长监测",
+				"navigationBarBackgroundColor": "#17BB89",
+				"navigationBarTextStyle": "white",
+				"disableScroll": true
+
+			}
+		}, {
+
+			"path": "pages/equipmentManagement/equipmentManagement",
+			"style": {
+				"navigationBarTitleText": "设备管理",
+				"navigationBarBackgroundColor": "#17BB89",
+				"navigationBarTextStyle": "white",
+				"disableScroll": true
+			}
+		}, {
+			"path": "pages/equipmentManagement/addEquipment",
+			"style": {
+				"navigationBarTitleText": "添加设备",
+				"navigationBarBackgroundColor": "#17BB89",
+				"navigationBarTextStyle": "white",
+				"disableScroll": true
+			}
+		}, {
+			"path": "pages/equipmentManagement/detailEquipment",
+			"style": {
+				"navigationBarTitleText": "设备详情",
+				"navigationBarBackgroundColor": "#17BB89",
+				"navigationBarTextStyle": "white",
+				"disableScroll": true
+			}
+		}, {
+			"path": "pages/personal/setTheWarning",
+			"style": {
+				"navigationBarTitleText": "地块预警设置",
+				"navigationBarBackgroundColor": "#17BB89",
+				"navigationBarTextStyle": "white",
+				"disableScroll": true
+			}
+		}, {
+			"path": "pages/personal/landWaring",
+			"style": {
+				"navigationBarTitleText": "预警设置",
+				"navigationBarBackgroundColor": "#17BB89",
+				"navigationBarTextStyle": "white",
+				"disableScroll": true
+			}
+		},
+		{
+			"path": "pages/personal/deviceList",
+			"style": {
+				"navigationBarTitleText": "选择设备预警",
+				"navigationBarBackgroundColor": "#17BB89",
+				"navigationBarTextStyle": "white",
+				"disableScroll": true
+			}
+		},
+		{
+			"path": "pages/personal/detailWarning",
+			"style": {
+				"navigationBarTitleText": "预警设置",
+				"navigationBarBackgroundColor": "#17BB89",
+				"navigationBarTextStyle": "white",
+				"disableScroll": true
+			}
+		},
+
+		{
+			"path": "pages/personal/WarningProcessing",
+			"style": {
+				"navigationBarTitleText": "预警处理",
+				"navigationBarBackgroundColor": "#17BB89",
+				"navigationBarTextStyle": "white",
+				"disableScroll": true
+			}
+		},
+		// {
+		// 	"path": "pages/personal/nearTheEquipment",
+		// 	"style": {
+		// 		"navigationBarTitleText": "附近100公里设备",
+		// 		"navigationBarBackgroundColor": "#17BB89",
+		// 		"navigationBarTextStyle": "white",
+		// 		"disableScroll": true
+		// 	}
+		// }, 
+		{
+			"path": "pages/personal/allNearTheEquipment",
+			"style": {
+				"navigationBarTitleText": "附近100公里设备",
+				"navigationBarBackgroundColor": "#17BB89",
+				"navigationBarTextStyle": "white",
+				"disableScroll": true
+			}
+		},
+		{
+			"path": "pages/aiRecognition/identifyResults",
+			"style": {
+				"navigationBarTitleText": "识别结果",
+				"navigationBarBackgroundColor": "#17BB89",
+				"navigationBarTextStyle": "white",
+				"disableScroll": true
+			}
+		},
+		{
+			"path": "pages/marketManagement/marketManagement",
+			"style": {
+				"navigationBarTitleText": "集市管理",
+				"navigationBarBackgroundColor": "#17BB89",
+				"navigationBarTextStyle": "white",
+				"disableScroll": true
+			}
+		},
+		{
+			"path": "pages/factionalism/factionalismList",
+			"style": {
+				"navigationBarTitleText": "圈子活动",
+				"navigationBarBackgroundColor": "#17BB89",
+				"navigationBarTextStyle": "white",
+				"disableScroll": true
+
+			}
 		}
-		
 	],
 	"subPackages": [{
 			"root": "pageA",
-			"pages": [
-
-				{
-					"path": "termsOfService",
-					"style": {
-						"navigationBarTitleText": "服务条款",
-						"navigationBarBackgroundColor": "#17BB89",
-						"navigationBarTextStyle": "white"
-					}
-				},
-				{
-					"path": "photoAlbum",
-					"style": {
-						"navigationBarTitleText": "生长历程",
-						"navigationBarBackgroundColor": "#17BB89",
-						"navigationBarTextStyle": "white"
-					}
-				},
-				
-				{
-					"path": "farmDetails",
-					"style": {
-						"navigationBarTitleText": "",
-						"navigationBarBackgroundColor": "#17BB89",
-						"navigationBarTextStyle": "white"
-					}
-				},
-				{
-					"path": "not",
-					"style": {
-						"navigationBarTitleText": "",
-						"navigationBarBackgroundColor": "#17BB89",
-						"navigationBarTextStyle": "white"
-					}
+			"pages": [{
+				"path": "termsOfService",
+				"style": {
+					"navigationBarTitleText": "服务条款",
+					"navigationBarBackgroundColor": "#17BB89",
+					"navigationBarTextStyle": "white"
 				}
-			]
+			}, {
+				"path": "mandate",
+				"style": {
+					"navigationBarTitleText": "添加被授权人",
+					"navigationBarBackgroundColor": "#17BB89",
+					"navigationBarTextStyle": "white"
+				}
+			}, {
+				"path": "photoAlbum",
+				"style": {
+					"navigationBarTitleText": "成长记录",
+					"navigationBarBackgroundColor": "#17BB89",
+					"navigationBarTextStyle": "white"
+				}
+			}, {
+				"path": "impowerList",
+				"style": {
+					"navigationBarTitleText": "授权列表",
+					"navigationBarBackgroundColor": "#17BB89",
+					"navigationBarTextStyle": "white"
+				}
+			}, {
+				"path": "addNetworkVideo",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationBarBackgroundColor": "#FFFFFF",
+					"navigationBarTextStyle": "white"
+				}
+			}]
 		},
 		{
 			"root": "pageB",
 			"pages": [
-
+		
 				{
 					"path": "activityDetail",
 					"style": {
-						"navigationBarTitleText": "活动详情",
+						"navigationBarTitleText": "项目详情",
 						"navigationBarBackgroundColor": "#FFFFFF",
 						"navigationBarTextStyle": "black"
 					}
@@ -150,54 +271,17 @@
 				{
 					"path": "activityList",
 					"style": {
-						"navigationBarTitleText": "活动",
+						"navigationBarTitleText": "项目",
 						"navigationBarBackgroundColor": "#FFFFFF",
 						"navigationBarTextStyle": "black"
 					}
 				},
 				{
-					"path": "addNetworkVideo",
+					"path": "addActivity",
 					"style": {
-						"navigationBarTitleText": "",
-						"navigationBarBackgroundColor": "#FFFFFF",
-						"navigationBarTextStyle": "black"
-					}
-				}
-			]
-		},
-		{
-			"root": "pageC",
-			"pages": [
-				{
-					"path": "farmFactionalism",
-					"style": {
-						"navigationBarTitleText": "",
-						"navigationBarBackgroundColor": "#FFFFFF",
-						"navigationBarTextStyle": "black"
-					}
-				},
-				{
-					"path": "farmManor",
-					"style": {
-						"navigationBarTitleText": "领地项目详情",
-						"navigationBarBackgroundColor": "#FFFFFF",
-						"navigationBarTextStyle": "black"
-					}
-				},
-				{
-					"path": "farmPay",
-					"style": {
-						"navigationBarTitleText": "确认支付",
-						"navigationBarBackgroundColor": "#FFFFFF",
-						"navigationBarTextStyle": "black"
-					}
-				},
-				{
-					"path": "traceabilityDetails",
-					"style": {
-						"navigationBarTitleText": "溯源详情",
-						"navigationBarBackgroundColor": "#FFFFFF",
-						"navigationBarTextStyle": "black"
+						"navigationBarTitleText": "新建项目",
+						"navigationBarBackgroundColor": "#17BB89",
+						"navigationBarTextStyle": "white"
 					}
 				}
 			]
@@ -211,50 +295,42 @@
 	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "科维特",
+		"navigationBarTitleText": "星鸦智农",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 		// 下拉刷新
 		// "enablePullDownRefresh": true
-	},
-	"tabBar": {
-		"color": "#999999",
-		"selectedColor": "#17BB89",
-		"backgroundColor": "#fff",
-		"list": [{
-				"pagePath": "pages/index/index",
-				"text": "首页",
-				"iconPath": "static/imgs/首页.png",
-				"selectedIconPath": "static/imgs/首页1.png"
-			},
-			{
-				"pagePath": "pages/farm/farmList",
-				"text": "农场",
-				"iconPath": "static/imgs/农场.png",
-				"selectedIconPath": "static/imgs/农场1.png"
-			},
-			{
-				"pagePath": "pages/circle/circle",
-				"text": "圈子",
-				"iconPath": "static/imgs/圈子.png",
-				"selectedIconPath": "static/imgs/圈子1.png"
-			},
-			{
-				"pagePath": "pages/bazaar/bazaar",
-				"text": "集市",
-				"iconPath": "static/imgs/集市.png",
-				"selectedIconPath": "static/imgs/集市1.png"
-			},
-
-			{
-				"pagePath": "pages/personal/personal",
-				"text": "我的",
-				"iconPath": "static/imgs/我的.png",
-				"selectedIconPath": "static/imgs/我的1.png"
-			}
-		]
-
 	}
+	// "tabBar": {
+	// 	"color": "#999999",
+	// 	"selectedColor": "#17BB89",
+	// 	"backgroundColor": "#fff",
+	// 	"list": [{
+	// 			"pagePath": "pages/monitor/monitor",
+	// 			"text": "监测预警",
+	// 			"iconPath": "static/imgs/detection.png",
+	// 			"selectedIconPath": "static/imgs/detection-1.png"
+	// 		},
+	// 		{
+	// 			"pagePath": "pages/equipmentManagement/equipmentManagement",
+	// 			"text": "设备管理",
+	// 			"iconPath": "static/imgs/equipment-management-1.png",
+	// 			"selectedIconPath": "static/imgs/equipment-management.png"
+	// 		},
+	// 		{
+	// 			"pagePath": "pages/personal/allNearTheEquipment",
+	// 			"text": "附近设备",
+	// 			"iconPath": "static/imgs/nearby.png",
+	// 			"selectedIconPath": "static/imgs/nearby1.png"
+	// 		},
+	// 		{
+	// 			"pagePath": "pages/personal/personal",
+	// 			"text": "用户中心",
+	// 			"iconPath": "static/imgs/my.png",
+	// 			"selectedIconPath": "static/imgs/my-1.png"
+	// 		}
+	// 	]
+	// }
 	// "condition": { //模式配置，仅开发期间生效
 	// 	"current": 0, //当前激活的模式(list 的索引项)
 

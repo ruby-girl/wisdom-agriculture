@@ -1,95 +1,63 @@
 <template>
-	<view class="bodys" v-bind:style="{ height: windowHeight + 'px' }">
-		<camera device-position="back"  binderror="error" style="width: 100%; height: 75%;"></camera>
-		<view class="bg-black">
-			<scroll-view scroll-x class=" nav" enhanced="true">
-				<view class="flex text-center justify-center" style="padding-bottom: 8rpx;;width: 190%;">
-					<view
-						class="cu-item font-size-16"
-						:class="item.id == TabCur ? 'text-green cur' : 'text-white'"
-						v-for="(item, index) in tabs"
-						:key="index"
-						@tap="tabSelect"
-						:data-id="item.id"
-					>
-						{{ item.name }}
-					</view>
+	<view class="bodys" v-bind:style="{height:windowHeight + 'px',backgroundImage:'url(' + backgroundImageUrl+ ')',backgroundSize:'100%'}" style="">
+		<!-- <view class="flex top">
+			<text class="text-serch">当前农作物：{{ text }}</text>
+			<view class="text-but" @tap="SwitchCrops()">切换作物</view>
+		</view> -->
+		<view class="flex">
+			<view class="item-box">
+				<view class="flex justify-content-flex-justify item-jt align-items-center">
+					<image src="../../static/imgs/recognition-disease-entities.png" mode="heightFix" @tap="scan('entities')" v-bind:style="{height:windowHeight/2 - 40 + 'px'}" style="margin:0 auto;"></image>
 				</view>
-			</scroll-view>
-			<view class="text-center relative" style="padding: 20px 0;">
-				<image src="../../static/imgs/button.png" style="width: 120rpx;height: 120rpx;" @tap="takePhoto"></image>
-				<image src="../../static/imgs/xiangce.png" style="width: 80rpx;height: 80rpx;position: absolute;left: 10%;top: 25%;" @tap="selectPhoto"></image>
+				<view class="flex justify-content-flex-justify item-jt align-items-center">
+					<image src="../../static/imgs/recognition-diseases-pests.png" mode="heightFix" @tap="scan('pests')"  v-bind:style="{height:windowHeight/2 - 40 + 'px'}" style="margin:0 auto;"></image>
+				</view>
 			</view>
 		</view>
+		<consult v-on:click='click' ></consult>
 	</view>
 </template>
 
 <script>
-import http from '@/utils/request.js';
-import consult from '@/components/consult.vue';
-import tabBar from '@/components/tabbar.vue';
+import http from '@/utils/request.js'
+import consult from '@/components/consult.vue'
 export default {
 	data() {
 		return {
-			src:'',
+			text: '草莓',
+			avatarUrl: null,
 			isLogin: false,
-			windowHeight: 300,
-			TabCur: 1,
-			tabs: [
-				{
-					id: 1,
-					name: '动物识别',
-					type: 'animal'
-				},
-				{
-					id: 2,
-					name: '植物识别',
-					type: 'plant'
-				},
-				{
-					id: 3,
-					name: 'logo识别',
-					type: 'logo_search'
-				},
-				{
-					id: 4,
-					name: '果蔬识别',
-					type: 'ingredient'
-				},
-				{
-					id: 5,
-					name: '菜品识别',
-					type: 'dish_search'
-				},
-				{
-					id: 6,
-					name: '红酒识别',
-					type: 'red_wine'
-				},
-				{
-					id: 7,
-					name: '货币识别',
-					type: 'currency'
-				},
-				{
-					id: 8,
-					name: '地标识别',
-					type: 'landmark'
-				}
-			]
+			windowHeight:300,
+			backgroundImageUrl: http.config.baseUrl + 'upload/beijing.png',
 		};
 	},
 	components: {
 		consult,
-		tabBar
 	},
 	onLoad() {
 		this.windowHeight = uni.getSystemInfoSync().windowHeight; // 屏幕的高度
 		let _this = this;
+		uni.getStorage({
+			key: 'XYZNUserInfo',
+			success: function(res) {
+				_this.isLogin = true;
+				getApp().globalData.isLogin = true;
+				_this.user = {
+					nickName: res.data.nickName || '',
+					phone: res.data.phone || '',
+					avatarUrl: res.data.avatarUrl
+				};
+				_this.getCount();
+			},
+			fail: function() {
+				_this.isLogin = false;
+				getApp().globalData.isLogin = false;
+			}
+		});
 	},
 	onShareAppMessage: function() {
 		return {
-			title: '科维特',
+			title: '星鸦智农',
 			desc: '',
 			path: 'pages/aiRecognition/aiRecognition'
 		};
@@ -106,49 +74,69 @@ export default {
 		}
 	},
 	methods: {
-		show(){
-			uni.request({
-			    url: 'http://vod.cn-shanghai.aliyuncs.com', //仅为示例，并非真实接口地址。
-				method:'POST',
-			    data: {
-			        Action: 'GetPlayInfo',
-					VideoId: '361a796be226402097f81c2258892668',
-			    },
-			    // header: {
-			    //     // 'custom-header': 'hello' //自定义请求头信息
-			    // },
-			    success: (res) => {
-			        console.log(res.data);
-			        // this.text = 'request success';
-			    }
+		
+		SwitchCrops() {
+			// 切换作物
+			if (!this.isLogin) {
+				uni.showToast({
+					title: '请先登录',
+					icon: 'none'
+				})
+				return
+			}
+			uni.showToast({
+				title: '暂未开放',
+				icon: 'none'
 			});
 		},
-		tabSelect(e) {
-			this.TabCur = e.currentTarget.dataset.id;
-		},
-		takePhoto() {// 拍照
-			var that = this;
-			const ctx = wx.createCameraContext();
-			ctx.takePhoto({
-				quality: 'high',
-				success: res => {
-					that.scan(res.tempImagePath);
-					console.log(res)
-				}
-			});
-		},
-		selectPhoto(){ // 选择相册
+		
+		scan(e) {
+			// 识别病虫/病种
+			if (!this.isLogin) {
+				uni.showToast({
+					title: '请先登录',
+					icon: 'none'
+				})
+				return
+			}
+			if (e != 'pests'){
+				uni.showToast({
+					title: '暂未开放',
+					icon: 'none'
+				});
+				return
+			}
 			var that = this;
 			wx.chooseImage({
 				count: 1, // 默认9
 				sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-				sourceType: ['album'], // 可以指定来源是相册还是相机，默认二者都有
+				sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
 				success: function(res) {
 					// 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-					
+					uni.showLoading({
+					    title: '识别中'
+					});
 					var tempFilePaths = res.tempFilePaths;
-					console.log(res.tempFilePaths)
-					that.scan(tempFilePaths[0]);
+					uni.uploadFile({
+						url: http.config.baseUrl+'api/ai/pests', 
+						filePath: tempFilePaths[0],
+						name: 'file',
+						header:{
+							'token': uni.getStorageSync('XYZNUserInfo').token 
+						},
+						success: (uploadFileRes) => {
+							var list = JSON.parse(uploadFileRes.data)
+							var array = list.data.result;
+							if (list.data.result.length > 3) {
+								array = array.slice(0,3);
+							}
+							console.log(uploadFileRes)
+							uni.navigateTo({
+							    url: './identifyResults?iamge='+tempFilePaths + '&item=' + encodeURIComponent(JSON.stringify(array))
+							});
+						}
+					});
+						
 				},
 				fail: function(res) {
 					uni.showToast({
@@ -156,36 +144,81 @@ export default {
 						icon: 'none'
 					});
 				}
+				
 			});
 		},
-		scan(path) { // 上传图片跳转识别结果
-			uni.uploadFile({
-				url: http.config.baseUrl + 'api/ai/pests',
-				filePath: path,
-				name: 'file',
-				header: {
-					token: uni.getStorageSync('XYZNUserInfo').token
-				},
-				success: uploadFileRes => {
-					var list = JSON.parse(uploadFileRes.data);
-					var array = list.data.result;
-					if (list.data.result.length > 3) {
-						array = array.slice(0, 3);
-					}
-					console.log(uploadFileRes);
-					uni.navigateTo({
-						url: './identifyResults?iamge=' + tempFilePaths + '&item=' + encodeURIComponent(JSON.stringify(array))
-					});
-				}
+
+		click(index,name) {
+			// 查百科
+			if (!this.isLogin) {
+				uni.showToast({
+					title: '请先登录',
+					icon: 'none'
+				})
+				return
+			}
+			uni.showToast({
+				title: name + '暂未开放',
+				icon: 'none'
 			});
 		},
-		
+	
+		getCount() {
+			this.$api.massifCount().then(res => {
+				this.nums = res.data.data;
+			});
+		},
 	}
 };
 </script>
 
 <style lang="scss" scoped>
-	.relative{
-		position: relative;
+	
+.top {
+	padding: 30rpx 0 30rpx 40rpx;
+}
+.text-serch {
+	background-color: #ffffff;
+	height: 100%;
+	width: 75%;
+	padding: 12rpx 0 12rpx 40rpx;
+	border-radius: 10rpx;
+	font-size: 18rpx;
+	color: #999999;
+}
+.text-but {
+	width: 25%;
+	text-align: center;
+	color: #17bb89;
+	font-size: 28rpx;
+}
+.title > image {
+	width: 36rpx;
+	height: 36rpx;
+	margin-right: 5px;
+}
+.item-box {
+	margin: auto;
+}
+
+.positon-box {
+	position: relative;
+	top: -80rpx;
+	z-index: 1011;
+	padding: 0 30rpx;
+
+	.position-num {
+		font-size: 28px;
+		font-weight: bold;
+		color: #49ba89;
+		text-align: center;
 	}
+}
+.bg {
+	background-color: #ffffff;
+	width: 32%;
+	border-radius: 10rpx;
+	display: flex;
+	justify-content: center;
+}
 </style>

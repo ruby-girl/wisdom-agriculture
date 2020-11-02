@@ -20,13 +20,13 @@
 				<view class="item-num">
 					{{itemObject.proportion||'-'}}<span class="small-txt">%</span>
 				</view>
-				<text class="small-text">{{itemObject.crop}}</text>
+				<text class="small-text">{{itemObject.crops}}</text>
 			</view>
 			<view class="item-content-box" v-for="(item,i) in itemObject.monitorings" :key="i">
 				<view class="item-num">
 					{{item.value||'-'}}<span class="small-txt">{{item.unit}}</span>
 				</view>
-				<text class="small-text">{{item.name}}</text>
+				<text class="small-text">{{item.operation}}</text>
 			</view>
 		</view>
 	</view>
