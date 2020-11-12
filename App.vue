@@ -20,7 +20,9 @@ export default {
     // baseUrl: "https://xyzn.tree-iot.com/",
 
     imgUrl: "https://www.sc-kwt.com",
-    baseUrl: "https://www.sc-kwt.com/",
+	baseUrl1: 'https://www.sc-kwt.com/tools/', // 1021
+	baseUrl2: 'https://www.sc-kwt.com/tracing/',// 1022
+	baseUrl3: 'https://www.sc-kwt.com/marketing/',// 1023
     isLogin: false,
     openId: ""
   }

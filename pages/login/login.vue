@@ -235,6 +235,7 @@
 						nickName: this.user.nickName,
 						avatarUrl: this.user.avatarUrl,
 						phone: this.obj.phone,
+						userId: res.data.data.user.userId,
 						// cookie: res.data.token,
 					}
 					uni.setStorage({

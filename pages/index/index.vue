@@ -35,7 +35,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="card">
+			<!-- <view class="card">
 				<view class="flex padding-box justify-center" >
 					<view class="flex index-h3">
 						限时秒杀地块
@@ -69,7 +69,7 @@
 						</view>
 					</scroll-view>
 				</view>
-			</view>
+			</view> -->
 			<view class="card">
 				<view class="flex padding-box justify-center">
 					<view class="flex index-h3">精选项目</view>

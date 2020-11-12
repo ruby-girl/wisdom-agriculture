@@ -24,7 +24,7 @@
 			"path": "pages/bazaar/commodityDetails",
 			"style": {
 				"navigationBarTitleText": "商品详情",
-				"navigationBarBackgroundColor": "#FFFFFF",
+				"navigationBarBackgroundColor": "#F8FAFB",
 				"navigationBarTextStyle": "black",
 				"disableScroll": true
 				// "navigationStyle": "custom"
@@ -200,6 +200,36 @@
 						"navigationBarTextStyle": "black"
 					}
 				}
+			]
+		},
+		{
+			"root": "pageD",
+			"pages": [
+				// {
+				// 	"path": "orderForm",
+				// 	"style": {
+				// 		"navigationBarTitleText": "",
+				// 		"navigationBarBackgroundColor": "#FFFFFF",
+				// 		"navigationBarTextStyle": "black"
+				// 	}
+				// },
+				{
+					"path": "addshippingAddress",
+					"style": {
+						"navigationBarTitleText": "添加收货地址",
+						"navigationBarBackgroundColor": "#FFFFFF",
+						"navigationBarTextStyle": "black"
+					}
+				},
+				{
+					"path": "shippingAddress",
+					"style": {
+						"navigationBarTitleText": "我的收货地址",
+						"navigationBarBackgroundColor": "#FFFFFF",
+						"navigationBarTextStyle": "black"
+					}
+				}
+				
 			]
 		}
 	],

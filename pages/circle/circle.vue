@@ -1,84 +1,28 @@
 <template>
 	<view>
 		<scroll-view v-bind:style="{ height: windowHeight + 'px' }" scroll-y="true" enable-back-to-top="true">
-			<view class="flex padding-box justify-center"  @tap="toActivity">
-				<view class="flex index-h3">热门活动</view>
-				<view class="flex index-span" >
-					查看全部
-					<image src="../../static/imgs/arrows.png" mode="" class="img-right"></image>
+			<view v-for="(item, index) in newsList" class="flex" style="position: relative;padding: 16rpx 30rpx;flex-direction: column;background-color: #FFFFFF;border-bottom: 1px solid #BFBFBF;">
+				<view class="flex" style="align-items:center;margin: 10rpx 0;justify-content: end;">
+					<image :src="item.avatar" mode="aspectFill" style="width: 90rpx;height: 90rpx;border-radius: 50%;"></image>
+					<view class="font-size-12" style="margin-left: 28rpx;">{{item.nickName}}</view>
 				</view>
-			</view>
-			<view class="page-section-spacing  card" >
-				<scroll-view class="scroll-view_H " scroll-x="true" bindscroll="scroll" style="width: 100%;margin: 0 15px;">
-					<view id="demo1" class="scroll-view-item_H demo-text-1 " @tap="toDetail">
-						<image src="../static/images/u=3182281012,3984649657&fm=26&gp=0.jpg" class="scroll-view-item-img"  mode="aspectFill"></image>
-						<view class="font-size-12 " style="padding: 0 10rpx;">南瓜节游园活动</view>
-						<view class="flex " style="padding: 0 10rpx;">
-							<view class="font-size-12 text-gray flex-1">
-								剩余
-								<text class="text-red">7</text>
-								天
-							</view>
-							<view class="font-size-12 text-gray">
-								<text class="text-red">￥50</text>
-								元/位
-							</view>
-						</view>
-					</view>
-				</scroll-view>
-			</view>
-			<view class="cameras" @tap="add" style="z-index: 1;">
-				<uni-icons  type="camera" size="30" ></uni-icons>
-			</view>
-			<view class="flex padding-box justify-center"  >
-				<view class="flex index-h3">田园随想</view>
-				<view class="flex index-span" >
-					查看全部
-					<image src="../../static/imgs/arrows.png" mode="" class="img-right"></image>
-				</view>
-			</view>
-			<view class="flex" style="padding: 16rpx 30rpx;flex-direction: column;border-bottom: 1px solid #BFBFBF;">
-				<view class="flex" style="align-items:center;margin: 10rpx 0;">
-					<image src="../../static/images/timgQ5KMALQZ.jpg" mode="aspectFill" style="width: 90rpx;height: 90rpx;border-radius: 50%;"></image>
-					<view class="font-size-12" style="margin-left: 30rpx;">种植小能手</view>
-				</view>
-				<text class="text-gray font-size-10" >
-					2020-12-12
+				<text class="text-gray font-size-12" >
+					{{item.creationTime}}
 				</text>
-				<view class="font-size-12 color-grey" style="padding: 0 20rpx;">项目进行的很顺利，老板人也很好，有问题及时就处理了。收到的苹果也很好，都没有烂 果,而且味道很甜，送了一些给朋友，都说很值。</view>
-				<view class="flex" style="flex-wrap: wrap;margin-top: 20rpx;padding: 0 20rpx;">
-					<image src="../../static/images/timg7FHKTBR0.jpg" mode="widthFix" style="width: 30%;margin-right: 22rpx;"></image>
-					<image src="../../static/images/timg7FHKTBR0.jpg" mode="widthFix" style="width: 30%;margin-right: 22rpx;"></image>
-					<image src="../../static/images/timg7FHKTBR0.jpg" mode="widthFix" style="width: 30%;margin-right: 22rpx;"></image>
+				<view class="font-size-12 color-grey">{{item.content}}</view>
+				<view class="flex" style="flex-wrap: wrap;margin-top: 20rpx;">
+					<image @tap="showImg(item.path)" v-for="(li,i) in item.path" :src="li" mode="aspectFill" v-bind:style="{width:100/item.path.length - 4 + '%', height:210/(item.path.length > 3? 3:item.path.length) + 'px'}" style="height: 140rpx;margin-right: 22rpx;"></image>
 				</view>
 				<view class="flex align-center" style="margin-top: 30rpx;margin-bottom: 20rpx;">
-					<view class="flex-1 text-gray font-size-12">10分钟前</view>
+					<view class="flex-1 text-gray font-size-12">{{item.time}}</view>
 					<view class="text-gray font-size-12">
 						<uni-icons type="heart" size="22" color="gary" style="margin-right: 20rpx;"></uni-icons>
+						<!-- <uni-icons type="heart-filled" size="22" color="gary" style="margin-right: 20rpx;"></uni-icons> -->
 						<uni-icons type="chat" size="20" color="gary" style="margin-right: 20rpx;"></uni-icons>
 					</view>
 				</view>
 			</view>
-			<view class="flex" style="padding: 16rpx 30rpx;flex-direction: column;border-bottom: 1px solid #BFBFBF;">
-				<view class="flex" style="align-items:center;margin: 10rpx 0;">
-					<image src="../../static/images/timgQ5KMALQZ.jpg" mode="aspectFill" style="width: 90rpx;height: 90rpx;border-radius: 50%;"></image>
-					<view class="font-size-12" style="margin-left: 30rpx;">种植小能手</view>
-				</view>
-				<text class="text-gray font-size-10" >
-					2020-12-12
-				</text>
-				<view class="font-size-12 color-grey" style="padding: 0 20rpx;">发布专题</view>
-				<view class="flex" style="flex-wrap: wrap;margin-top: 20rpx;padding: 0 20rpx;">
-					<image src="../../static/images/timg7FHKTBR0.jpg" mode="widthFix" style="width: 100%;"></image>
-				</view>
-				<view class="flex align-center" style="margin-top: 30rpx;margin-bottom: 20rpx;">
-					<view class="flex-1 text-gray font-size-12">15分钟前</view>
-					<view class="text-gray font-size-12">
-						<uni-icons type="heart" size="22" color="gary" style="margin-right: 20rpx;"></uni-icons>
-						<uni-icons type="chat" size="20" color="gary" style="margin-right: 20rpx;"></uni-icons>
-					</view>
-				</view>
-			</view>
+			
 		</scroll-view>
 	</view>
 </template>
@@ -89,18 +33,17 @@ export default {
 		return {
 			windowHeight: 300,
 			isLogin: false,
-			indicatorDots: true,
-			autoplay: true,
-			interval: 3000,
-			duration: 1000,
-			remaining: '', //显示剩余时间
-			remainingd: '' //数据返回时间秒
+			pageNum:1,
+			pageSize:100,
+			newsList:[],
+		
 		};
 	},
 	components: {},
 	onLoad() {
 		this.windowHeight = uni.getSystemInfoSync().windowHeight; // 屏幕的高度
 		this.isLogin = getApp().globalData.isLogin;
+		this.circleOrderTime();
 	},
 	// onShareAppMessage: function() {
 	// 	return {
@@ -120,21 +63,71 @@ export default {
 		// }
 	},
 	methods: {
-		toActivity(){ // 活动列表
-			uni.navigateTo({
-				url:"/pageB/activityList"
+		circleOrderTime(){
+			this.$api.circleOrderTime({
+				pageNum:this.pageNum,
+				pageSize:this.pageSize,
+			}).then(res =>{
+				res.data.data.circleDtos.forEach(item => {
+					item.time = this.getTimes(item.creationTime);
+				})
+				this.userFindId(0,res.data.data.circleDtos);
 			})
 		},
-		add(){ // 发布
-			uni.navigateTo({
-				url:'/pageB/addNetworkVideo'
+		
+		userFindId(index,array){
+			this.$api.userFindId({userId:array[index].uid}).then(res =>{
+				array[index].nickName = res.data.data.nickName;
+				array[index].avatar = res.data.data.avatar;
+				if (++index < array.length) {
+					this.userFindId(index,array);
+				} else {
+					this.newsList = array;
+				}
 			})
 		},
-		toDetail(){
-			uni.navigateTo({
-				url:'/pageB/activityDetail'
-			})
-		}
+		showImg(array){
+			uni.previewImage({
+				urls: array,
+				longPressActions: {
+					// itemList: ['发送给朋友', '保存图片', '收藏'],
+					success: function(data) {
+						// console.log('选中了第' + (data.tapIndex + 1) + '个按钮,第' + (data.index + 1) + '张图片');
+					},
+					fail: function(err) {
+						console.log(err.errMsg);
+					}
+				}
+			});
+		},
+		getTimes(date){ // 时间前
+			var date1= date.replace(/-/g,'/');  //开始时间
+			var date2 = new Date();    //结束时间
+			var date3 = date2.getTime() - new Date(date1.replace(/-/g,'/')).getTime();   //时间差的毫秒数 
+			
+			//计算出相差天数
+			var days=Math.floor(date3/(24*3600*1000))
+			 
+			//计算出小时数
+			var leave1=date3%(24*3600*1000)    //计算天数后剩余的毫秒数
+			var hours=Math.floor(leave1/(3600*1000))
+			//计算相差分钟数
+			var leave2=leave1%(3600*1000)        //计算小时数后剩余的毫秒数
+			var minutes=Math.floor(leave2/(60*1000))
+			//计算相差秒数
+			var leave3=leave2%(60*1000)      //计算分钟数后剩余的毫秒数
+			var seconds=Math.round(leave3/1000)
+			var time = '';
+			if (days > 0) {
+				return days+'天前';
+			} else if (hours > 0){
+				return hours+'小时前';
+			} else if (minutes > 0){
+				return minutes+'分钟前';
+			} else {
+				return seconds + '秒前';
+			}
+		},
 		
 	}
 };
@@ -144,68 +137,7 @@ export default {
 	page{
 		background: #fff;
 	}
-.scroll-view_H {
-	white-space: nowrap;
-}
-.scroll-view-item {
-	height: 300rpx;
-}
-.scroll-view-item_H {
-	display: inline-block;
-	width: 35%;
-	border: 1px solid #d8d8d8;
-	border-radius: 20rpx;
-	margin-right: 40rpx;
-}
 
-.scroll-view-item-img {
-	// border-radius: 20rpx;
-	border-top-right-radius: 20rpx;
-	border-top-left-radius: 20rpx;
-	width: 100%;
-	height: 210rpx;
-}
-.padding-box {
-	padding: 8px 15px;
-	align-items: center;
-	justify-content: center;
-	letter-spacing: 5rpx;
-}
-.index-h3 {
-	font-size: 35rpx;
-	flex: 1;
-	border-left: 3px solid #00ae66;
-	padding: 0 15px;
-	font-weight: 600;
-}
-.index-span {
-	color: #c2c2c2;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-.index-time {
-	font-size: 20rpx;
-	color: #ff0001;
-	position: relative;
-	margin: auto 10rpx;
-}
-.index-money {
-	color: #ff0001;
-}
-.img-right {
-	width: 10rpx;
-	height: 20rpx;
-	position: relative;
-	margin: auto 10rpx;
-}
-.img-size {
-	width: 22rpx;
-	height: 28rpx;
-	position: relative;
-	margin: auto 0;
-	margin-right: 10rpx;
-}
 .text-gray {
 	color: #9a9a9a;
 	// padding: 10rpx;
@@ -225,21 +157,5 @@ export default {
 .card-height{
 	height: 60rpx;
 }
-.card{
-	margin-top: 30rpx;
-	padding-bottom: 30rpx;
-	border-bottom: 1px solid #E4E4E4;
-}
-.cameras{
-	position: fixed;
-	width: 54px;
-	height: 54px;
-	align-items: center;
-	text-align: center;
-	bottom: 10rpx;
-	right: 10rpx;
-	border-radius: 50%;
-	background-color:#fff;
-	border: 1px solid #EEEEEE;
-}
+
 </style>
