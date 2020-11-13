@@ -42,7 +42,10 @@ export const  coverAll= (data) => {
 		data,
 	})
 }
-// 根据定位城市查询推荐农场
+// 根据多条件查去多个农场信息
+// farmId		农场ID
+// recommended	查是否开启推荐
+// cityName		用城市名找查
 export const  farmGetOne= (data) => {
 	return http.request({
 		url: 'tracing/api/farm/getOne',
@@ -85,12 +88,38 @@ export const  productFindMerchants = (data) => {
 		data,
 	})
 }
-// 我的收藏夹/购物车
-export const  cartGetList= (data) => {
+// 根据地块ID查询相关地块
+// massifId  id
+export const  massifGetOne = (data) => {
 	return http.request({
-		url: 'marketing/api/cart/getList',
+		url: 'tracing/api/massif/getOne',
 		method: 'post',
 		data,
+	})
+}
+// 根据地块ID查询绑定的设备表列
+// massifId  id
+export const  massifGetDeviceList = (data) => {
+	return http.request({
+		url: 'tracing/api/massif/getDeviceList',
+		method: 'post',
+		data,
+	})
+}
+// 监测7日数据及设备数据
+export const deviceGetDetails= (data) => {
+	return http.request({
+		url: 'tracing/api/device/getDetails',
+		method: 'post',
+		data:data
+	})
+}
+//获取生长历程图片
+export const  deviceetScopeImage= (data) => {
+	return http.request({ 
+		url: 'tracing/api/device/getScopeImage',
+		method: 'post',
+		data:data
 	})
 }
 /*   农场信息end   */
@@ -133,6 +162,7 @@ export const  productFindCategory= (data) => {
 	})
 }
 // 通过商品id查询封面图
+// productId  商品id
 export const  coverFindByidlist= (data) => {
 	return http.request({
 		url: 'marketing/api/cover/findByIdList',
@@ -140,9 +170,34 @@ export const  coverFindByidlist= (data) => {
 		data,
 	})
 }
+// 通过商品id查询详情图
+// productId  商品id
+export const  detailsFindByIdDetail= (data) => {
+	return http.request({
+		url: 'marketing/api/details/findByIdDetail',
+		method: 'post',
+		data,
+	})
+}
+// 通过商品id查询
+export const  productFindId= (data) => {
+	return http.request({
+		url: 'marketing/api/product/findId',
+		method: 'post',
+		data,
+	})
+}
 /*   集市end   */
 
 /*   个人中心   */
+// 我的收藏夹/购物车
+export const  cartGetList= (data) => {
+	return http.request({
+		url: 'marketing/api/cart/getList',
+		method: 'post',
+		data,
+	})
+}
 // 添加收货地址
 export const  shoppingAddressInsert= (data) => {
 	return http.request({
@@ -151,4 +206,37 @@ export const  shoppingAddressInsert= (data) => {
 		data,
 	})
 }
+// 分页查询收货地址
+export const  shoppingAddressFindAll= (data) => {
+	return http.request({
+		url: 'marketing/api/shoppingAddress/findAll',
+		method: 'post',
+		data,
+	})
+}
+// 根据指定id和用户指定查询信息
+export const  shoppingAddressFindById= (data) => {
+	return http.request({
+		url: 'marketing/api/shoppingAddress/findById',
+		method: 'post',
+		data,
+	})
+}
+// 根据指定id和用户修改收货地址信息
+export const  shoppingAddressUpdate= (data) => {
+	return http.request({
+		url: 'marketing/api/shoppingAddress/update',
+		method: 'post',
+		data,
+	})
+}
+// 根据指定id和用户删除收货地址信息
+export const  shoppingAddressDelete= (data) => {
+	return http.request({
+		url: 'marketing/api/shoppingAddress/delete',
+		method: 'post',
+		data,
+	})
+}
+
 /*   个人中心end   */

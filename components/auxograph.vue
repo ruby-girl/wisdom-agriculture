@@ -5,7 +5,7 @@
 				<view class="timeline-item" v-if="i % 2 == 0">
 					<view class="timeline-img-left flex">
 						<view class="border-box"></view>
-						<view class="time-txt">{{ item.date }}<br>{{'苹果树开花了'}}</view>
+						<view class="time-txt">{{ item.date }}</view>
 					</view>
 					<view class="timeline-content js--fadeInLeft">
 						<image class="images" :src="item.resArr[0]" mode="aspectFill" @tap="toPhoto(item.resArr)"></image>
@@ -15,7 +15,7 @@
 
 				<view class="timeline-item" v-else>
 					<view class="timeline-img-right flex">
-						<view class="time-txt">{{ item.date }}<br>{{'苹果树开花了'}}</view>
+						<view class="time-txt" style="padding: 0 44rpx;">{{ item.date }}</view>
 						<view class="border-box"></view>
 					</view>
 					<view class="timeline-content js--fadeInRight">

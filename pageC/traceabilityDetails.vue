@@ -19,7 +19,7 @@
 			</view>
 			<view v-if="TabCur == 1">
 				<scroll-view scroll-x class="bg-white nav">
-					<view class="flex text-center justify-center" style="padding-bottom: 8rpx;">
+					<view class="flex text-center justify-center" style="padding-bottom: 8rpx;;width: 150%;">
 						<view
 							class="cu-item font-size-12"
 							:class="item.id == TabListCur ? 'text-black font-size-16' : ''"
@@ -32,11 +32,11 @@
 						</view>
 					</view>
 				</scroll-view>
-				<view v-if="TabListCur == 1">
-					<area-chart ></area-chart>
+				<view v-if="scopeData.length > 0">
+					<area-chart :Data="scopeData[TabListCur]" ></area-chart>
 				</view>
-				<view v-else-if="TabListCur == 2">
-				</view>
+				<!-- <view v-else-if="TabListCur == 2">
+				</view> -->
 			</view>
 			<view v-else-if="TabCur == 2">
 				<auxograph :imgsArr="imgsArr" />
@@ -75,9 +75,9 @@ export default {
 		return {
 			windowHeight: 300,
 			isLogin: false,
-			active_video: false,
-			percent: 0,
-			pColoc: '',
+			massifId:'',// 地块id
+			scopeData:[],// 7日数据
+			imgsArr:[],// 生长历程
 			tabs: [
 				{
 					id: 1,
@@ -87,53 +87,14 @@ export default {
 					id: 2,
 					name: '成长过程'
 				},
-				{
-					id: 3,
-					name: '农场劳作'
-				}
+				// {
+				// 	id: 3,
+				// 	name: '农场劳作'
+				// }
 			],
 			TabCur: 1,
-			tabList: [
-				{
-					id: 1,
-					name: '空间温度'
-				},
-				{
-					id: 2,
-					name: '空间湿度'
-				},
-				{
-					id: 3,
-					name: '太阳光照度'
-				},
-				{
-					id: 4,
-					name: '土壤湿度'
-				},
-			],
-			TabListCur:1,
-			imgsArr:[
-				{
-					date:'2020-1-1',
-					resArr:['../../../static/images/u=12638188,2993346786&fm=26&gp=0.jpg']
-				},
-				{
-					date:'2020-1-2',
-					resArr:['../../../static/images/u=12638188,2993346786&fm=26&gp=0.jpg']
-				},
-				{
-					date:'2020-1-3',
-					resArr:['../../../static/images/u=12638188,2993346786&fm=26&gp=0.jpg']
-				},
-				{
-					date:'2020-1-4',
-					resArr:['../../../static/images/u=12638188,2993346786&fm=26&gp=0.jpg']
-				},
-				{
-					date:'2020-1-5',
-					resArr:['../../../static/images/u=12638188,2993346786&fm=26&gp=0.jpg']
-				},
-			],
+			tabList: [],
+			TabListCur:0,
 		};
 	},
 	components: {},
@@ -141,10 +102,8 @@ export default {
 		var _self = this;
 		_self.windowHeight = uni.getSystemInfoSync().windowHeight; // 屏幕的高度
 		_self.isLogin = getApp().globalData.isLogin;
-		console.log(option);
-		// setInterval(function(){
-		// 	_self.add();
-		// },100)
+		_self.massifId = option.id;
+		_self.massifGetDeviceList();
 	},
 	// onShareAppMessage: function() {
 	// 	return {
@@ -164,29 +123,94 @@ export default {
 		// }
 	},
 	methods: {
-		GetDeviceImageData() {
-			//生长历程
-			this.$api.GetDeviceImageData({ deviceId: this.deviceId }).then(res => {
-				this.imgsArr = res.data.data;
-				this.imgsArr.map(item => {
-					let f = item.picture.split('[')[1];
-					let t = f.split(']')[0];
-					let arr = t.split(',');
-					arr.forEach((li, n) => {
-						if (li.charAt(0) == ' ') {
-							li = li.split(' ')[1];
-						}
-						arr[n] = li;
-					});
-					item.resArr = arr;
-				});
+		massifGetDeviceList() {
+			// 根据地块获取设备列表
+			this.$api.massifGetDeviceList({ massifId: this.massifId }).then(res => {
+				this.deviceGetDetails(res.data.data[0].deviceId);
+				this.deviceetScopeImage(res.data.data[0].deviceId);
 			});
+		},
+		deviceGetDetails(id){
+			this.$api.deviceGetDetails({deviceId:id}).then(res => {
+				for (var i = 0; i<res.data.data.scopeData.length;i++) {
+					this.tabList.push({
+						id:i,
+						name:res.data.data.scopeData[i].operation,
+					})
+				}
+				this.scopeData = res.data.data.scopeData;
+			})
+		},
+		deviceetScopeImage(id) {
+			//生长历程
+			this.$api.deviceetScopeImage({device:{deviceId: id}}).then(res => {
+				var Arrimgs = new Array();
+				res.data.data.forEach(item => {
+					Arrimgs.push({
+						date: this.formats(item.time),
+						picture: item.url,
+						resArr: [item.url],
+						deviceId:this.deviceId,
+					});
+				});
+				this.imgsArr = Arrimgs;
+			});
+		},
+		GetTime() { // 获取当前时间前7天
+			var date = new Date();
+			var base = Date.parse(date); // 转换为时间戳
+			var year = date.getFullYear(); //获取当前年份
+			var mon = date.getMonth() + 1; //获取当前月份
+			var day = date.getDate(); //获取当前日
+			var oneDay = 24 * 3600 *1000
+			var daytime = `${year}${mon >= 10 ? mon : '0' + mon}${day >= 10 ? day : '0' + day}`; //今日时间
+			this.$data.daytime = daytime; // 今日时间赋值给变量
+			
+			var daytimeArr = []
+			for (var i = 1; i < 7 ; i++) { //前七天的时间
+				var now = new Date(base -= oneDay);
+				var myear = now.getFullYear();
+				var month = now.getMonth() + 1;
+				var mday = now.getDate()
+				daytimeArr.push([myear, month >=10 ?month :'0'+ month, mday>=10?mday:'0'+mday].join('-'))
+			}
+			return daytimeArr
+		},
+		formats(time) {
+			//time是整数，否则要parseInt转换
+			var time = new Date(time);
+			var y = time.getFullYear();
+			var m = time.getMonth() + 1;
+			var d = time.getDate();
+			var h = time.getHours();
+			var mm = time.getMinutes();
+			var s = time.getSeconds();
+			return y + '-' + this.add0(m) + '-' + this.add0(d) + ' ' + this.add0(h) + ':' + this.add0(mm) + ':' + this.add0(s);
+		},
+		add0(m) {
+			return m < 10 ? '0' + m : m;
+		},
+		getDate(type) {
+			const date = new Date();
+			let year = date.getFullYear();
+			let month = date.getMonth() + 1;
+			let day = date.getDate();
+		
+			if (type === 'start') {
+				year = year - 60;
+			} else if (type === 'end') {
+				year = year + 2;
+			}
+			month = month > 9 ? month : '0' + month;
+			day = day > 9 ? day : '0' + day;
+			return `${year}-${month}-${day}`;
 		},
 		tabSelect(e) {
 			this.TabCur = e.currentTarget.dataset.id;
 		},
 		tabListSelect(e){
 			this.TabListCur = e.currentTarget.dataset.id;
+			this.scopeData = [...this.scopeData];
 		},
 		onClick (e) {
 		        uni.showToast({

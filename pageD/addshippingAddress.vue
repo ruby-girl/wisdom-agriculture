@@ -31,8 +31,8 @@
 				</view>
 			</view>
 		</view>
+		<view v-if="id" class="bottom-lg-btn-red" @click="inDelete">删除</view>
 		<view class="bottom-lg-btn" @click="insert">保存</view>
-
 	</view>
 </template>
 
@@ -40,18 +40,56 @@
 	export default {
 		data() {
 			return {
+				id:'',
 				formData: {
 					userId:uni.getStorageSync('XYZNUserInfo').userId,
 				},
 				multiIndex: [0, 0, 0],
 				multiArray: [],
+				provinceCode: '',
+				cityCode: '',
+				countyCode: '', 
 				init: true,
 			}
 		},
 		onLoad(option) {
-			this.getProvinceCode();
+			if (option.id) {
+				this.id = option.id;
+				this.shoppingAddressFindById();
+				
+			} else {
+				this.getProvinceCode();
+			}
 		},
 		methods: {
+			shoppingAddressFindById(){
+				this.$api.shoppingAddressFindById({
+						id:this.id,
+						userId:this.formData.userId,
+				}).then(res =>{
+					this.formData = res.data.data;
+					// 根据code设置省市县默认值 
+					this.provinceCode = this.formData.provinceCode;
+					this.cityCode = this.formData.cityCode;
+					this.countyCode = this.formData.countyCode;
+					this.$api.getProvince().then(res => {
+						let arr = []
+						res.data.data.forEach(item => {
+							let obj = {
+								name: item.name,
+								id: item.code
+							}
+							arr.push(obj)
+						})
+						this.multiArray[0] = arr;
+						if (this.provinceCode) {
+							this.getByProvinceCode(this.provinceCode, this.cityCode)
+						} else {
+							this.getByProvinceCode(res.data.data[0].code)
+						}
+					})
+				})
+			},
 			getProvinceCode() { //获取省
 				this.$api.getProvince().then(res => {
 					let arr = []
@@ -164,9 +202,34 @@
 			},
 			insert(){
 				this.getSelectValue();
-				this.$api.shoppingAddressInsert(this.formData).then(res =>{
+				var api = '';
+				if (this.id) {
+					api = 'shoppingAddressUpdate';
+				} else {
+					api = 'shoppingAddressInsert';
+				}
+				this.$api[api](this.formData).then(res =>{
 					uni.showToast({
-						title: '添加成功',
+						title: '操作成功',
+						duration: 2000,
+						success() {
+							let pages = getCurrentPages(); // 当前页面
+							let beforePage = pages[pages.length - 2]; // 前一个页面
+							setTimeout(function(){
+								uni.navigateBack({
+									success: function() {
+										beforePage.onLoad(); // 执行前一个页面的onLoad方法
+									}
+								});
+							},2000)
+						}
+					});
+				})
+			},
+			inDelete(){
+				this.$api.shoppingAddressDelete({id:this.id,userId:this.formData.userId}).then(res =>{
+					uni.showToast({
+						title: '删除成功',
 						duration: 2000,
 						success() {
 							let pages = getCurrentPages(); // 当前页面
@@ -208,6 +271,15 @@
 
 	.bottom-lg-btn {
 		background: #00AE66;
+		border-radius: 20px;
+		padding: 5px 0;
+		width: 90%;
+		margin: 40rpx auto;
+		text-align: center;
+		color: #fff;
+	}
+	.bottom-lg-btn-red {
+		background: #FF3855;
 		border-radius: 20px;
 		padding: 5px 0;
 		width: 90%;

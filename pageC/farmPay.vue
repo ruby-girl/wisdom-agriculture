@@ -3,11 +3,12 @@
 		<view  style="margin: 18rpx;background-color: #FFFFFF;border-radius: 10rpx;" @tap="getSite">
 			<view class="flex" style="padding: 14rpx;align-items: center;">
 				<image src="../static/imgs/nearby1.png" style="width: 90rpx;height: 90rpx;border-radius: 10rpx;" mode="aspectFill"></image>
-				<view class="flex bg-personal" style="flex: 1;padding: 30rpx;flex-direction: column;overflow: hidden;">
+				<view  class="flex bg-personal" style="flex: 1;padding: 30rpx;flex-direction: column;overflow: hidden;">
 					<view >
-						<text class="font-size-14" style="font-weight: 600;margin-right: 20rpx;">名字</text><text>1995087xxxx</text>
+						<text class="font-size-14" style="font-weight: 600;margin-right: 20rpx;">{{address.recipientName||''}}</text><text>{{address.recipientPhone||''}}</text>
 					</view>
-					<view class="font-size-12 color-grey" >四川省绵阳市江油市 四川省绵阳市江油市xx街xx号</view>
+					<view class="font-size-12 color-grey" v-if="JSON.stringify(address) != '{}'">{{address.provinceName||''}}{{address.cityName||''}}{{address.countyName||''}} {{address.address||''}}</view>
+					<view class="font-size-12 color-grey" v-else>请添加地址</view>
 					<view class="font-size-12 color-green">收货不便时，可选择暂存服务</view>
 				</view>
 				<image src="../static/imgs/arrows.png" class="img-right"></image>
@@ -119,6 +120,12 @@ export default {
 					color: '#fff'
 				}
 			],
+			data:{
+				userId:uni.getStorageSync('XYZNUserInfo').userId,
+				pageNum:1,
+				pageSize:100,
+			},
+			address:{},
 			
 		};
 	},
@@ -127,7 +134,8 @@ export default {
 		var _self = this;
 		_self.windowHeight = uni.getSystemInfoSync().windowHeight; // 屏幕的高度
 		_self.isLogin = getApp().globalData.isLogin;
-		console.log(option);
+		_self.data.userId = uni.getStorageSync('XYZNUserInfo').userId;
+		_self.shoppingAddressFindAll();
 		
 	},
 	// onShareAppMessage: function() {
@@ -148,6 +156,15 @@ export default {
 		// }
 	},
 	methods: {
+		shoppingAddressFindAll(){
+			this.$api.shoppingAddressFindAll(this.data).then(res =>{
+				res.data.data.records.forEach(item =>{
+					if (item.preferred) {
+						this.address = item;
+					}
+				})
+			})
+		},
 		getSite(){
 			wx.chooseAddress({
 			  success (res) {

@@ -269,12 +269,12 @@
 				"iconPath": "static/imgs/圈子.png",
 				"selectedIconPath": "static/imgs/圈子1.png"
 			},
-			{
-				"pagePath": "pages/bazaar/bazaar",
-				"text": "集市",
-				"iconPath": "static/imgs/集市.png",
-				"selectedIconPath": "static/imgs/集市1.png"
-			},
+			// {
+			// 	"pagePath": "pages/bazaar/bazaar",
+			// 	"text": "集市",
+			// 	"iconPath": "static/imgs/集市.png",
+			// 	"selectedIconPath": "static/imgs/集市1.png"
+			// },
 
 			{
 				"pagePath": "pages/personal/personal",

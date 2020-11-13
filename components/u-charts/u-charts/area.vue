@@ -1,6 +1,6 @@
 <template>
 	<view class="qiun-columns">
-		<view class=""><view class="qiun-title-dot-light">混合图</view></view>
+		<view class=""><view class="qiun-title-dot-light"></view></view>
 		<view class="qiun-charts">
 			<canvas canvas-id="canvasMix" id="canvasMix" class="charts" disable-scroll="true" @touchstart="touchMix" @touchmove="moveMix" @touchend="touchEndMix"></canvas>
 		</view>
@@ -13,6 +13,9 @@ var _self;
 var canvaMix = null;
 
 export default {
+	props: {
+		Data:{},
+	},
 	data() {
 		return {
 			cWidth: '',
@@ -28,12 +31,12 @@ export default {
 						type: 'area',
 						style: 'curve'
 					},
-					{
-						name: '最低温度',
-						data: [30, 40, 45, 90, 34, 48,30, 40, 45, 90, 34, 48],
-						type: 'area',
-						style: 'curve'
-					},
+					// {
+					// 	name: '最低温度',
+					// 	data: [30, 40, 45, 90, 34, 48,30, 40, 45, 90, 34, 48],
+					// 	type: 'area',
+					// 	style: 'curve'
+					// },
 					
 				]
 			}
@@ -49,9 +52,17 @@ export default {
 	},
 	methods: {
 		getServerData() {
-			_self.showMix('canvasMix', _self.chartData);
+			_self.showMix('canvasMix', this.Data);
 		},
 		showMix(canvasId, chartData) {
+			var series = [
+					{
+						name: chartData.operation,
+						data: chartData.dps,
+						type: 'area',
+						style: 'curve'
+					},
+			]
 			canvaMix = new uCharts({
 				$this: _self,
 				canvasId: canvasId,
@@ -64,8 +75,8 @@ export default {
 				},
 				background: '#FFFFFF',
 				pixelRatio: _self.pixelRatio,
-				categories: chartData.categories,
-				series: chartData.series,
+				categories: this.GetTime(),
+				series: series,
 				animation: true,
 				enableScroll: true, //开启图表拖拽功能
 
@@ -79,10 +90,10 @@ export default {
 				},
 				yAxis: {
 					gridType: 'dash',
-					splitNumber: 5,
+					splitNumber: 10,
 					gridColor:'#ffffff',
-					min: 10,
-					max: 180,
+					min: chartData.min,
+					max: chartData.max,
 					format: val => {
 						return val.toFixed(0);
 					}
@@ -110,6 +121,26 @@ export default {
 					}
 				}
 			});
+		},
+		GetTime() { // 获取当前时间前7天
+			var date = new Date();
+			var base = Date.parse(date); // 转换为时间戳
+			var year = date.getFullYear(); //获取当前年份
+			var mon = date.getMonth() + 1; //获取当前月份
+			var day = date.getDate(); //获取当前日
+			var oneDay = 24 * 3600 *1000
+			var daytime = `${year}${mon >= 10 ? mon : '0' + mon}${day >= 10 ? day : '0' + day}`; //今日时间
+			this.$data.daytime = daytime; // 今日时间赋值给变量
+			
+			var daytimeArr = []
+			for (var i = 1; i < 7 ; i++) { //前七天的时间
+				var now = new Date(base -= oneDay);
+				var myear = now.getFullYear();
+				var month = now.getMonth() + 1;
+				var mday = now.getDate()
+				daytimeArr.push([month >=10 ?month :'0'+ month, mday>=10?mday:'0'+mday].join('-'))
+			}
+			return daytimeArr
 		},
 		touchMix(e) {
 			canvaMix.scrollStart(e);

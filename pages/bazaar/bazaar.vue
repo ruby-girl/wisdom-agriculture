@@ -57,7 +57,9 @@ export default {
 				parentId:1,
 			},
 			typeSerch:{
-				categoryId:'',
+				product:{
+					categoryId:'',
+				},
 				pageNum:1,
 				pageSize:100,
 			},
@@ -92,7 +94,7 @@ export default {
 			this.$api.categoryFindAll(this.serch).then(res => {
 				this.tabs = res.data.data.records;
 				this.TabCur = res.data.data.records[0].id;
-				this.typeSerch.categoryId = res.data.data.records[0].id;
+				this.typeSerch.product.categoryId = res.data.data.records[0].id;
 				this.productFindCategory();
 			})
 		},
@@ -122,7 +124,7 @@ export default {
 		tabSelect(e) {
 			this.TabCur = e.currentTarget.dataset.id;
 			this.typeSerch.pageNum = 1;
-			this.typeSerch.pageSize = 10;
+			this.typeSerch.pageSize = 100;
 			this.typeSerch.categoryId = e.currentTarget.dataset.id;
 			this.productFindCategory();
 		},

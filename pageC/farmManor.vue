@@ -1,25 +1,26 @@
 <template>
 	<view>
 		<scroll-view v-bind:style="{ height: windowHeight + 'px' }" scroll-y="true" enable-back-to-top="true" style="background-color: #FFFFFF;padding-bottom: 50px;">
-			<view class="bg-personal" >
-				<image src="../static/images/farmIndex.jpg" style="width: 100%;height: 400rpx;" mode="aspectFill"></image>
+			<view class="bg-personal">
+				<image @tap="showImg(cover)" :src="cover[0]" style="width: 100%;height: 400rpx;" mode="aspectFill"></image>
 				<view class="padding-box">
-					<view>水晶甜石榴硬籽</view>
+					<view>{{data.productName}}</view>
 					<view class="index-money">
 						￥
-						<text style="font-size: 40rpx;">120</text>
-						<text style="color: #C0C0C0;">/1块地</text>
+						<text style="font-size: 40rpx;">{{data.price}}</text>
+						<text style="color: #C0C0C0;">/{{data.unitName}}</text>
 					</view>
-					<view><progress style="flex: 1;" :percent="percent" border-radius="10" stroke-width="8" :activeColor="pColoc" backgroundColor="#C9EEDE" /></view>
+					<view><progress style="flex: 1;" :percent="(data.sales/data.stock).toFixed(0)" border-radius="100" stroke-width="8"
+						 :activeColor="pColoc" backgroundColor="#C9EEDE" /></view>
 					<view class="flex margin-box ">
 						<view class="flex-1 font-size-12" style="line-height:56rpx;">
 							当前进度
-							<text style="color: #FF9700;">60%</text>
+							<text style="color: #FF9700;">{{(data.sales/data.stock).toFixed(0)}}%</text>
 						</view>
 						<view class="font-size-12">
 							剩余领地
-							<text class="font-size-16" style="color: #FF9700;">16</text>
-							块
+							<text class="font-size-16" style="color: #FF9700;">{{data.stock - data.sales}}</text>
+							{{data.unitName}}
 						</view>
 					</view>
 				</view>
@@ -30,17 +31,13 @@
 					<image src="../static/images/timg3RV2I4X0.jpg" mode="aspectFill"></image>
 					<view class="font-size-12">领地直播</view>
 				</view>
-				<view class="standard" style="border-left: 1px solid #BFBFBF;border-right: 1px solid #BFBFBF;" @tap="detail">
-					<image src="../static/images/timgQ5KMALQZ.jpg" mode="aspectFill"></image>
+				<view class="standard" style="border-left: 1px solid #BFBFBF;" @tap="ToDetail(data.massifId)">
+					<image src="../static/images/timg3RV2I4X0.jpg" mode="aspectFill"></image>
 					<view class="font-size-12">溯源详情</view>
-				</view>
-				<view class="standard">
-					<image src="../static/images/timgQ5KMALQZ.jpg" mode="aspectFill"></image>
-					<view class="font-size-12">参与生产</view>
 				</view>
 			</view>
 			<view class="line-gray"></view>
-			<view class="" style="margin: 8px 15px;">
+			<!-- <view class="" style="margin: 8px 15px;">
 				<view style="border-radius: 10rpx;">
 					<view class="flex justify-center" style="margin: 30rpx 0;">
 						<image src="../static/images/people.jpg" style="width: 180rpx;height: 180rpx;border-radius: 10rpx;" mode="aspectFill"></image>
@@ -61,18 +58,12 @@
 					</view>
 				</view>
 			</view>
-			<view class="line-gray"></view>
+			<view class="line-gray"></view> -->
 			<view class="top">
 				<scroll-view scroll-x class="bg-white nav">
 					<view class="flex text-center justify-center" style="padding-bottom: 8rpx;border-bottom: 1px solid #D8D8D8;">
-						<view
-							class="cu-item font-size-16"
-							:class="item.id == TabCur ? 'text-green cur' : ''"
-							v-for="(item, index) in tabs"
-							:key="index"
-							@tap="tabSelect"
-							:data-id="item.id"
-						>
+						<view class="cu-item font-size-16" :class="item.id == TabCur ? 'text-green cur' : ''" v-for="(item, index) in tabs"
+						 :key="index" @tap="tabSelect" :data-id="item.id">
 							{{ item.name }}
 						</view>
 					</view>
@@ -84,7 +75,7 @@
 						品牌:
 					</view>
 					<view class="detaile-li">
-						石榴
+						{{data.crops}}
 					</view>
 					<view class="detaile-li">
 						种植方式：
@@ -92,7 +83,6 @@
 					<view class="detaile-li">
 						有机种植
 					</view>
-					
 					<view class="detaile-li">
 						储存方式：
 					</view>
@@ -103,49 +93,38 @@
 						分量总数:
 					</view>
 					<view class="detaile-li">
-						1000份
+						{{data.stock}}{{data.unitName}}
 					</view>
 					<view class="detaile-li">
 						物流配送：
 					</view>
 					<view class="detaile-li">
-						快递邮寄	
-					</view>
-					<view class="detaile-li">
-						产量预估:
-					</view>
-					<view class="detaile-li">
-						300斤
-					</view>
-					<view class="detaile-li">
-						最低收益保障：
-					</view>
-					<view class="detaile-li">
-						200g/份
+						快递邮寄
 					</view>
 					<view class="detaile-li">
 						播种时间：
 					</view>
 					<view class="detaile-li">
-						2018年3月	
+						{{data.startTime}}
 					</view>
 					<view class="detaile-li">
 						每份价格:
 					</view>
 					<view class="detaile-li">
-						35元/份
+						{{data.price}}元/{{data.unitName}}
 					</view>
 					<view class="detaile-li">
 						收获时间：
 					</view>
 					<view class="detaile-li">
-						2020年9月
+						{{data.stopTime}}
 					</view>
 				</view>
 				<view class="line-gray"></view>
-				<image src="../static/images/fsafwa.jpg" style="width: 100%;"></image>
-				<image src="../static/images/fsafwa.jpg" style="width: 100%;"></image>
-				<view class="flex line-gray"></view>
+				<image v-for="(item,index) in details" :key="index" :src="item.detailsPath" @tap="showImg(details,1)" mode="widthFix"
+				 style="width: 100%;"></image>
+				<!-- <image src="../static/images/fsafwa.jpg" style="width: 100%;"></image> -->
+				<!-- <view class="flex line-gray"></view>
 				<view class="flex padding-box justify-center margin-box"><view class="flex index-h3">相关推荐</view></view>
 				<view class="page-section-spacing  " style="padding-bottom: 30rpx;">
 					<scroll-view class="scroll-view_H " scroll-x="true" bindscroll="scroll" style="width: 100%;margin: 0 15px;">
@@ -210,329 +189,446 @@
 							</view>
 						</view>
 					</scroll-view>
-				</view>
+				</view> -->
 			</view>
 			<view v-else-if="TabCur == 2">
-				<view class="flex padding-box justify-center margin-box"><view class="flex index-h3">720度全景展示</view></view>
+				<!-- <view class="flex padding-box justify-center margin-box"><view class="flex index-h3">720度全景展示</view></view>
 				<view class="flex padding-box"><image src="../static/images/fsafwa.jpg" mode="aspectFill" style="width: 100%;border-radius: 20rpx;height: 350rpx;"></image></view>
-				<view class="line-gray-1"></view>
-				<view class="flex padding-box justify-center margin-box"><view class="flex index-h3">详情介绍</view></view>
-				<view class="flex padding-box">
-					苹果树是喜低温干燥的温带果树。而绵阳的气候正适合 苹果生长，所以当地产的苹果都又大又甜。
+				<view class="line-gray-1"></view> -->
+				<view class="flex padding-box justify-center margin-box">
+					<view class="flex index-h3">详情介绍</view>
 				</view>
-				<view class="flex padding-box"><image src="../static/images/fsafwa.jpg" mode="aspectFill" style="width: 100%;height: 350rpx;"></image></view>
-				<view class="flex padding-box"><video src="https://6e6f-normal-env-ta6pc-1300924598.tcb.qcloud.la/video-swiper/1589851354869410.mp4?sign=1f636557effa496e074332e3f4b9b8aa&t=1589851461" enable-play-gesture="true" style="width: 100%;height: 350rpx;"></video></view>
-				<view class="flex padding-box"><image src="../static/images/fsafwa.jpg" mode="aspectFill" style="width: 100%;height: 350rpx;"></image></view>
+				<view class="flex padding-box">
+					{{farm.farm.introduce}}
+				</view>
+				<view class="flex padding-box" v-for="(item,index) in farm.masterPhotos">
+					<image @tap="showImg(farm.masterPhotos,2)" :src="item.path" mode="aspectFill" style="width: 100%;height: 350rpx;"></image>
+				</view>
+				<!-- <view class="flex padding-box"><video src="https://6e6f-normal-env-ta6pc-1300924598.tcb.qcloud.la/video-swiper/1589851354869410.mp4?sign=1f636557effa496e074332e3f4b9b8aa&t=1589851461" enable-play-gesture="true" style="width: 100%;height: 350rpx;"></video></view> -->
+				<!-- <view class="flex padding-box"><image src="../static/images/fsafwa.jpg" mode="aspectFill" style="width: 100%;height: 350rpx;"></image></view> -->
 			</view>
 			<view v-else>
-				<view class="flex" style="padding: 16rpx 30rpx;flex-direction: column;">
+				<view class="flex" style="padding: 16rpx 30rpx;flex-direction: column;" v-for="(item,index) in circle" :key="index">
 					<view class="flex" style="align-items:center;margin: 10rpx 0;">
-						<image src="../static/images/timgQ5KMALQZ.jpg" mode="aspectFill" style="width: 90rpx;height: 90rpx;border-radius: 50%;"></image>
-						<view class="font-size-12" style="margin-left: 30rpx;">种植小能手</view>
+						<image :src="item.avatar" mode="aspectFill" style="width: 90rpx;height: 90rpx;border-radius: 50%;"></image>
+						<view class="font-size-12" style="margin-left: 30rpx;">{{item.nickName}}</view>
 					</view>
-					<text class="color-grey font-size-12" >
-						2020-12-12
+					<text class="color-grey font-size-12">
+						{{item.creationTime}}
 					</text>
-					<view class="font-size-12 color-grey">项目进行的很顺利，老板人也很好，有问题及时就处理了。收到的苹果也很好，都没有烂 果,而且味道很甜，送了一些给朋友，都说很值。</view>
+					<view class="font-size-12 color-grey">{{item.content}}</view>
 					<view class="flex" style="flex-wrap: wrap;margin-top: 20rpx;">
-						<image src="../static/images/timg7FHKTBR0.jpg" mode="aspectFill" style="width: 30%;height: 140rpx;margin-right: 22rpx;"></image>
-						<image src="../static/images/timg7FHKTBR0.jpg" mode="aspectFill" style="width: 30%;height: 140rpx;margin-right: 22rpx;"></image>
-						<image src="../static/images/timg7FHKTBR0.jpg" mode="aspectFill" style="width: 30%;height: 140rpx;margin-right: 22rpx;"></image>
+						<image @tap="showImg(item.path)" v-for="(li,i) in item.path" :src="li" mode="aspectFill" v-bind:style="{width:100/item.path.length - 4 + '%', height:210/(item.path.length > 3? 3:item.path.length) + 'px'}"
+						 style="height: 140rpx;margin-right: 22rpx;"></image>
+
 					</view>
 				</view>
-				
-				<view class="flex" style="padding: 16rpx 30rpx;flex-direction: column;">
-					<view class="flex" style="align-items:center;margin: 10rpx 0;">
-						<image src="../static/images/timgQ5KMALQZ.jpg" mode="aspectFill" style="width: 90rpx;height: 90rpx;border-radius: 50%;"></image>
-						<view class="font-size-12" style="margin-left: 30rpx;">种植小能手</view>
-					</view>
-					<text class="color-grey font-size-12" >
-						2020-12-12
-					</text>
-					<view class="font-size-12 color-grey" >项目进行的很顺利，老板人也很好，有问题及时就处理了。收到的苹果也很好，都没有烂 果,而且味道很甜，送了一些给朋友，都说很值。</view>
-					<view class="flex" style="flex-wrap: wrap;margin-top: 20rpx;">
-						<image src="../static/images/timg7FHKTBR0.jpg" mode="aspectFill" style="width: 30%;height: 140rpx;margin-right: 20rpx;"></image>
-						<image src="../static/images/timg7FHKTBR0.jpg" mode="aspectFill" style="width: 30%;height: 140rpx;margin-right: 20rpx;"></image>
-						<image src="../static/images/timg7FHKTBR0.jpg" mode="aspectFill" style="width: 30%;height: 140rpx;margin-right: 20rpx;"></image>
-					</view>
-				</view>
+
+
 			</view>
 		</scroll-view>
-		<uni-goods-nav style="position: fixed;bottom: 0;width: 100%;" :kwt="kwt"  :options="options" :buttonGroup="buttonGroup"  @click="onClick" @buttonClick="buttonClick" />
+		<uni-goods-nav style="position: fixed;bottom: 0;width: 100%;" :kwt="kwt" :options="options" :buttonGroup="buttonGroup"
+		 @click="onClick" @buttonClick="buttonClick" />
 	</view>
 </template>
 
 <script>
 	import uniGoodsNav from '@/components/uni-goods-nav/uni-goods-nav.vue'
-export default {
-	components: {uniGoodsNav},
-	data() {
-		return {
-			windowHeight: 300,
-			isLogin: false,
-			active_video: false,
-			percent: 0,
-			pColoc: '',
-			tabs: [
-				{
-					id: 1,
-					name: '项目介绍'
-				},
-				{
-					id: 2,
-					name: '农场秀'
-				},
-				{
-					id: 3,
-					name: '新农人说'
-				}
-			],
-			TabCur: 1,
-			commend: false,
-			kwt:[
-				{
-					text:'天后开启项目',
+	export default {
+		components: {
+			uniGoodsNav
+		},
+		data() {
+			return {
+				data: {}, // 商品数据
+				cover: [], // 商品封面
+				details: [], // 商品详情图
+				farm: [], // 农场信息
+				circle: [], // 新农人说
+				productId: '',
+				windowHeight: 300,
+				isLogin: false,
+				active_video: false,
+				percent: 0,
+				pColoc: '',
+				tabs: [{
+						id: 1,
+						name: '项目介绍'
+					},
+					{
+						id: 2,
+						name: '农场秀'
+					},
+					{
+						id: 3,
+						name: '新农人说'
+					}
+				],
+				TabCur: 1,
+				commend: false,
+				kwt: [{
+					text: '天后开启项目',
 					numberColor: '#ffa200',
-					number:10,
-				}
-			],
-			options: [
-				{
-					icon: 'chat',
-					text: '联系商家'
-				}, 
-				{
-					icon: 'star',
-					text: '收藏',
-					// info: 2,
-					// infoBackgroundColor:'#007aff',
-					infoColor:"red"
-				}, 
-				
-				{
-					icon: 'compose',
-					text: '评论',
-					// info: 2
+					number: 10,
 				}],
-			buttonGroup: [
-				{
+				options: [{
+						icon: 'chat',
+						text: '联系商家'
+					},
+					{
+						icon: 'star',
+						text: '收藏',
+						// info: 2,
+						// infoBackgroundColor:'#007aff',
+						infoColor: "red"
+					},
+
+					{
+						icon: 'compose',
+						text: '评论',
+						// info: 2
+					}
+				],
+				buttonGroup: [{
 					text: '参与项目',
 					backgroundColor: '#4ABA8A',
 					color: '#fff'
-				}
-			],
-			
-		};
-	},
-	components: {},
-	onLoad(option) {
-		var _self = this;
-		_self.windowHeight = uni.getSystemInfoSync().windowHeight; // 屏幕的高度
-		_self.isLogin = getApp().globalData.isLogin;
-		console.log(option);
-		_self.add();
-		// setInterval(function(){
-		// 	_self.add();
-		// },100)
-	},
-	// onShareAppMessage: function() {
-	// 	return {
-	// 		title: '科维特',
-	// 		desc: '',
-	// 		path: 'pages/personal/personal'
-	// 	}
-	// },
-	onShow() {
-		// if (!this.isLogin) { //每次进入页面检查是否登录，如果没有登录，再拿一次最新状态
-		// 	this.isLogin = getApp().globalData.isLogin
-		// 	if (this.isLogin) {
-		// 		this.getCount()
+				}],
+
+			};
+		},
+		components: {},
+		onLoad(option) {
+			var _self = this;
+			_self.windowHeight = uni.getSystemInfoSync().windowHeight; // 屏幕的高度
+			_self.isLogin = getApp().globalData.isLogin;
+			_self.productId = option.id;
+			_self.productFindId();
+			_self.coverFindByidlist();
+			_self.detailsFindByIdDetail();
+			// setInterval(function(){
+			// 	_self.add();
+			// },100)
+		},
+		// onShareAppMessage: function() {
+		// 	return {
+		// 		title: '科维特',
+		// 		desc: '',
+		// 		path: 'pages/personal/personal'
 		// 	}
-		// }else{
-		// 	this.getCount()
-		// }
-	},
-	methods: {
-		add() {
-			if (this.percent == 100) {
-				this.percent = 0;
-			} else {
-				this.percent++;
-				if (this.percent < 20) {
-					console.log(this.percent);
+		// },
+		onShow() {
+			// if (!this.isLogin) { //每次进入页面检查是否登录，如果没有登录，再拿一次最新状态
+			// 	this.isLogin = getApp().globalData.isLogin
+			// 	if (this.isLogin) {
+			// 		this.getCount()
+			// 	}
+			// }else{
+			// 	this.getCount()
+			// }
+		},
+		methods: {
+			// add() {
+			// 	if (this.percent == 100) {
+			// 		this.percent = 0;
+			// 	} else {
+			// 		this.percent++;
+			// 		if (this.percent < 20) {
+			// 			console.log(this.percent);
+			// 		}
+			// 		this.pColoc = '#FF0001';
+			// 		if ((this.percent >= 20) & (this.percent < 50)) {
+			// 			this.pColoc = '#FF9700';
+			// 		}
+			// 		if (this.percent >= 50) {
+			// 			this.pColoc = '#4ABA8A';
+			// 		}
+			// 	}
+			// },
+			productFindId() { //商品详情
+				this.$api.productFindId({
+					"productId": this.productId
+				}).then(res => {
+
+					this.massifGetOne(res.data.data)
+				})
+			},
+			coverFindByidlist() { // 获取封面图
+				this.$api.coverFindByidlist({
+					productId: this.productId
+				}).then(res => {
+					this.cover = res.data.data;
+				})
+			},
+			detailsFindByIdDetail() { // 获取详情图
+				this.$api.detailsFindByIdDetail({
+					productId: this.productId
+				}).then(res => {
+					this.details = res.data.data;
+				})
+			},
+			massifGetOne(array) { // 获取农场id
+				this.$api.massifGetOne({
+					massifId: array.massifId
+				}).then(res => {
+					array.crops = res.data.data.crops;
+					this.data = array;
+					this.farmGetOne(res.data.data.farmId);
+				})
+			},
+			farmGetOne(id) { // 获取农场详情
+				this.$api.farmGetOne({
+					farmId: id
+				}).then(res => {
+					this.farm = res.data.data[0];
+					this.circleOrderTime(this.farm.farm.userId);
+				})
+			},
+			circleOrderTime(id) { // 获取圈子
+				this.$api.circleOrderTime({
+					uid: id,
+					pageNum: 1,
+					pageSize: 100,
+				}).then(res => {
+					this.userFindId(0, res.data.data.circleDtos);
+				})
+			},
+			userFindId(index, array) { // 获取用户
+				this.$api.userFindId({
+					userId: array[index].uid
+				}).then(res => {
+					array[index].nickName = res.data.data.nickName;
+					array[index].avatar = res.data.data.avatar;
+					if (++index < array.length) {
+						this.userFindId(index, array);
+					} else {
+						this.circle = array;
+					}
+				})
+			},
+			tabSelect(e) {
+				this.TabCur = e.currentTarget.dataset.id;
+			},
+			showImg(array, num) {
+				var list = new Array();
+				if (num == 1) {
+					array.forEach(item => {
+						list.push(item.detailsPath)
+					})
+				} else if (num == 2) {
+					array.forEach(item => {
+						list.push(item.path)
+					})
+				} else {
+					list = array;
 				}
-				this.pColoc = '#FF0001';
-				if ((this.percent >= 20) & (this.percent < 50)) {
-					this.pColoc = '#FF9700';
+				uni.previewImage({
+					urls: list,
+					longPressActions: {
+						// itemList: ['发送给朋友', '保存图片', '收藏'],
+						success: function(data) {
+							// console.log('选中了第' + (data.tapIndex + 1) + '个按钮,第' + (data.index + 1) + '张图片');
+						},
+						fail: function(err) {
+							console.log(err.errMsg);
+						}
+					}
+				});
+			},
+			ToDetail(id) {
+				uni.navigateTo({
+					url: './traceabilityDetails?id=' + id,
+				})
+			},
+			onClick(e) {
+				uni.showToast({
+					title: `点击${e.content.text}`,
+					icon: 'none'
+				})
+			},
+			buttonClick(e) {
+				if (!this.isLogin){
+					uni.showToast({
+						title:'请登录',
+						icon:'none'
+					})
+					return
 				}
-				if (this.percent >= 50) {
-					this.pColoc = '#4ABA8A';
-				}
+				uni.navigateTo({
+					url: "farmPay",
+				})
 			}
 		},
-		tabSelect(e) {
-			this.TabCur = e.currentTarget.dataset.id;
-		},
-		detail(){
-			uni.navigateTo({
-				url:'./traceabilityDetails'
-			})
-		},
-		onClick (e) {
-		        uni.showToast({
-		          title: `点击${e.content.text}`,
-		          icon: 'none'
-		        })
-		      },
-		      buttonClick (e) {
-		        uni.navigateTo({
-		        	url:"farmPay",
-		        })
-		      }
-	},
-	mounted() {}
-};
+		mounted() {}
+	};
 </script>
 
 <style lang="scss" scoped>
-.bg-personal {
-	position: relative;
-}
-.bg-img {
-	width: 90%;
-	margin: 0 auto;
-	background-color: #ffffff;
-	border: 1px solid #eeeeee;
-	border-radius: 30rpx;
-	padding: 50rpx;
-	position: absolute;
-	top: 250rpx;
-	left: 5%;
-	box-shadow: 0px 1px 5px 0px #b8b3b3;
-}
-.uni-padding-wrap {
-	width: 100%;
-	padding: 0;
-}
-.scroll-view_H {
-	white-space: nowrap;
-}
-.scroll-view-item {
-	height: 300rpx;
-}
-.scroll-view-item_H {
-	display: inline-block;
-	width: 35%;
-	border: 1px solid #d8d8d8;
-	border-radius: 20rpx;
-	margin-right: 40rpx;
-}
+	.bg-personal {
+		position: relative;
+	}
 
-.scroll-view-item-img {
-	// border-radius: 20rpx;
-	border-top-right-radius: 20rpx;
-	border-top-left-radius: 20rpx;
-	width: 100%;
-	height: 210rpx;
-}
-.text-h3 {
-	font-size: 34rpx;
-}
-.index-money {
-	color: #ff0001;
-}
-.index-h3 {
-	font-size: 35rpx;
-	flex: 1;
-	border-left: 3px solid #00ae66;
-	padding: 0 15px;
-	font-weight: 600;
-}
-.font-size-12 {
-	font-size: 24rpx;
-}
-.font-size-16 {
-	font-size: 32rpx;
-}
-.text-overflows {
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
-}
-.color-grey {
-	color: #8c8c8c;
-}
-.img-size {
-	width: 25rpx;
-	height: 34rpx;
-	position: relative;
-	margin: auto 10rpx auto 0;
-	top: 6rpx;
-}
-.text-bottom-right {
-	position: absolute;
-	bottom: 15rpx;
-	right: 0;
-}
-.text-green {
-	color: #49ba89;
-	border-bottom: 2px solid #49ba89;
-}
-.padding-box {
-	padding: 8px 15px;
-	align-items: center;
-	justify-content: center;
-	letter-spacing: 5rpx;
-}
-.margin-box {
-	margin: 20rpx 0;
-}
-.line-height {
-	line-height: 60rpx;
-	font-weight: 600;
-}
-.line-gray {
-	border-bottom: 16rpx solid #EEEEEE;
-}
-.line-gray-1 {
-	border-bottom: 1rpx solid #EEEEEE;
-	margin-top: 40rpx;
-}
-.text-red {
-	color: #ff0000;
-}
-.text-gray {
-	color: #9a9a9a;
-	padding: 10rpx;
-}
-.standard {
-	flex: 1;
-	text-align: center;
-	margin: 30rpx 0;
-	letter-spacing: 8rpx;
-	image {
-		width: 120rpx;
-		height: 120rpx;
-		margin: auto;
-		border-radius: 50%;
+	.bg-img {
+		width: 90%;
+		margin: 0 auto;
+		background-color: #ffffff;
+		border: 1px solid #eeeeee;
+		border-radius: 30rpx;
+		padding: 50rpx;
+		position: absolute;
+		top: 250rpx;
+		left: 5%;
+		box-shadow: 0px 1px 5px 0px #b8b3b3;
 	}
-}
-.detaile{
-	display: flex;
-	margin: 60rpx 15px;
-	// border: 1px solid;
-	flex-wrap: wrap;
-	.detaile-li{
-		width: 50%;
-		padding: 20rpx 20rpx;
+
+	.uni-padding-wrap {
+		width: 100%;
+		padding: 0;
+	}
+
+	.scroll-view_H {
+		white-space: nowrap;
+	}
+
+	.scroll-view-item {
+		height: 300rpx;
+	}
+
+	.scroll-view-item_H {
+		display: inline-block;
+		width: 35%;
+		border: 1px solid #d8d8d8;
+		border-radius: 20rpx;
+		margin-right: 40rpx;
+	}
+
+	.scroll-view-item-img {
+		// border-radius: 20rpx;
+		border-top-right-radius: 20rpx;
+		border-top-left-radius: 20rpx;
+		width: 100%;
+		height: 210rpx;
+	}
+
+	.text-h3 {
+		font-size: 34rpx;
+	}
+
+	.index-money {
+		color: #ff0001;
+	}
+
+	.index-h3 {
+		font-size: 35rpx;
+		flex: 1;
+		border-left: 3px solid #00ae66;
+		padding: 0 15px;
+		font-weight: 600;
+	}
+
+	.font-size-12 {
 		font-size: 24rpx;
-		border: 1px solid #B5B5B5;
-		text-align: center;
 	}
-}
-.video {
-	width: 100%;
-	height: 100vh;
-	position: relative;
-}
+
+	.font-size-16 {
+		font-size: 32rpx;
+	}
+
+	.text-overflows {
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+
+	.color-grey {
+		color: #8c8c8c;
+	}
+
+	.img-size {
+		width: 25rpx;
+		height: 34rpx;
+		position: relative;
+		margin: auto 10rpx auto 0;
+		top: 6rpx;
+	}
+
+	.text-bottom-right {
+		position: absolute;
+		bottom: 15rpx;
+		right: 0;
+	}
+
+	.text-green {
+		color: #49ba89;
+		border-bottom: 2px solid #49ba89;
+	}
+
+	.padding-box {
+		padding: 8px 15px;
+		align-items: center;
+		justify-content: center;
+		letter-spacing: 5rpx;
+	}
+
+	.margin-box {
+		margin: 20rpx 0;
+	}
+
+	.line-height {
+		line-height: 60rpx;
+		font-weight: 600;
+	}
+
+	.line-gray {
+		border-bottom: 16rpx solid #EEEEEE;
+	}
+
+	.line-gray-1 {
+		border-bottom: 1rpx solid #EEEEEE;
+		margin-top: 40rpx;
+	}
+
+	.text-red {
+		color: #ff0000;
+	}
+
+	.text-gray {
+		color: #9a9a9a;
+		padding: 10rpx;
+	}
+
+	.standard {
+		flex: 1;
+		text-align: center;
+		margin: 30rpx 0;
+		letter-spacing: 8rpx;
+
+		image {
+			width: 120rpx;
+			height: 120rpx;
+			margin: auto;
+			border-radius: 50%;
+		}
+	}
+
+	.detaile {
+		display: flex;
+		margin: 60rpx 15px;
+		// border: 1px solid;
+		flex-wrap: wrap;
+
+		.detaile-li {
+			width: 50%;
+			padding: 20rpx 20rpx;
+			font-size: 24rpx;
+			border: 1px solid #B5B5B5;
+			text-align: center;
+		}
+	}
+
+	.video {
+		width: 100%;
+		height: 100vh;
+		position: relative;
+	}
 </style>

@@ -39,7 +39,7 @@
 				</view>
 
 			</view>
-			<view class="container-input">
+			<!-- <view class="container-input">
 				<view>我的项目</view>
 				<view class="flex justify-content-flex-justify " style="padding: 20rpx 0;">
 					<view class="flex-1 text-center text-gray">
@@ -73,7 +73,7 @@
 					<view class="flex-1 text-center text-gray"></view>
 					<view class="flex-1 text-center text-gray"></view>
 				</view>
-			</view>
+			</view> -->
 			<view class="container-input">
 				<form>
 					<view class="cu-form-group item-jt" @tap="toAddress">

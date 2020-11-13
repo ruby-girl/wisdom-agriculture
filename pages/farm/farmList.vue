@@ -7,20 +7,20 @@
 			:refresher-triggered="triggered"
 			@refresherrefresh="getList"
 			>
-			<view  style="margin: 18rpx;background-color: #FFFFFF;border-radius: 10rpx;" @tap="showFarm()">
+			<view v-for="(item,index) in dataList" :key="index" style="margin: 18rpx;background-color: #FFFFFF;border-radius: 10rpx;" @tap="showFarm(item.farm.farmId,item.farm.farmName)">
 				<view class="flex" style="padding: 14rpx;">
-					<image src="../../static/images/timgQ5KMALQZ.jpg" style="width: 250rpx;height: 250rpx;border-radius: 10rpx;" mode="aspectFill"></image>
-					<view class="flex bg-personal" style="flex: 1;padding: 30rpx;flex-direction: column;letter-spacing: 8rpx;overflow: hidden;">
-						<view class="text-h3">绵阳九汇生态农场</view>
-						<view class="font-size-12 text-overflows" >主营业务：农家乐旅游、苹果和梨种等多种项目</view>
-						<view class="font-size-12 text-overflows color-grey">绵阳市江油市xx区xx路xx号</view>
+					<image :src="item.farmPhotos[0].path" style="width: 250rpx;height: 250rpx;border-radius: 10rpx;" mode="aspectFill"></image>
+					<view class="flex bg-personal" style="flex: 1;padding: 0 30rpx;flex-direction: column;letter-spacing: 8rpx;overflow: hidden;">
+						<view class="text-h3 text-overflows">{{item.farm.farmName}}</view>
+						<view class="font-size-12 " >主营业务：{{item.farm.introduce ?   item.farm.introduce.length > 17 ? item.farm.introduce.slice(0,17)+'...' : item.farm.introduce : ''}}</view>
+						<view class="font-size-12 text-overflows color-grey">{{item.farm.cityName}}{{item.farm.countyName}}</view>
 						<view class="flex font-size-12 text-overflows color-grey">
-								<image class="img-size" src="../../static/imgs/nearby.png"></image>
+								<image class="img-size" src="../../static/imgs/dingwei@3x.png"></image>
 								22km
 						</view>
-						<view class="font-size-12 text-bottom-right">
+						<!-- <view class="font-size-12 text-bottom-right">
 								在种项目  4个
-						</view>
+						</view> -->
 					</view>
 				</view>
 			</view>
@@ -38,12 +38,14 @@ export default {
 			page:1,
 			triggered:false,
 			_freshing: false,
+			dataList:[],
 		};
 	},
 	components: {},
 	onLoad() {
 		this.windowHeight = uni.getSystemInfoSync().windowHeight; // 屏幕的高度
 		this.isLogin = getApp().globalData.isLogin;
+		this.getList();
 	},
 	// onShareAppMessage: function() {
 	// 	return {
@@ -63,27 +65,32 @@ export default {
 		// }
 	},
 	methods: {
+		// getList(){
+		// 	if (this._freshing) return;
+		// 	this._freshing = true;
+		// 	if (!this.triggered) {
+		// 		//界面下拉触发，triggered可能不是true，要设为true
+		// 		this.triggered = true;
+		// 	}
+		// 	let _this = this;
+		// 	setTimeout(() => {
+		// 		this.triggered = false; //触发onRestore，并关闭刷新图标
+		// 		this._freshing = false;
+		// 		uni.showToast({
+		// 			title:'刷新',
+		// 			icon:'none'
+		// 		})
+		// 	}, 1000);
+		// },
 		getList(){
-			if (this._freshing) return;
-			this._freshing = true;
-			if (!this.triggered) {
-				//界面下拉触发，triggered可能不是true，要设为true
-				this.triggered = true;
-			}
-			let _this = this;
-			setTimeout(() => {
-				this.triggered = false; //触发onRestore，并关闭刷新图标
-				this._freshing = false;
-				uni.showToast({
-					title:'刷新',
-					icon:'none'
-				})
-			}, 1000);
-		},
-		showFarm(){
-			uni.navigateTo({
-				url:"/pageC/farmFactionalism?id="+ 1 +"&name=" + '九汇生态农场',
+			this.$api.farmGetOne(this.serch).then(res => {
+				this.dataList = res.data.data;
 			})
+		},
+		showFarm(id, name) {
+			uni.navigateTo({
+				url: '/pageA/farmDetails?id=' + id + '&name=' + name,
+			});
 		},
 		changeList(){
 			console.log(this.page++)
@@ -115,7 +122,7 @@ export default {
 	color: #8C8C8C;
 }
 .img-size {
-	width: 30rpx;
+	width: 24rpx;
 	height: 34rpx;
 	position: relative;
 	margin: auto 10rpx auto 0;
