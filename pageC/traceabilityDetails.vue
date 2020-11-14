@@ -33,7 +33,7 @@
 					</view>
 				</scroll-view>
 				<view v-if="scopeData.length > 0">
-					<area-chart :Data="scopeData[TabListCur]" ></area-chart>
+					<area-chart :Data="scopeData[TabListCur]"  ref="chart"></area-chart>
 				</view>
 				<!-- <view v-else-if="TabListCur == 2">
 				</view> -->
@@ -211,6 +211,10 @@ export default {
 		tabListSelect(e){
 			this.TabListCur = e.currentTarget.dataset.id;
 			this.scopeData = [...this.scopeData];
+			let _this=this
+			setTimeout(()=>{
+				_this.$refs.chart.getServerData()
+			},700)
 		},
 		onClick (e) {
 		        uni.showToast({

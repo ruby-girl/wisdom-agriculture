@@ -206,6 +206,13 @@
 				});
 			},
 			toAddress(){
+				if (!this.isLogin) {
+					uni.showToast({
+						title: '请先登录',
+						icon: 'none'
+					})
+					return
+				}
 				uni.navigateTo({
 					url:'/pageD/shippingAddress'
 				})

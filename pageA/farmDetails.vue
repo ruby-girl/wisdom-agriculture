@@ -21,7 +21,7 @@
 						<image src="../static/imgs/location.png" style="width: 50rpx;height: 50rpx;"></image>
 						<text style="padding: 0 12rpx;">历史追溯</text>
 					</view>
-					<view class="flex font-size-12 right-card" style="top: 125rpx;" @tap="video()">
+					<view class="flex font-size-12 right-card" style="top: 125rpx;" @tap="showHistory">
 						<image src="../static/imgs/location.png" style="width: 50rpx;height: 50rpx;"></image>
 						<text style="padding: 0 12rpx;">领地直播</text>
 					</view>
